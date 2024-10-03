@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/03 17:31:03 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/03 18:13:23 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,15 @@ static char	*close_and_free(char **array, int fd)
 	return (NULL);
 }
 
-static void	add_line(char **map, int fd, char *line, int *nb)
+static void	add_line(char **map, char *line, int *nb)
 {
 	if (skip_data_map(line) == TRUE)
 	{
 		map[*nb] = ft_strdup(line);
-		nb++;
+		(*nb)++;
 	}
-	printf("line = %s\n", line);
-	if (line)
-		free(line);
-	line = get_next_line(fd);
+	free(line);
+
 }
 
 char	**get_map(char *map_name)
@@ -76,7 +74,6 @@ char	**get_map(char *map_name)
 	nb = get_nb_line_fd(map_name);
 	if (nb == 0)
 		return (NULL);
-	printf("map name = %s\n", map_name);
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
@@ -87,7 +84,8 @@ char	**get_map(char *map_name)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		add_line(map, fd, line, &nb);
+		add_line(map, line, &nb);
+		line = get_next_line(fd);
 	}
 	map[nb] = NULL;
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/03 16:57:00 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/03 18:11:24 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct map
 
 //						FUNCTIONS						//
 //parsing
-bool	parsing(char *map_name, t_map *data_map);
+bool	parsing(char *map_name, t_map **data_map);
 char	**get_map(char *map_name);
 char	*get_next_line(int fd);
 
