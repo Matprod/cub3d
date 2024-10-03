@@ -11,12 +11,17 @@ MLX_DIR 			= lib/mlx/
 # Compiler and CFlags
 CC					= cc
 CFLAGS				= -Wall -Wextra -Werror -I
-MLX_FLAGS			= lib/mlx/libmlx.a lib/mlx/libmlx_Linux.a -L. -lXext -L. -lX11
+MLX_FLAGS			= -L. -lXext -L. -lX11
 RM					= rm -f
 
 
 # Concatenate all source files
-SRCS 				=	srcs/
+SRCS 				=	srcs/main.c\
+						srcs/parsing.c\
+						srcs/map_parsing.c\
+						srcs/get_next_line.c\
+						srcs/free.c\
+						srcs/print.c\
 
 # Apply the pattern substitution to each source file in SRC and produce a corresponding list of object files in the OBJ_DIR
 OBJ 				= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
@@ -26,14 +31,14 @@ start:
 					make all
 
 $(LIBFT):
-					make -C ./libft
+					make -C ./lib/libft
 
 $(MLX):
-					make -C ./libmlx.a
+					make -C ./mlx
 
 all: 				$(NAME)
 
-$(NAME): 			$(OBJ) $(LIBFT)
+$(NAME): 			$(OBJ) $(LIBFT) $(MLX)
 					$(CC) $(CFLAGS) $(INC) $(OBJ) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
 
 # Compile object files from source files
@@ -43,8 +48,8 @@ $(OBJ_DIR)%.o:		$(SRC_DIR)%.c
 
 clean:
 					@$(RM) -r $(OBJ_DIR)
-					@make clean -C ./libft
-					@make clean -C ./libmlx.a
+					@make clean -C ./lib/libft
+					@make clean -C ./lib/mlx
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(LIBFT)

@@ -1,41 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 14:10:10 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/01 14:22:36 by Matprod          ###   ########.fr       */
+/*   Created: 2024/10/03 16:35:57 by Matprod           #+#    #+#             */
+/*   Updated: 2024/10/03 17:08:10 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	is_valid_map_name(char *map)
+void	free_array(char **array)
 {
 	int	i;
 
-	i = ft_strlen(map);
-	if (i < 5)
+	i = 0;
+	while(array[i])
 	{
-		printf("Map name is too short\n");
-		return (FALSE);
+		free(array[i]);
+		i++;
 	}
-	if (map[i - 1] != 'b' || map[i - 2] != 'u' || map[i - 3] != 'c'
-		|| map[i - 4] != '.')
-	{
-		printf("Map name is invalid\n");
-		return (FALSE);
-	}
-	return (TRUE);
+	free(array);
+}
+void	free_map(t_map *map)
+{
+	if (map->map)
+		free_array(map->map);
+	if (map->text_ea)
+		free(map->text_ea);
+	if (map->text_no)
+		free(map->text_no);
+	if (map->text_we)
+		free(map->text_we);
+	if (map->text_so)
+		free(map->text_so);
+	if (map->map_name)
+		free(map->map_name);
 }
 
-void parsing(char *map_name)
+void	free_all(t_map *map)
 {
-	int	fd;
-
-	if (!is_valid_map_name(map_name))
-		return ;
-	if 
+	free_map(map);
 }
