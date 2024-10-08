@@ -16,7 +16,7 @@ bool	parse_map(t_map *data_map)
 {
 	data_map->map = get_map(data_map->map_name);
 	if (!data_map->map)
-		return (ERROR);
+		return (printf("Error : with stocking the map\n"), ERROR);
 	return (SUCCESS);
 }
 
@@ -27,13 +27,13 @@ bool	is_valid_map_name(char *map)
 	i = ft_strlen(map);
 	if (i < 5)
 	{
-		printf("Error map should have '.cub' format and at least 1 letter\n");
+		printf("Error : map should have '.cub' format and at least 1 letter\n");
 		return (FALSE);
 	}
 	if (map[i - 1] != 'b' || map[i - 2] != 'u' || map[i - 3] != 'c'
 		|| map[i - 4] != '.')
 	{
-		printf("Error map should have '.cub' format and at least 1 letter\n");
+		printf("Error : map should have '.cub' format and at least 1 letter\n");
 		return (FALSE);
 	}
 	return (TRUE);

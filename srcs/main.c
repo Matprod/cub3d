@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/03 18:11:36 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/07 18:58:09 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	if (parsing(argv[1], &data_map) == ERROR)
 		return (ERROR);
 	//print_array(data_map->map);
+	print
 	free_all(data_map);
 	return (SUCCESS);
 }

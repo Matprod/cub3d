@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/03 18:11:24 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/08 13:15:52 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define SUCCESS 0
 # define FALSE 0
 # define TRUE 1
+
 
 typedef struct map
 {
@@ -56,5 +57,7 @@ void	free_all(t_map *map);
 void	free_array(char **array);
 //print
 void	print_array(char **array);
+int		print_error(char *error);
+void	print_int_array(int **array);
 
 #endif

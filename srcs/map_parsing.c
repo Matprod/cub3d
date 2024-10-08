@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/03 18:13:23 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/07 15:50:54 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	add_line(char **map, char *line, int *nb)
 		(*nb)++;
 	}
 	free(line);
-
 }
 
 char	**get_map(char *map_name)
