@@ -19,6 +19,9 @@ RM					= rm -f
 SRCS 				=	srcs/main.c\
 						srcs/parsing.c\
 						srcs/map_parsing.c\
+						srcs/get_texture_path.c\
+						srcs/get_color_floor.c\
+						srcs/get_color_ceiling.c\
 						srcs/get_next_line.c\
 						srcs/free.c\
 						srcs/print.c\

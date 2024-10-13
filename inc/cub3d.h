@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/08 13:15:52 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/13 21:54:05 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@
 # define SUCCESS 0
 # define FALSE 0
 # define TRUE 1
-
+# define RES 64
+# define NORTH_WALL "north_wall.xpm"
+# define SOUTH_WALL "south_wall.xpm"
+# define WEST_WALL "west_wall.xpm"
+# define EAST_WALL "east_wall.xpm"
 
 typedef struct map
 {
@@ -44,20 +48,23 @@ typedef struct map
 	int		map_width;
 }	t_map;
 
-
 //						FUNCTIONS						//
 //parsing
 bool	parsing(char *map_name, t_map **data_map);
 char	**get_map(char *map_name);
 char	*get_next_line(int fd);
+bool	get_color_ceiling(t_map **map);
+bool	get_color_floor(t_map **map);
+bool	get_texture_path(t_map *map);
 
 //free
+void	close_and_free(char **array, int fd);
 void	free_map(t_map *map);
 void	free_all(t_map *map);
 void	free_array(char **array);
 //print
 void	print_array(char **array);
 int		print_error(char *error);
-void	print_int_array(int **array);
+void	print_int_array(int *array, int size);
 
 #endif

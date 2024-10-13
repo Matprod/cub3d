@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/07 15:50:54 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/08 17:19:17 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,10 @@ static int	get_nb_line_fd(char *map_name)
 	return (nb);
 }
 
-static char	*close_and_free(char **array, int fd)
+void	close_and_free(char **array, int fd)
 {
 	free_array(array);
 	close(fd);
-	return (NULL);
 }
 
 static void	add_line(char **map, char *line, int *nb)
@@ -78,7 +77,7 @@ char	**get_map(char *map_name)
 		return (NULL);
 	map = (char **)malloc(sizeof(char *) * (nb + 1));
 	if (!map)
-		close_and_free(map, fd);
+		return (close_and_free(map, fd), NULL);
 	nb = 0;
 	line = get_next_line(fd);
 	while (line != NULL)

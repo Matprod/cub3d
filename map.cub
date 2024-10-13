@@ -1,9 +1,9 @@
-NO images/retro_texture_pack/HEDGE_1A.xpm
-SO images/retro_texture_pack/HEDGE_2A.xpm
-WE images/retro_texture_pack/HEDGE_1C.xpm
-EA images/retro_texture_pack/HEDGE_1B.xpm
-F 220,100,0
-C 225,30,0
+NO north
+SO south
+WE west
+EA east
+C 225,30,50
+F 220,100,60
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
