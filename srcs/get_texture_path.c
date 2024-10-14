@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/09 15:13:00 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/14 16:24:17 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,22 @@ static	bool	check_valid_split(char **split, char *line)
 static	bool	split_line_texture(t_map *map, char *line)
 {
 	char	**split;
+	char	**split_eof;
 
 	split = ft_split(line, ' ');
+	split_eof = ft_split(split[1], '\n');
 	if (check_valid_split(split, line) == ERROR)
 		return (ERROR);
 	if (line[0] == 'N' && line[1] == 'O')
-		map->text_no = ft_strdup(split[1]);
+		map->text_no = ft_strdup(split_eof[0]);
 	if (line[0] == 'S' && line[1] == 'O')
-		map->text_so = ft_strdup(split[1]);
+		map->text_so = ft_strdup(split_eof[0]);
 	if (line[0] == 'E' && line[1] == 'A')
-		map->text_ea = ft_strdup(split[1]);
+		map->text_ea = ft_strdup(split_eof[0]);
 	if (line[0] == 'W' && line[1] == 'E')
-		map->text_we = ft_strdup(split[1]);
+		map->text_we = ft_strdup(split_eof[0]);
 	free_array(split);
+	free_array(split_eof);
 	return (SUCCESS);
 }
 

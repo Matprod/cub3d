@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/13 20:32:07 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/13 22:40:24 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ int	main(int argc, char **argv)
 	t_map	*data_map;
 
 	data_map = malloc(sizeof(t_map));
+	if (!data_map)
+		return (printf("Error malloc data_map\n"), ERROR);
 	if (argc != 2)
 		return (ERROR);
 	if (parsing(argv[1], &data_map) == ERROR)
 		return (ERROR);
-	//print_array(data_map->map);
+	print_array(data_map->map);
 	printf("color ceiling =\n");
 	print_int_array(data_map->color_ceiling, 3);
 	printf("color floor =\n");

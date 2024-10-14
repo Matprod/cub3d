@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/08 17:19:17 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/14 16:13:31 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,13 @@ void	close_and_free(char **array, int fd)
 
 static void	add_line(char **map, char *line, int *nb)
 {
+	char **split_eof;
+
 	if (skip_data_map(line) == TRUE)
 	{
-		map[*nb] = ft_strdup(line);
+		split_eof = ft_split(line, '\n');
+		map[*nb] = ft_strdup(split_eof[0]);
+		free_array(split_eof);
 		(*nb)++;
 	}
 	free(line);

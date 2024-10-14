@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/13 21:54:05 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/13 22:19:17 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*get_next_line(int fd);
 bool	get_color_ceiling(t_map **map);
 bool	get_color_floor(t_map **map);
 bool	get_texture_path(t_map *map);
+bool	check_input_map(char **map);
 
 //free
 void	close_and_free(char **array, int fd);
