@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_color_floor.c                                  :+:      :+:    :+:   */
+/*   get_color_ceiling.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 18:15:44 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/13 22:12:18 by Matprod          ###   ########.fr       */
+/*   Created: 2024/10/07 17:51:33 by Matprod           #+#    #+#             */
+/*   Updated: 2024/10/14 18:11:06 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	bool	check_valid_split(char **first_split, char **second_split)
 	{
 		free_array(first_split);
 		free_array(second_split);
-		printf("Error : Invalid color floor input\n");
+		printf("Error : Invalid color ceiling input\n");
 		return (ERROR);
 	}
 	i = -1;
@@ -33,20 +33,20 @@ static	bool	check_valid_split(char **first_split, char **second_split)
 	{
 		free_array(first_split);
 		free_array(second_split);
-		printf("Error : Invalid color floor input\n");
+		printf("Error : Invalid color ceiling input\n");
 		return (ERROR);
 	}
 	return (SUCCESS);
 }
 
-static	bool	split_line_floor(t_map **map, char *line)
+static	bool	split_line_ceiling(t_parse *map, char *line)
 {
 	char	**first_split;
 	char	**second_split;
 	int		i;
 
 	i = -1;
-	if (line[0] == 'F')
+	if (line[0] == 'C')
 	{
 		first_split = ft_split(line, ' ');
 		second_split = ft_split(first_split[1], ',');
@@ -56,7 +56,9 @@ static	bool	split_line_floor(t_map **map, char *line)
 			return (ERROR);
 		}
 		while (second_split[++i])
-			(*map)->color_floor[i+1] = ft_atoi(second_split[i]);
+		{
+			map->color_ceiling[i+1] = ft_atoi(second_split[i]);
+		}
 		free_array(first_split);
 		free_array(second_split);
 		free(line);
@@ -66,20 +68,20 @@ static	bool	split_line_floor(t_map **map, char *line)
 	return (ERROR);
 }
 
-bool	get_color_floor(t_map **map)
+bool	get_color_ceiling(t_parse *map)
 {
 	int		fd;
 	char	*line;
 
-	fd = open((*map)->map_name, O_RDONLY);
+	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
 		return (perror("Error opening file"), ERROR);
 	if (!map)
-		close_and_free((*map)->map, fd);
+		close_and_free(map->map, fd);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		split_line_floor(map, line);
+		split_line_ceiling(map, line);
 		line = get_next_line(fd);
 	}
 	close(fd);

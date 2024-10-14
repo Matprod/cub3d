@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/13 22:40:24 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/14 18:12:19 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 int	main(int argc, char **argv)
 {
-	t_map	*data_map;
+	t_parse	*parse;
 
-	data_map = malloc(sizeof(t_map));
-	if (!data_map)
-		return (printf("Error malloc data_map\n"), ERROR);
+	parse = malloc(sizeof(t_parse));
+	if (!parse)
+		return (printf("Error malloc parse\n"), ERROR);
 	if (argc != 2)
 		return (ERROR);
-	if (parsing(argv[1], &data_map) == ERROR)
+	if (parsing(argv[1], &parse) == ERROR)
 		return (ERROR);
-	print_array(data_map->map);
+	print_array(parse->map);
 	printf("color ceiling =\n");
-	print_int_array(data_map->color_ceiling, 3);
+	print_int_array(parse->color_ceiling, 3);
 	printf("color floor =\n");
-	print_int_array(data_map->color_floor, 3);
-	printf("data map text no = %s\n",data_map->text_no);
-	printf("data map text so = %s\n",data_map->text_so);
-	printf("data map text ea = %s\n",data_map->text_ea);
-	printf("data map text we = %s\n",data_map->text_we);
-	free_all(data_map);
+	print_int_array(parse->color_floor, 3);
+	printf("data map text no = %s\n",parse->text_no);
+	printf("data map text so = %s\n",parse->text_so);
+	printf("data map text ea = %s\n",parse->text_ea);
+	printf("data map text we = %s\n",parse->text_we);
+	free_all(parse);
 	return (SUCCESS);
 }

@@ -17,13 +17,14 @@ RM					= rm -f
 
 # Concatenate all source files
 SRCS 				=	srcs/main.c\
-						srcs/parsing.c\
-						srcs/map_parsing.c\
-						srcs/check_map.c\
-						srcs/get_texture_path.c\
-						srcs/get_color_floor.c\
-						srcs/get_color_ceiling.c\
-						srcs/get_next_line.c\
+						srcs/parsing/parsing.c\
+						srcs/parsing/map_parsing.c\
+						srcs/parsing/map_utils.c\
+						srcs/parsing/check_map.c\
+						srcs/parsing/get_texture_path.c\
+						srcs/parsing/get_color_floor.c\
+						srcs/parsing/get_color_ceiling.c\
+						srcs/parsing/get_next_line.c\
 						srcs/free.c\
 						srcs/print.c\
 

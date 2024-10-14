@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:35:57 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/09 13:00:33 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/14 18:11:06 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void	free_array(char **array)
 		free(array[i]);
 	free(array);
 }
-void	free_map(t_map *map)
+
+void	free_texture(t_parse *map)
 {
-	if (map->map)
-		free_array(map->map);
 	if (map->text_ea)
 		free(map->text_ea);
 	if (map->text_no)
@@ -34,12 +33,19 @@ void	free_map(t_map *map)
 		free(map->text_we);
 	if (map->text_so)
 		free(map->text_so);
+}
+
+void	free_map(t_parse *map)
+{
+	if (map->map)
+		free_array(map->map);
 	if (map->map_name)
 		free(map->map_name);
+	free_texture(map);
 	free(map);
 }
 
-void	free_all(t_map *map)
+void	free_all(t_parse *map)
 {
 	free_map(map);
 }

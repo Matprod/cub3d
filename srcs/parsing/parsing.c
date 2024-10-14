@@ -6,20 +6,22 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:10:10 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/14 15:59:02 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/14 18:22:47 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	parse_map(t_map *data_map)
+bool	parse_map(t_parse *map)
 {
-	data_map->map = get_map(data_map->map_name);
-	if (!data_map->map)
+	map->map = get_map(map->map_name);
+	if (!map->map)
 		return (printf("Error : with stocking the map\n"), ERROR);
-	get_color_ceiling(&data_map);
-	get_color_floor(&data_map);
-	get_texture_path(data_map);
+	get_color_ceiling(map);
+	get_color_floor(map);
+	get_texture_path(map);
+	map->map_height = map_height(map->map);
+	map->map_width = map_width(map->map);
 	return (SUCCESS);
 }
 
@@ -41,7 +43,7 @@ bool	is_valid_map_name(char *map)
 	}
 	return (TRUE);
 }
-void	init_map(t_map *data_map)
+void	init_map(t_parse *data_map)
 {
 	if (!data_map->text_no)
 		data_map->text_no = ft_strdup(NORTH_WALL);
@@ -53,20 +55,21 @@ void	init_map(t_map *data_map)
 		data_map->text_we = ft_strdup(WEST_WALL);
 }
 
-
-bool	parsing(char *map_name, t_map **data_map)
+bool	parsing(char *map_name, t_parse **parse)
 {
 	if (!is_valid_map_name(map_name))
 	{
-		free(*data_map);
+		free(*parse);
 		return (ERROR);
 	}
-	(*data_map)->map_name = ft_strdup(map_name);
-	if (parse_map(*data_map) == ERROR)
+	(*parse)->pos_player = (t_vector){0, 0};
+	(*parse)->dir_player = 0;
+	(*parse)->map_name = ft_strdup(map_name);
+	if (parse_map(*parse) == ERROR)
 		return (ERROR);
-	if (check_input_map((*data_map)->map) == ERROR)
+	if (check_input_map(*parse) == ERROR)
 	{
-		free_all(*data_map);
+		free_all(*parse);
 		return (ERROR);
 	}
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/14 16:24:17 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/14 18:11:06 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static	bool	check_valid_split(char **split, char *line)
 	return (SUCCESS);
 }
 
-static	bool	split_line_texture(t_map *map, char *line)
+static	bool	split_line_texture(t_parse *map, char *line)
 {
 	char	**split;
 	char	**split_eof;
@@ -84,7 +84,7 @@ static	bool	split_line_texture(t_map *map, char *line)
 	return (SUCCESS);
 }
 
-bool	get_texture_path(t_map *map)
+bool	get_texture_path(t_parse *map)
 {
 	int		fd;
 	char	*line;
