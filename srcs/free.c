@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:35:57 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/14 18:11:06 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/15 16:14:59 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,20 @@ void	free_map(t_parse *map)
 	free(map);
 }
 
-void	free_all(t_parse *map)
+void	free_all(t_game *game)
 {
-	free_map(map);
+	free_map(game->parsing);
+	free(game);
+}
+
+void	free_parse(t_parse *parse)
+{
+	free_map(parse);
+	free(parse);
+}
+
+int		close_window(t_game *game)
+{
+	free_all(game);
+	exit(0);
 }

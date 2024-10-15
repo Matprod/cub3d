@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/14 18:12:19 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/15 14:02:33 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_parse	*parse;
+	t_game	*game;
 
 	parse = malloc(sizeof(t_parse));
 	if (!parse)
@@ -23,15 +24,13 @@ int	main(int argc, char **argv)
 		return (ERROR);
 	if (parsing(argv[1], &parse) == ERROR)
 		return (ERROR);
-	print_array(parse->map);
-	printf("color ceiling =\n");
-	print_int_array(parse->color_ceiling, 3);
-	printf("color floor =\n");
-	print_int_array(parse->color_floor, 3);
-	printf("data map text no = %s\n",parse->text_no);
-	printf("data map text so = %s\n",parse->text_so);
-	printf("data map text ea = %s\n",parse->text_ea);
-	printf("data map text we = %s\n",parse->text_we);
-	free_all(parse);
+	game = malloc(sizeof(t_game));
+	game->parsing = parse;
+	/* mlx_hook(game->fps_win, 2, 1L << 1, handle_keypress, game);
+	mlx_hook(game->fps_win, 3, 1L << 0, handle_keyrelease, game);
+	mlx_loop_hook(game->mlx, game_loop, game);
+	mlx_hook(game->fps_win, 17, 0, close_window, game);
+	mlx_loop(game->mlx); */
+	free_all(game);
 	return (SUCCESS);
 }

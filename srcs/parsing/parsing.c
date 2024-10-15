@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:10:10 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/14 18:22:47 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/15 14:21:53 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	parsing(char *map_name, t_parse **parse)
 		return (ERROR);
 	if (check_input_map(*parse) == ERROR)
 	{
-		free_all(*parse);
+		free_parse(*parse);
 		return (ERROR);
 	}
 	return (SUCCESS);
