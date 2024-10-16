@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/15 14:02:33 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/16 11:44:51 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 		return (ERROR);
 	game = malloc(sizeof(t_game));
 	game->parsing = parse;
+	printf("main fin\n");
 	/* mlx_hook(game->fps_win, 2, 1L << 1, handle_keypress, game);
 	mlx_hook(game->fps_win, 3, 1L << 0, handle_keyrelease, game);
 	mlx_loop_hook(game->mlx, game_loop, game);

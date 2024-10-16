@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/15 17:43:33 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/16 11:46:48 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ bool		get_texture_path(t_parse *map);
 bool		check_input_map(t_parse *map);
 int			map_height(char **map);
 int			map_width(char **map);
+bool		is_map_surrounded(char **map);
 //game
 int			handle_keypress(int keycode, t_game *game);
 int			handle_keyrelease(int keycode, t_game *game);
