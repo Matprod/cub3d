@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:27:46 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/14 19:10:05 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/17 11:12:32 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,40 @@
 t_img	create_img(t_game *game, char *path)
 {
 	t_img		img;
-
+	if (access(path, F_OK) != 0) 
+		printf("File %s not found or inaccessible\n", path);
 	img.mlx_img = mlx_xpm_file_to_image(game->mlx, path,
 			&img.width, &img.height);
+	 if (!img.mlx_img)
+	{
+		printf("Error: failed to load image from %s\n", path);
+		return (img); // Return a struct with NULL fields
+	}
 	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp,
 			&img.line_len, &img.endian);
 	return (img);
 }
 
+
 void	load_img(t_game *game)
 {
 	game->texture.north = create_img(game, game->parsing->text_no);
+	if (!game->texture.north.mlx_img)
+		return (printf("Error loading north texture\n"), (void)0);
+	
 	game->texture.south = create_img(game, game->parsing->text_so);
+	if (!game->texture.south.mlx_img)
+		return (printf("Error loading south texture\n"), (void)0);
+	
 	game->texture.west = create_img(game, game->parsing->text_we);
+	if (!game->texture.west.mlx_img)
+		return (printf("Error loading west texture\n"), (void)0);
+	
 	game->texture.east = create_img(game, game->parsing->text_ea);
+	if (!game->texture.east.mlx_img)
+		return (printf("Error loading east texture\n"), (void)0);
 }
+
 
 void	init_player(t_game *game)
 {

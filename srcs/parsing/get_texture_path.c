@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/14 18:11:06 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/17 12:04:25 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_texture(t_parse *data_map)
+{
+	data_map->text_no = NULL;
+	data_map->text_so = NULL;
+	data_map->text_ea = NULL;
+	data_map->text_we = NULL;
+	if (!data_map->text_no)
+		data_map->text_no = ft_strdup(NORTH_WALL);
+	if (!data_map->text_so)
+		data_map->text_so = ft_strdup(SOUTH_WALL);
+	if (!data_map->text_ea)
+		data_map->text_ea = ft_strdup(EAST_WALL);
+	if (!data_map->text_we)
+		data_map->text_we = ft_strdup(WEST_WALL);
+}
 
 static bool	is_texture(char *line)
 {
@@ -102,6 +118,7 @@ bool	get_texture_path(t_parse *map)
 		free(line);
 		line = get_next_line(fd);
 	}
+	init_texture(map);
 	close(fd);
 	return (SUCCESS);
 }

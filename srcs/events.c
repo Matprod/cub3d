@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:57:04 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/15 15:44:41 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/16 16:42:13 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,16 @@ int	handle_keyrelease(int keycode, t_game *game)
 	if (keycode == LEFT)
 		game->key_states[1] = 0;
 	return (0);
+}
+
+void	move(t_game *game, char direction)
+{
+	if (direction == 'N')
+		game->player.pos.y -= 2;
+	else if (direction == 'S')
+		game->player.pos.y += 2;
+	else if (direction == 'W')
+		game->player.pos.x -= 2;
+	else
+		game->player.pos.x += 2;
 }

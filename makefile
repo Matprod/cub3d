@@ -21,6 +21,7 @@ SRCS 				=	srcs/main.c\
 						srcs/free.c\
 						srcs/print.c\
 						srcs/events.c\
+						srcs/game_loop.c\
 						srcs/init_windows.c\
 						srcs/parsing/parsing.c\
 						srcs/parsing/map_parsing.c\
@@ -35,10 +36,21 @@ SRCS 				=	srcs/main.c\
 						srcs/vector/vec_mult.c\
 						srcs/vector/vec_normalize.c\
 						srcs/vector/vec_print.c\
+						srcs/vector/vec_rotate.c\
 						srcs/vector/vec_rotate_edit.c\
 						srcs/vector/vec_rotate_rad.c\
 						srcs/vector/vec_scalar_mult.c\
+						srcs/vector/vec_sum.c\
 						srcs/vector/vec_to_angle.c\
+						srcs/shapes/circle.c\
+						srcs/shapes/line.c\
+						srcs/shapes/pixel.c\
+						srcs/render/color.c\
+						srcs/render/load.c\
+						srcs/render/raycast_utils.c\
+						srcs/render/raycast.c\
+						srcs/render/render_fps.c\
+						srcs/render/render.c\
 
 # Apply the pattern substitution to each source file in SRC and produce a corresponding list of object files in the OBJ_DIR
 OBJ 				= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))

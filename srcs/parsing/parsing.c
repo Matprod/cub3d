@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:10:10 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/16 16:31:13 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/17 11:26:26 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,6 @@ bool	is_valid_map_name(char *map)
 		return (FALSE);
 	}
 	return (TRUE);
-}
-void	init_map(t_parse *data_map)
-{
-	if (!data_map->text_no)
-		data_map->text_no = ft_strdup(NORTH_WALL);
-	if (!data_map->text_so)
-		data_map->text_so = ft_strdup(SOUTH_WALL);
-	if (!data_map->text_ea)
-		data_map->text_ea = ft_strdup(EAST_WALL);
-	if (!data_map->text_we)
-		data_map->text_we = ft_strdup(WEST_WALL);
 }
 
 bool	parsing(char *map_name, t_parse **parse)
