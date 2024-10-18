@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/17 12:06:24 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 11:58:11 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 	if (!game->mlx)
 		free_all(game);
 	game->fps_win = mlx_new_window(game->mlx,
-			RES_X, RES_Y, "first_person");
+			RES_X, RES_Y, "cub3d");
 	game->fps_img.mlx_img = mlx_new_image(game->mlx, RES_X, RES_Y);
 	game->fps_img.addr = mlx_get_data_addr(game->fps_img.mlx_img,
 			&game->fps_img.bpp, &game->fps_img.line_len,
