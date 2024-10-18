@@ -1,0 +1,4 @@
+Cub3d Change
+
+parse map -> init_map
+check_input_map -> parse map

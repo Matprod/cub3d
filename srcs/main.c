@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 11:04:09 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 16:33:14 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	main(int argc, char **argv)
 	game = NULL;
 	parse = malloc(sizeof(t_parse));
 	if (!parse)
-		return (printf("Error malloc parse\n"), ERROR);
+		return (error_msg(ERROR_MALLOC), ERROR);
 	if (argc != 2)
 		return (ERROR);
-	if (parsing(argv[1], &parse) == ERROR)
+	if (parsing(argv[1], &parse) == ERROR)	//OK
 		return (ERROR);
 	game = malloc(sizeof(t_game));
 	memset(game, 0, sizeof(t_game));

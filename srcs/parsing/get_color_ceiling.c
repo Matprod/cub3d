@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color_ceiling.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:51:33 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/14 18:11:06 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 15:10:07 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static	bool	check_valid_split(char **first_split, char **second_split)
 	{
 		free_array(first_split);
 		free_array(second_split);
-		printf("Error : Invalid color ceiling input\n");
-		return (ERROR);
+		return (error_msg(ERROR_CEILING_COLOR), ERROR);
 	}
 	i = -1;
 	while (second_split[++i])
@@ -33,8 +32,7 @@ static	bool	check_valid_split(char **first_split, char **second_split)
 	{
 		free_array(first_split);
 		free_array(second_split);
-		printf("Error : Invalid color ceiling input\n");
-		return (ERROR);
+		return (error_msg(ERROR_CEILING_COLOR), ERROR);
 	}
 	return (SUCCESS);
 }
@@ -75,9 +73,7 @@ bool	get_color_ceiling(t_parse *map)
 
 	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
-		return (perror("Error opening file"), ERROR);
-	if (!map)
-		close_and_free(map->map, fd);
+		return (error_msg(ERROR_OPEN), ERROR);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{

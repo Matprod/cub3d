@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:18:29 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/16 16:34:33 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 16:31:49 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ bool	is_valid_input(char c)
 	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E'
 		|| c == 'W'|| c == ' ')
 		return (TRUE);
-	return (FALSE);
+	return (error_msg(ERROR_MAP_CONTENT), FALSE);
 }
 
-bool	check_input_map(t_parse *map)
+bool	parse_map(t_parse *map)
 {
 	int	i;
 	int	j;
@@ -37,7 +37,7 @@ bool	check_input_map(t_parse *map)
 				|| map->map[i][j] == 'E' || map->map[i][j] == 'W')
 			{
 				if (map->pos_player.x != 0 || map->pos_player.y != 0)
-					return (false);
+					return (false); // ??
 				map->pos_player = (t_vector){j, i};
 				map->dir_player = map->map[i][j];
 			}
@@ -61,7 +61,8 @@ bool	is_map_surrounded(char **map)
 			j++;
 		if (map[i][j] == '0')
 		{
-			printf("error | map[i] =%s | map[i][j] =%c | j = %d\n",map[i], map[i][j], j);
+			error_msg(ERROR_MAP_WALL);
+			printf("At coordonate: y:%d x:%d Value: %c\n", i, j, map[i][j]);
 			return (ERROR);
 		}
 		i++;
@@ -71,7 +72,8 @@ bool	is_map_surrounded(char **map)
 	{
 		if (map[i][ft_strlen(map[i])-1] == '0')
 		{
-			printf("error | map[i] =%s | map[i][j] =%c | j = %d\n",map[i], map[i][j], j);
+			error_msg(ERROR_MAP_WALL);
+			printf("At coordonate: y:%d x:%d Value: %c\n", i, j, map[i][j]);
 			return (ERROR);
 		}
 		i++;

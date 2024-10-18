@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:35:14 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 11:38:47 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 13:43:59 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	game_loop(void *g)
 	game = (t_game *)g;
 	edit_player_pos(game);
 	edit_player_rotate(game);
-	//usleep(16000);
+	usleep(8000);
 	render(game);
 	return (0);
 }

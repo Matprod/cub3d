@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/14 16:13:31 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 12:58:59 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ char	**get_map(char *map_name)
 		return (NULL);
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
-		return (NULL);
+		return (error_msg(ERROR_OPEN), NULL);
 	map = (char **)malloc(sizeof(char *) * (nb + 1));
 	if (!map)
-		return (close_and_free(map, fd), NULL);
+		return (error_msg(ERROR_MALLOC), close_and_free(map, fd), NULL);
 	nb = 0;
 	line = get_next_line(fd);
 	while (line != NULL)

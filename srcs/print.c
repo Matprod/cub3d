@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:38:58 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/13 21:44:10 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 12:48:50 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,11 @@ int	print_error(char *error)
 {
 	printf("%s\n", error);
 	return (ERROR);
+}
+
+void	error_msg(const char *error)
+{
+	if (!error)
+		return ;
+	write(2, error, ft_strlen(error));
 }

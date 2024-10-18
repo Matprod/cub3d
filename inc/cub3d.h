@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 11:22:04 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 16:19:41 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 # define WEST_WALL "./images/BRICK_2A.xpm"
 # define EAST_WALL "./images/DOOR_2A.xpm"
 
+
 # define ESC 65307
 # define A 97
 # define W 119
@@ -63,6 +64,40 @@
 # define S 115
 # define RIGHT 65361
 # define LEFT 65363
+
+# define ERROR_MAP_NAME \
+"Error\n" \
+"Error : map should have '.cub' format and at least 1 letter\n"
+# define ERROR_MAP_FORMAT \
+"Error\n" \
+"Error : map should have '.cub' format and at least 1 letter\n"
+# define ERROR_OPEN \
+"Error\n" \
+"Error : Opening File Failed\n"
+# define ERROR_MALLOC \
+"Error\n" \
+"Error : Malloc Initialisation Failed\n"
+# define ERROR_FLOOR_COLOR \
+"Error\n" \
+"Error : Floor Input: Invalid color\n"
+# define ERROR_FLOOR_IDENTIFIER \
+"Error\n" \
+"Error : Floor Identifier must start with 'F'\n"
+# define ERROR_CEILING_COLOR \
+"Error\n" \
+"Error : Ceiling Input: Invalid color\n"
+# define ERROR_TEXTURE_PATH \
+"Error\n" \
+"Error : Texture Path: Invalid Input\n"
+# define ERROR_MAP_CONTENT \
+"Error\n" \
+"Error : Map Content: Invalid Character\n" \
+"Valid Characters are: '1' '0' 'N' 'S' 'E' 'W'\n"
+# define ERROR_MAP_WALL \
+"Error\n" \
+"Error : Map is not surrounded by walls\n"
+
+
 
 typedef struct s_vector
 {
@@ -87,8 +122,6 @@ typedef struct s_player
 	float				direction_adjust;
 	t_vector			current_tile;
 }						t_player;
-
-
 
 typedef struct s_img
 {
@@ -161,15 +194,17 @@ typedef struct s_game
 //parsing
 bool			parsing(char *map_name, t_parse **data_map);
 char			**get_map(char *map_name);
+bool			init_map(t_parse *map);
 char			*get_next_line(int fd);
 bool			get_color_ceiling(t_parse *map);
 bool			get_color_floor(t_parse *map);
 bool			get_texture_path(t_parse *map);
-bool			check_input_map(t_parse *map);
+bool			parse_map(t_parse *map);
 int				map_height(char **map);
 int				map_width(char **map);
 bool			is_map_surrounded(char **map);
 void			init_texture(t_parse *data_map);
+
 //game
 int				handle_keypress(int keycode, t_game *game);
 int				handle_keyrelease(int keycode, t_game *game);
@@ -177,6 +212,7 @@ void			var_init(t_game *game);
 void			init_player(t_game *game);
 void			move(t_game *game, char direction);
 int				game_loop(void *g);
+
 //render
 void			render(t_game *game);
 void			render_fps(t_game *game);
@@ -186,12 +222,14 @@ unsigned int	img_pix_read(t_img *img, int x, int y);
 void			load_grid(t_game *game);
 void			clean_map(t_game *game);
 void			clear_img(t_img *img);
+
 //raycast
 void			print_circle_relative_tile_pos(t_game *game, t_vector point);
 char			get_collision_orientation(char last_step, t_vector v_step);
 double			get_texture_x(char last_step, t_vector v_collision_point,
 					t_vector v_map_check);
-t_collision		cast_two_d_ray(t_game *game, t_vector direction);	
+t_collision		cast_two_d_ray(t_game *game, t_vector direction);
+
 //pixel
 int				pixel_out_of_bound(float x, float y, t_img *image);
 t_vector		tile_to_pixel(t_vector tile_coord);
@@ -202,6 +240,7 @@ void			img_pix_put(t_img *img, int x, int y, int color);
 void			draw_vertical_line_2(t_img *img, t_vector pos, int len, int color);
 void			draw_line_dda(t_img *img, t_vector vec1, t_vector vec2, int color);
 void			draw_filled_circle(t_img *img, t_vector mid, int radius, int color);
+
 //vector
 double			vec_angle(t_vector v1, t_vector v2);
 double			vec_distance(t_vector vec1, t_vector vec2);
@@ -214,6 +253,7 @@ t_vector		vec_rotate(t_vector vector, float angle);
 t_vector		vec_scalar_mult(t_vector vec1, double i);
 t_vector		vec_sum(t_vector vec1, t_vector vec2);
 void			vec_to_angle(double angle, t_vector *vector);
+
 //free
 int				close_window(t_game *game);
 void			close_and_free(char **array, int fd);
@@ -226,5 +266,6 @@ void			free_array(char **array);
 void			print_array(char **array);
 int				print_error(char *error);
 void			print_int_array(int *array, int size);
+void			error_msg(const char *error);
 
 #endif

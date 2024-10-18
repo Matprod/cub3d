@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color_floor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:15:44 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/14 18:11:06 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 15:17:55 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static	bool	check_valid_split(char **first_split, char **second_split)
 	{
 		free_array(first_split);
 		free_array(second_split);
-		printf("Error : Invalid color floor input\n");
-		return (ERROR);
+		return (error_msg(ERROR_FLOOR_COLOR), ERROR);
 	}
 	i = -1;
 	while (second_split[++i])
@@ -33,8 +32,7 @@ static	bool	check_valid_split(char **first_split, char **second_split)
 	{
 		free_array(first_split);
 		free_array(second_split);
-		printf("Error : Invalid color floor input\n");
-		return (ERROR);
+		return (error_msg(ERROR_FLOOR_COLOR), ERROR);
 	}
 	return (SUCCESS);
 }
@@ -51,10 +49,7 @@ static	bool	split_line_floor(t_parse *map, char *line)
 		first_split = ft_split(line, ' ');
 		second_split = ft_split(first_split[1], ',');
 		if (check_valid_split(first_split, second_split) == ERROR)
-		{
-			free(line);
-			return (ERROR);
-		}
+			return (free(line), ERROR);
 		while (second_split[++i])
 			map->color_floor[i+1] = ft_atoi(second_split[i]);
 		free_array(first_split);
@@ -63,7 +58,7 @@ static	bool	split_line_floor(t_parse *map, char *line)
 		return (SUCCESS);
 	}
 	free(line);
-	return (ERROR);
+	return (error_msg(ERROR_FLOOR_IDENTIFIER), ERROR);
 }
 
 bool	get_color_floor(t_parse *map)
@@ -73,9 +68,7 @@ bool	get_color_floor(t_parse *map)
 
 	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
-		return (perror("Error opening file"), ERROR);
-	if (!map)
-		close_and_free(map->map, fd);
+		return (error_msg(ERROR_OPEN), ERROR);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{

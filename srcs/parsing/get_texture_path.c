@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/17 12:36:42 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 15:21:23 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ static	bool	check_valid_split(char **split, char *line)
 	{
 		free(line);
 		free_array(split);
-		printf("Error : Invalid texture path input\n");
-		return (ERROR);
+		return (error_msg(ERROR_TEXTURE_PATH), ERROR);
 	}
 	/* if (open(split[1], O_RDONLY) == -1)
 	{
@@ -107,9 +106,7 @@ bool	get_texture_path(t_parse *map)
 
 	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
-		return (perror("Error opening file"), ERROR);
-	if (!map)
-		close_and_free(map->map, fd);
+		return (error_msg(ERROR_OPEN), ERROR);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
