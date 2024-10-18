@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:46:25 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 12:33:54 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 13:28:43 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,6 @@ void	render_fps(t_game *game)
 		//line_height = (64 / 2) * game->player.direction_adjust;
 		line_pos.y = RES_Y / 2 - line_height / 2;
 		texture_render(game, collision, line_pos, line_height);
-		line_pos.x += 1
+		line_pos.x += 1;
 	}
 }
