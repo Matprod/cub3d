@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/17 11:36:10 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 11:22:04 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@
 # define FALSE 0
 # define TRUE 1
 # define RES 64
-# define NORTH_WALL "./images/HEDGE_1A.xpm"
-# define SOUTH_WALL "./images/HEDGE_2A.xpm"
-# define WEST_WALL "./images/HEDGE_1C.xpm"
-# define EAST_WALL "./images/HEDGE_1B.xpm"
+# define NORTH_WALL "./images/BRICK_1A.xpm"
+# define SOUTH_WALL "./images/BRICK_3D.xpm"
+# define WEST_WALL "./images/BRICK_2A.xpm"
+# define EAST_WALL "./images/DOOR_2A.xpm"
 
 # define ESC 65307
 # define A 97

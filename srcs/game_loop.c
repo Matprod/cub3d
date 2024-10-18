@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:35:14 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/16 17:35:39 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 11:38:47 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	game_loop(void *g)
 	game = (t_game *)g;
 	edit_player_pos(game);
 	edit_player_rotate(game);
-	usleep(16000);
+	//usleep(16000);
 	render(game);
 	return (0);
 }

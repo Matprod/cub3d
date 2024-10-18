@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:46:25 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/16 16:46:30 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 11:42:47 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,9 @@ void	render_fps(t_game *game)
 	i = -1;
 	while (++i < RES_X)
 	{
-		update_collision(&collision, game, line_pos, half_width);
-		line_height = (64 / collision.distance) * game->player.direction_adjust;
+		//update_collision(&collision, game, line_pos, half_width);
+		//line_height = (64 / collision.distance) * game->player.direction_adjust;
+		line_height = (64) * game->player.direction_adjust;
 		line_pos.y = RES_Y / 2 - line_height / 2;
 		texture_render(game, collision, line_pos, line_height);
 		line_pos.x += RES_X / RES_X;

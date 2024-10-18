@@ -74,7 +74,7 @@ $(OBJ_DIR)%.o:		$(SRC_DIR)%.c
 
 clean:
 	$(MAKE) clean -C lib/libft
-	$(RM) $(OBJS)
+	$(RM) $(OBJ)
 	
 
 fclean: clean

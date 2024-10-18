@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:27:46 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/17 11:12:32 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/18 11:25:38 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_img	create_img(t_game *game, char *path)
 {
 	t_img		img;
-	if (access(path, F_OK) != 0) 
-		printf("File %s not found or inaccessible\n", path);
+	/* if (access(path, F_OK) != 0) 
+		printf("File %s not found or inaccessible\n", path); */
 	img.mlx_img = mlx_xpm_file_to_image(game->mlx, path,
 			&img.width, &img.height);
 	 if (!img.mlx_img)
