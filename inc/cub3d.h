@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 16:19:41 by adebert          ###   ########.fr       */
+/*   Updated: 2024/10/19 14:00:10 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,16 @@
 
 # define MAX_DISTANCE 10
 
+# define CEILING 2
+# define FLOOR 3
+
 # define BUFFER_SIZE 42
 # define ERROR 1
 # define SUCCESS 0
 # define FALSE 0
 # define TRUE 1
 # define RES 64
+# define NOT_FOUND 1
 # define NORTH_WALL "./images/BRICK_1A.xpm"
 # define SOUTH_WALL "./images/BRICK_3D.xpm"
 # define WEST_WALL "./images/BRICK_2A.xpm"
@@ -96,8 +100,6 @@
 # define ERROR_MAP_WALL \
 "Error\n" \
 "Error : Map is not surrounded by walls\n"
-
-
 
 typedef struct s_vector
 {
@@ -191,15 +193,35 @@ typedef struct s_game
 
 
 //						FUNCTIONS						//
+//PARSER
 //parsing
 bool			parsing(char *map_name, t_parse **data_map);
-char			**get_map(char *map_name);
+bool			is_valid_map_name(char *map);
+//getmap
+bool			get_map(t_parse *map);
+int				get_nb_line_fd(char *map_name);
+void			add_line(char **map, char *line, int *nb);
+bool			skip_data_map(char *line);
+void			add_line(char **map, char *line, int *nb);
+//init_map
 bool			init_map(t_parse *map);
+//get_color_element
+bool			get_color_element(t_parse *map, int element, char name);
+bool			split_line(t_parse *map, char *line, int element, char name);
+bool			check_valid_split(char **first_split, char **second_split,
+				int element);
+void			copy_color(int color_element[3], t_parse *map, int element);
+void			error_color(int element);
+
+//check_map
+bool			is_valid_input(char c);
+
+
 char			*get_next_line(int fd);
-bool			get_color_ceiling(t_parse *map);
-bool			get_color_floor(t_parse *map);
+/* bool			get_color_ceiling(t_parse *map);
+bool			get_color_floor(t_parse *map); */
 bool			get_texture_path(t_parse *map);
-bool			parse_map(t_parse *map);
+bool			check_map(t_parse *map);
 int				map_height(char **map);
 int				map_width(char **map);
 bool			is_map_surrounded(char **map);

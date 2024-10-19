@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_color_ceiling.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:51:33 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 15:10:07 by adebert          ###   ########.fr       */
+/*   Updated: 2024/10/19 14:01:05 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static	bool	check_valid_split(char **first_split, char **second_split)
-{
-	int	i;
-
-	i = -1;
-	while (first_split[++i])
-		;
-	if (i != 2)
-	{
-		free_array(first_split);
-		free_array(second_split);
-		return (error_msg(ERROR_CEILING_COLOR), ERROR);
-	}
-	i = -1;
-	while (second_split[++i])
-		;
-	if (i != 3)
-	{
-		free_array(first_split);
-		free_array(second_split);
-		return (error_msg(ERROR_CEILING_COLOR), ERROR);
-	}
-	return (SUCCESS);
-}
 
 static	bool	split_line_ceiling(t_parse *map, char *line)
 {
@@ -49,14 +24,9 @@ static	bool	split_line_ceiling(t_parse *map, char *line)
 		first_split = ft_split(line, ' ');
 		second_split = ft_split(first_split[1], ',');
 		if (check_valid_split(first_split, second_split) == ERROR)
-		{
-			free(line);
-			return (ERROR);
-		}
+			return (free(line), ERROR);
 		while (second_split[++i])
-		{
 			map->color_ceiling[i+1] = ft_atoi(second_split[i]);
-		}
 		free_array(first_split);
 		free_array(second_split);
 		free(line);

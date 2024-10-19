@@ -24,12 +24,11 @@ SRCS 				=	srcs/main.c\
 						srcs/game_loop.c\
 						srcs/init_windows.c\
 						srcs/parsing/parsing.c\
-						srcs/parsing/map_parsing.c\
+						srcs/parsing/get_map.c\
 						srcs/parsing/map_utils.c\
 						srcs/parsing/check_map.c\
 						srcs/parsing/get_texture_path.c\
-						srcs/parsing/get_color_floor.c\
-						srcs/parsing/get_color_ceiling.c\
+						srcs/parsing/get_color_element.c\
 						srcs/parsing/get_next_line.c\
 						srcs/vector/vec_angle.c\
 						srcs/vector/vec_distance.c\

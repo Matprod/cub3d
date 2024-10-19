@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 15:21:23 by adebert          ###   ########.fr       */
+/*   Updated: 2024/10/19 14:02:28 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static bool	is_texture(char *line)
 	return (FALSE);
 }
 
-static	bool	check_valid_split(char **split, char *line)
+static	bool	check_split_texture(char **split, char *line)
 {
 	int	i;
 
@@ -68,12 +68,6 @@ static	bool	check_valid_split(char **split, char *line)
 		free_array(split);
 		return (error_msg(ERROR_TEXTURE_PATH), ERROR);
 	}
-	/* if (open(split[1], O_RDONLY) == -1)
-	{
-		free(line);
-		free_array(split);
-		return (perror("Error opening file"), ERROR);
-	} */
 	return (SUCCESS);
 }
 
@@ -84,7 +78,7 @@ static	bool	split_line_texture(t_parse *map, char *line)
 
 	split = ft_split(line, ' ');
 	split_eof = ft_split(split[1], '\n');
-	if (check_valid_split(split, line) == ERROR)
+	if (check_split_texture(split, line) == ERROR)
 		return (ERROR);
 	if (line[0] == 'N' && line[1] == 'O')
 		map->text_no = ft_strdup(split_eof[0]);
