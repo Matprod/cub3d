@@ -1,4 +1,12 @@
-Cub3d Change
+To Free
 
-parse map -> init_map
-check_input_map -> parse map
+Stage 1:
+Scope: Main -> is_valid_map name
+free(parse)
+
+Stage 2:
+End of get_map name -> 
+free(parser->map_name);
+free(parse)
+
+

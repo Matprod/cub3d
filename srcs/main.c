@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/20 18:48:00 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/20 23:38:56 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,15 @@ int	main(int argc, char **argv)
 	t_parse	*parse;
 	t_game	*game;
 
+	if (argc != 2)
+		return (error_msg(ERROR_NBR_ARG), ERROR);
 	game = NULL;
 	parse = malloc(sizeof(t_parse));
 	if (!parse)
 		return (error_msg(ERROR_MALLOC), ERROR);
-	if (argc != 2)
+	if (parser(argv[1], &parse) == ERROR)
 		return (ERROR);
-	if (parser(argv[1], &parse) == ERROR)	//OK
-		return (ERROR);
+	//
 	game = malloc(sizeof(t_game));
 	memset(game, 0, sizeof(t_game));
  	game->map = map_dup(parse->map);
