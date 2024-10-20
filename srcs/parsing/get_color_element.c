@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:49:49 by allan             #+#    #+#             */
-/*   Updated: 2024/10/19 14:25:40 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/20 18:22:10 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,10 @@ bool	check_valid_split(char **first_split, char **second_split,
 
 void	copy_color(int color_element[3], t_parse *map, int element)
 {
-	printf("test\n");
 	if (element == CEILING)
 		ft_memcpy(map->color_ceiling, color_element, 3 * sizeof(int));
 	else if (element == FLOOR)
 		ft_memcpy(map->color_floor, color_element, 3 * sizeof(int));
-	printf("ah\n");
 }
 
 void	error_color(int element)

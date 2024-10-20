@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/19 12:34:29 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/20 18:35:08 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	get_map(t_parse *map)
 	int		nb;
 	char	*line;
 
-	nb = get_nb_line_fd(map->map_name);				//OK
+	nb = get_nb_line_fd(map->map_name);
 	if (nb == 0)
 		return (ERROR);
 	fd = open(map->map_name, O_RDONLY);

@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/19 14:02:28 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/20 18:38:23 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init_texture(t_parse *data_map)
 		data_map->text_we = ft_strdup(WEST_WALL);
 }
 
-static bool	is_texture(char *line)
+bool	is_texture(char *line)
 {
 	if (ft_strlen(line) < 2)
 		return (FALSE);
@@ -55,7 +55,7 @@ static bool	is_texture(char *line)
 	return (FALSE);
 }
 
-static	bool	check_split_texture(char **split, char *line)
+bool	check_split_texture(char **split, char *line)
 {
 	int	i;
 
@@ -71,7 +71,7 @@ static	bool	check_split_texture(char **split, char *line)
 	return (SUCCESS);
 }
 
-static	bool	split_line_texture(t_parse *map, char *line)
+bool	split_line_texture(t_parse *map, char *line)
 {
 	char	**split;
 	char	**split_eof;

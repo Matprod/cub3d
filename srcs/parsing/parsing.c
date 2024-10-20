@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 14:10:10 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/19 14:07:08 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/20 18:22:22 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,14 @@ bool	is_valid_map_name(char *map)
 
 bool	init_map(t_parse *map)
 {
-	if (get_map(map) == ERROR)					//OK
+	if (get_map(map) == ERROR)							//OK
 		return (ERROR);
-	if (get_color_element(map, CEILING, 'C') == ERROR)
+	if (get_color_element(map, CEILING, 'C') == ERROR)	//OK
 		return (ERROR);
-	printf("quoii\n");
-	if (get_color_element(map, FLOOR, 'F') == ERROR)
+	if (get_color_element(map, FLOOR, 'F') == ERROR)	//OK
 		return (ERROR);
-	printf("Oups\n");
-	if (get_texture_path(map) == ERROR)
+	if (get_texture_path(map) == ERROR)					//OK
 		return (ERROR);
-	/* if (get_color_ceiling(map) == ERROR)
-		return (ERROR);
-	if (get_color_floor(map) == ERROR)
-		return (ERROR);
-	if (get_texture_path(map) == ERROR)
-		return (ERROR); */
 	map->map_height = map_height(map->map);
 	map->map_width = map_width(map->map);
 	return (SUCCESS);
