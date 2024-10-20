@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2024/10/20 18:41:48 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/20 19:47:04 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include "cub3d.h"
 
-// Structs related to parsing
+// Structs related to PARSING
 typedef struct s_vector
 {
     double              x;
@@ -41,12 +41,13 @@ typedef struct s_parse
 
 // PARSER
 //parsing
-bool            parsing(char *map_name, t_parse **data_map);
+bool            parser(char *map_name, t_parse **parser);
 bool            is_valid_map_name(char *map);
-bool            init_map(t_parse *map);
-bool            check_map(t_parse *map);
+bool            init_map(char *map_name, t_parse **parser);
+bool            check_map(t_parse *parser);
 
 //get_map
+bool			get_map_name(char *map_name, t_parse **parser);
 bool            get_map(t_parse *map);
 int             get_nb_line_fd(char *map_name);
 bool            skip_data_map(char *line);
@@ -55,7 +56,10 @@ void            add_line(char **map, char *line, int *nb);
 
 //check_map
 bool            is_valid_input(char c);
+bool			is_valid_starting_position(t_parse *parser, int i, int j);
 bool            is_map_surrounded(char **map);
+bool			check_first_walls(char **map);
+bool			check_last_walls(char **map);
 
 //get_next_line
 char            *get_next_line(int fd);

@@ -23,13 +23,17 @@ SRCS 				=	srcs/main.c\
 						srcs/events.c\
 						srcs/game_loop.c\
 						srcs/init_windows.c\
-						srcs/parsing/parsing.c\
-						srcs/parsing/get_map.c\
-						srcs/parsing/map_utils.c\
-						srcs/parsing/check_map.c\
-						srcs/parsing/get_texture_path.c\
-						srcs/parsing/get_color_element.c\
-						srcs/parsing/get_next_line.c\
+						srcs/parsing/parser.c\
+						srcs/parsing/init_map/init_map.c\
+						srcs/parsing/init_map/get_map_name.c\
+						srcs/parsing/init_map/get_map.c\
+						srcs/parsing/init_map/get_next_line.c\
+						srcs/parsing/init_map/get_color_element.c\
+						srcs/parsing/init_map/get_texture_path.c\
+						srcs/parsing/init_map/get_height_width.c\
+						srcs/parsing/check_map/check_map.c\
+						srcs/parsing/check_map/is_valid_input_pos.c\
+						srcs/parsing/check_map/is_map_surrounded.c\
 						srcs/vector/vec_angle.c\
 						srcs/vector/vec_distance.c\
 						srcs/vector/vec_mult.c\

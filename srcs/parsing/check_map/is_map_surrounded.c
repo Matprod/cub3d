@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   is_map_surrounded.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 22:18:29 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/20 18:22:08 by allan            ###   ########.fr       */
+/*   Created: 2024/10/20 19:58:30 by allan             #+#    #+#             */
+/*   Updated: 2024/10/20 19:59:54 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	is_valid_input(char c)
-{
-	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E'
-		|| c == 'W'|| c == ' ')
-		return (TRUE);
-	return (error_msg(ERROR_MAP_CONTENT), FALSE);
-}
-
 bool	is_map_surrounded(char **map)
 {
-	int	i;
-	int	j;
+	if (check_first_walls(map) == ERROR)
+		return (FALSE);
+	if (check_last_walls(map) == ERROR)
+		return (FALSE);
+	return (TRUE);
+}
+
+bool	check_first_walls(char **map)
+{
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (map[i])
@@ -34,18 +35,29 @@ bool	is_map_surrounded(char **map)
 		if (map[i][j] == '0')
 		{
 			error_msg(ERROR_MAP_WALL);
-			printf("At coordonate: y:%d x:%d Value: %c\n", i, j, map[i][j]);
+			printf("Coordinate: y:%ld, x:%ld value:%c: Should be a wall\n",
+					i, j, map[i][j]);
 			return (ERROR);
 		}
 		i++;
 	}
+	return (SUCCESS);
+}
+
+bool	check_last_walls(char **map)
+{
+	size_t	i;
+	size_t	last_char;
+
 	i = 0;
 	while (map[i])
 	{
-		if (map[i][ft_strlen(map[i])-1] == '0')
+		last_char = ft_strlen(map[i]) - (size_t) 1;
+		if (map[i][last_char] == '0')
 		{
 			error_msg(ERROR_MAP_WALL);
-			printf("At coordonate: y:%d x:%d Value: %c\n", i, j, map[i][j]);
+			printf("Coordinate: y:%ld, x:%ld value:%c: Should be a wall\n",
+					i, last_char, map[i][last_char]);
 			return (ERROR);
 		}
 		i++;

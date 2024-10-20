@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/20 18:26:52 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/20 19:32:57 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@
 # define ERROR_MAP_WALL \
 "Error\n" \
 "Error : Map is not surrounded by walls\n"
+# define ERROR_STARTING_POSITION \
+"Error\n" \
+"Error : Invalid Player Starting Position\n"
 
 typedef struct s_collision
 {

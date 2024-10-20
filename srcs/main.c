@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/20 18:22:33 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/20 18:48:00 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 		return (error_msg(ERROR_MALLOC), ERROR);
 	if (argc != 2)
 		return (ERROR);
-	if (parsing(argv[1], &parse) == ERROR)	//OK
+	if (parser(argv[1], &parse) == ERROR)	//OK
 		return (ERROR);
 	game = malloc(sizeof(t_game));
 	memset(game, 0, sizeof(t_game));
