@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/20 18:35:08 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/22 22:33:26 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,21 @@ bool	get_map(t_parse *map)
 	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
 		return (error_msg(ERROR_OPEN), ERROR);
-	map->map = (char **)malloc(sizeof(char *) * (nb + 1));
+	map->map = (char **)ft_calloc(nb + 1, sizeof(char *));
 	if (!map->map)
-		return (error_msg(ERROR_MALLOC), close_and_free(map->map, fd), ERROR);
+		return (error_msg(ERROR_MALLOC), close(fd), ERROR);
+	if (add_singleton_data(map->map, DOUBLE_PTR) == ERROR)
+		return (ERROR);
 	nb = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		add_line(map->map, line, &nb);
+		if (add_line(map->map, line, &nb) == ERROR)
+			return (free(line), close(fd), ERROR);
 		line = get_next_line(fd);
 	}
 	map->map[nb] = NULL;
-	close(fd);
-	return (SUCCESS);
+	return (close(fd), SUCCESS);
 }
 
 int	get_nb_line_fd(char *map_name)
@@ -57,8 +59,28 @@ int	get_nb_line_fd(char *map_name)
 		free(line);
 		line = get_next_line(fd);
 	}
-	close(fd);
-	return (nb);
+	return (close(fd), nb);
+}
+
+bool	add_line(char **map, char *line, int *nb)
+{
+	char **split_eof;
+
+	if (skip_data_map(line) == TRUE)
+	{
+		split_eof = ft_split(line, '\n');
+		map[*nb] = ft_strdup(split_eof[0]);
+		if (!map[*nb])
+		{
+			free_array(split_eof);
+			free(line);
+			return (error_msg(ERROR_MALLOC), ERROR);
+		}
+		free_array(split_eof);
+		(*nb)++;
+	}
+	free(line);
+	return (SUCCESS);
 }
 
 bool	skip_data_map(char *line)
@@ -68,20 +90,6 @@ bool	skip_data_map(char *line)
 	if (line[0] && (line[0] == 'E' || line[0] == 'F' || line[0] == 'C'))
 		return (FALSE);
 	return (TRUE);
-}
-
-void	add_line(char **map, char *line, int *nb)
-{
-	char **split_eof;
-
-	if (skip_data_map(line) == TRUE)
-	{
-		split_eof = ft_split(line, '\n');
-		map[*nb] = ft_strdup(split_eof[0]);
-		free_array(split_eof);
-		(*nb)++;
-	}
-	free(line);
 }
 
 void	close_and_free(char **array, int fd)

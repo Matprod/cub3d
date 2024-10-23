@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2024/10/20 19:47:04 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/22 21:18:49 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool			get_map_name(char *map_name, t_parse **parser);
 bool            get_map(t_parse *map);
 int             get_nb_line_fd(char *map_name);
 bool            skip_data_map(char *line);
-void            add_line(char **map, char *line, int *nb);
+bool            add_line(char **map, char *line, int *nb);
 				//add close_and_free
 
 //check_map

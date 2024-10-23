@@ -10,7 +10,8 @@ MLX_A 				= libmlx.a
 MLX_DIR 			= lib/mlx/
 # Compiler and CFlags
 CC					= cc
-CFLAGS				= -Wall -Wextra -Werror -I
+CFLAGS				= -Wall -Wextra -I
+#-Werror
 MLX_FLAGS			= -L. -lXext -L. -lX11
 MLX_FLAGS_OBJS 		= lib/mlx/libmlx.a lib/mlx/libmlx_Linux.a -L. -lXext -L. -lX11
 RM					= rm -f
@@ -19,6 +20,7 @@ RM					= rm -f
 # Concatenate all source files
 SRCS 				=	srcs/main.c\
 						srcs/free.c\
+						srcs/singleton.c\
 						srcs/print.c\
 						srcs/events.c\
 						srcs/game_loop.c\

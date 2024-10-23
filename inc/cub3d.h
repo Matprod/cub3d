@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/21 00:33:15 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/22 23:26:47 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define FALSE 0
 # define TRUE 1
 # define RES 64
-# define NOT_FOUND 1
+# define NOT_FOUND 0
 # define NORTH_WALL "./images/BRICK_1A.xpm"
 # define SOUTH_WALL "./images/BRICK_3D.xpm"
 # define WEST_WALL "./images/BRICK_2A.xpm"
@@ -106,12 +106,25 @@
 "Error\n" \
 "Invalid Player Starting Position\n"
 
-/* typedef	struct s_Singleton
+//singleton_struct
+typedef enum	e_ptr_types
 {
-	void *ptr;
-	struct s_Singleton *next;
-}				t_free; */
+	SINGLE_PTR,
+	DOUBLE_PTR
+}				t_ptr_types;
 
+typedef struct	s_node
+{
+	void				*data;
+	t_ptr_types				type;
+	struct s_node		*next;
+}				t_node;
+
+typedef struct	s_singleton
+{
+	t_node	*head;
+}				t_singleton;
+//
 
 typedef struct s_collision
 {
@@ -245,5 +258,11 @@ void			print_array(char **array);
 int				print_error(char *error);
 void			print_int_array(int *array, int size);
 void			error_msg(const char *error);
+
+//singleton
+t_singleton 	*get_singleton_list();
+bool			add_singleton_data(void *data, t_ptr_types data_type);
+bool			free_singleton_list();
+void			free_singleton_data(t_node *current);
 
 #endif
