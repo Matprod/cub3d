@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color_element.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:49:49 by allan             #+#    #+#             */
-/*   Updated: 2024/10/22 23:27:41 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/24 14:33:23 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ bool	get_color_element(t_parse *map, int element, char name)
 	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
 		return (error_msg(ERROR_OPEN), ERROR);
-	line = get_next_line(fd);
+	line = get_next_line(fd, FALSE);
 	while (line != NULL)
 	{
 		if (split_line(map, line, element, name) == ERROR)
-			return (close(fd), error_msg(ERROR_MALLOC), ERROR);
-		line = get_next_line(fd);
+		{
+			get_next_line(fd, TRUE);
+			return (free(line), close(fd), error_msg(ERROR_MALLOC), ERROR);
+		}
+		line = get_next_line(fd, FALSE);
 	}
 	close(fd);
 	return (SUCCESS);
@@ -43,22 +46,19 @@ bool	split_line(t_parse *map, char *line, int element, char name)
 	{
 		first_split = ft_split(line, ' ');
 		if (!first_split)
-			return (free(line), ERROR);
+			return (ERROR);
 		second_split = ft_split(first_split[1], ',');
 		if (!second_split)
-			return (free_array(first_split), free(line), ERROR);
+			return (free_array(first_split), ERROR);
 		if (check_valid_split(first_split, second_split, element) == ERROR)
-			return (free_array(first_split),
-					free_array(second_split), free(line), ERROR);
+			return (free_array(first_split), free_array(second_split), ERROR);
 		while (second_split[++i])
 			color_element[i] = ft_atoi(second_split[i]);
 		copy_color(color_element, map, element);
 		free_array(first_split);
 		free_array(second_split);
-		printf("a\n");
 		return (free(line), SUCCESS);
 	}
-	printf("b\n");
 	return (free(line), NOT_FOUND);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/22 23:17:43 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/24 15:22:45 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,21 @@ char	**map_dup(char **map)
 int	main(int argc, char **argv)
 {
 	t_parse	*parse;
-	//t_game	*game;
+	t_game	*game;
 
 	if (argc != 2)
 		return (error_msg(ERROR_NBR_ARG), ERROR);
 	if (get_singleton_list() == NULL)
 		return (ERROR);
-	//game = NULL;
+	game = NULL;
 	parse = malloc(sizeof(t_parse));
 	if (!parse)
 		return (error_msg(ERROR_MALLOC), ERROR);
 	if (add_singleton_data(parse, SINGLE_PTR) == ERROR)
 		return (free_singleton_list(), ERROR);
-	if (parser(argv[1], &parse) == ERROR)
+	if (parser(argv[1], &parse) == ERROR)	////LF (exept gnl)
 		return (free_singleton_list(), ERROR);
-	return (free_singleton_list(), 0);
-
-
-
-	//
-	/* game = malloc(sizeof(t_game));
+	game = malloc(sizeof(t_game));
 	memset(game, 0, sizeof(t_game));
  	game->map = map_dup(parse->map);
 	game->parsing = parse;
@@ -79,6 +74,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_hook(game->fps_win, 17, 0, close_window, game);
 	mlx_loop(game->mlx);
-	free_all(game); */
+	free_all(game);
+	free_singleton_list();
 	return (SUCCESS);
 }

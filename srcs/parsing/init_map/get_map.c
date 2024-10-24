@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/22 22:33:26 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/24 14:22:04 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ bool	get_map(t_parse *map)
 	if (add_singleton_data(map->map, DOUBLE_PTR) == ERROR)
 		return (ERROR);
 	nb = 0;
-	line = get_next_line(fd);
+	line = get_next_line(fd, FALSE);
 	while (line != NULL)
 	{
 		if (add_line(map->map, line, &nb) == ERROR)
-			return (free(line), close(fd), ERROR);
-		line = get_next_line(fd);
+			return (get_next_line(fd, TRUE), free(line), close(fd), ERROR);
+		line = get_next_line(fd, FALSE);
 	}
 	map->map[nb] = NULL;
 	return (close(fd), SUCCESS);
@@ -51,13 +51,13 @@ int	get_nb_line_fd(char *map_name)
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 		return (error_msg(ERROR_OPEN), 0);
-	line = get_next_line(fd);
+	line = get_next_line(fd, FALSE);
 	while (line != NULL)
 	{
 		if (skip_data_map(line) == TRUE)
 			nb++;
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, FALSE);
 	}
 	return (close(fd), nb);
 }

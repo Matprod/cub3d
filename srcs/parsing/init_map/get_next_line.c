@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:14:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/20 18:34:55 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/24 14:18:50 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, bool error)
 {
 	static char	*stack;
 	char		*line;
 
+	if (error == TRUE)
+		return (free(stack), NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stack = read_and_stock(fd, stack);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/22 23:21:17 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/24 14:46:16 by adebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,16 @@ bool	get_texture_path(t_parse *map)
 	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
 		return (error_msg(ERROR_OPEN), ERROR);
-	line = get_next_line(fd);
+	line = get_next_line(fd, FALSE);
 	while (line != NULL)
 	{
 		if (is_texture(line))
 			split_line_texture(map, line);
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, FALSE);
 	}
-	init_texture(map);
+	if (init_texture(map) == ERROR)
+		return (close(fd), ERROR);
 	close(fd);
 	return (SUCCESS);
 }
@@ -82,20 +83,33 @@ bool	split_line_texture(t_parse *map, char *line)
 	return (SUCCESS);
 }
 
-void	init_texture(t_parse *data_map)
+bool	init_texture(t_parse *data_map)
 {
 	data_map->text_no = NULL;
 	data_map->text_so = NULL;
 	data_map->text_ea = NULL;
 	data_map->text_we = NULL;
+	data_map->text_no = ft_strdup(NORTH_WALL);
 	if (!data_map->text_no)
-		data_map->text_no = ft_strdup(NORTH_WALL);
+		return (ERROR);
+	if (add_singleton_data(data_map->text_no, SINGLE_PTR) == ERROR)
+		return (ERROR);
+	data_map->text_so = ft_strdup(SOUTH_WALL);
 	if (!data_map->text_so)
-		data_map->text_so = ft_strdup(SOUTH_WALL);
+		return (ERROR);
+	if (add_singleton_data(data_map->text_so, SINGLE_PTR) == ERROR)
+		return (ERROR);
+	data_map->text_ea = ft_strdup(EAST_WALL);
 	if (!data_map->text_ea)
-		data_map->text_ea = ft_strdup(EAST_WALL);
+		return (ERROR);
+	if (add_singleton_data(data_map->text_ea, SINGLE_PTR) == ERROR)
+		return (ERROR);
+	data_map->text_we = ft_strdup(WEST_WALL);
 	if (!data_map->text_we)
-		data_map->text_we = ft_strdup(WEST_WALL);
+		return (ERROR);
+	if (add_singleton_data(data_map->text_we, SINGLE_PTR) == ERROR)
+		return (ERROR);
+	return (SUCCESS);
 }
 
 bool	check_split_texture(char **split, char *line)
