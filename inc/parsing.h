@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2024/10/24 14:42:48 by adebert          ###   ########.fr       */
+/*   Updated: 2024/10/25 18:12:16 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef struct s_parse
 	char		*text_so;
 	char		*text_we;
 	char		*text_ea;
-	int		 color_floor[3];
-	int		 color_ceiling[3];
-	int		 map_height;
-	int		 map_width;
+	int		 	color_floor[3];
+	int		 	color_ceiling[3];
+	int		 	map_height;
+	int		 	map_width;
 	char		dir_player;
 	t_vector	pos_player;
 }				t_parse;

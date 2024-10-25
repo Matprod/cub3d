@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/24 22:38:04 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/25 21:06:06 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,16 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (error_msg(ERROR_NBR_ARG), ERROR);
+	parse = NULL;
+	game = NULL;
 	if (get_singleton_list() == NULL)
 		return (ERROR);
-	game = NULL;
-	parse = malloc(sizeof(t_parse));
-	if (!parse)
-		return (error_msg(ERROR_MALLOC), ERROR);
-	if (add_singleton_data(parse, SINGLE_PTR) == ERROR)
-		return (free_singleton_list(), ERROR);
 	if (parser(argv[1], &parse) == ERROR)	////LF (exept gnl)
 		return (free_singleton_list(), ERROR);
-
-	game = ft_calloc(1, sizeof(t_game));
-	if (!game)
+	if (init_mlx(&game, parse) == ERROR)
 		return (free_singleton_list(), ERROR);
-	if (add_singleton_data(game, SINGLE_PTR) == ERROR)
-		return (free_singleton_list(), ERROR);
-
 	var_init(game);
-	usleep(1000);
+	usleep(1000); //not allowed
 	mlx_hook(game->fps_win, 2, 1L << 1, handle_keypress, game);
 	mlx_hook(game->fps_win, 3, 1L << 0, handle_keyrelease, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
@@ -70,21 +61,22 @@ int	main(int argc, char **argv)
 	return (SUCCESS);
 }
 
-int	init_game_struct(t_game **game, t_parse *parse)
+int	init_mlx(t_game **game, t_parse *parse)
 {
 	*game = ft_calloc(1, sizeof(t_game));
 	if (!(*game))
 		return (ERROR);
 	if (add_singleton_data(*game, SINGLE_PTR) == ERROR)
 		return (ERROR);
-	//(*game)->map = map_dup(parse->map);
 	(*game)->map = parse->map;
 	(*game)->parsing = parse;
 	(*game)->mlx = mlx_init();
 	if (!(*game)->mlx)
 		return (ERROR);
+
 	(*game)->fps_win = mlx_new_window((*game)->mlx,
 			RES_X, RES_Y, "cub3d");
+
 	(*game)->fps_img.mlx_img = mlx_new_image((*game)->mlx, RES_X, RES_Y);
 	(*game)->fps_img.addr = mlx_get_data_addr((*game)->fps_img.mlx_img,
 			&(*game)->fps_img.bpp, &(*game)->fps_img.line_len,

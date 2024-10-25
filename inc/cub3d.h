@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/22 23:26:47 by allan            ###   ########.fr       */
+/*   Updated: 2024/10/25 20:01:31 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ typedef struct s_game
 
 //						FUNCTIONS						//
 //game
+int				init_mlx(t_game **game, t_parse *parse);
 int				handle_keypress(int keycode, t_game *game);
 int				handle_keyrelease(int keycode, t_game *game);
 void			var_init(t_game *game);
