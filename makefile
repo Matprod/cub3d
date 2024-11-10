@@ -10,7 +10,9 @@ MLX_A 				= libmlx.a
 MLX_DIR 			= lib/mlx/
 # Compiler and CFlags
 CC					= cc
-CFLAGS				= -Wall -Wextra -Werror -I
+CFLAGS 				= -Wall -Wextra -O3 -Ofast -g3 -march=native -funroll-loops -flto -fomit-frame-pointer -ffast-math -fno-math-errno -I
+
+#-Werror
 MLX_FLAGS			= -L. -lXext -L. -lX11
 MLX_FLAGS_OBJS 		= lib/mlx/libmlx.a lib/mlx/libmlx_Linux.a -L. -lXext -L. -lX11
 RM					= rm -f
@@ -19,18 +21,22 @@ RM					= rm -f
 # Concatenate all source files
 SRCS 				=	srcs/main.c\
 						srcs/free.c\
+						srcs/singleton.c\
 						srcs/print.c\
 						srcs/events.c\
 						srcs/game_loop.c\
 						srcs/init_windows.c\
-						srcs/parsing/parsing.c\
-						srcs/parsing/map_parsing.c\
-						srcs/parsing/map_utils.c\
-						srcs/parsing/check_map.c\
-						srcs/parsing/get_texture_path.c\
-						srcs/parsing/get_color_floor.c\
-						srcs/parsing/get_color_ceiling.c\
-						srcs/parsing/get_next_line.c\
+						srcs/parsing/parser.c\
+						srcs/parsing/init_map/init_map.c\
+						srcs/parsing/init_map/get_map_name.c\
+						srcs/parsing/init_map/get_map.c\
+						srcs/parsing/init_map/get_next_line.c\
+						srcs/parsing/init_map/get_color_element.c\
+						srcs/parsing/init_map/get_texture_path.c\
+						srcs/parsing/init_map/get_height_width.c\
+						srcs/parsing/check_map/check_map.c\
+						srcs/parsing/check_map/is_valid_input_pos.c\
+						srcs/parsing/check_map/is_map_surrounded.c\
 						srcs/vector/vec_angle.c\
 						srcs/vector/vec_distance.c\
 						srcs/vector/vec_mult.c\

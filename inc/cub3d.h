@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 11:22:04 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/11/09 23:58:10 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include <fcntl.h>
+# include <time.h>
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -23,14 +24,15 @@
 # include <sys/types.h>
 # include "../lib/libft/libft.h"
 # include "../lib/mlx/mlx.h"
+# include "parsing.h"
 
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define FOV_RADIANS 1.5707963268
-# define FOV 60
+# define FOV_RADIANS 1.31
+# define FOV 90
 
 # define RES_X 1280
 # define RES_Y 720
@@ -45,16 +47,21 @@
 
 # define MAX_DISTANCE 10
 
+# define CEILING 2
+# define FLOOR 3
+
 # define BUFFER_SIZE 42
 # define ERROR 1
 # define SUCCESS 0
 # define FALSE 0
 # define TRUE 1
 # define RES 64
+# define NOT_FOUND 0
 # define NORTH_WALL "./images/BRICK_1A.xpm"
 # define SOUTH_WALL "./images/BRICK_3D.xpm"
 # define WEST_WALL "./images/BRICK_2A.xpm"
 # define EAST_WALL "./images/DOOR_2A.xpm"
+
 
 # define ESC 65307
 # define A 97
@@ -64,11 +71,61 @@
 # define RIGHT 65361
 # define LEFT 65363
 
-typedef struct s_vector
+
+# define ERROR_NBR_ARG \
+"Error\n" \
+"Two Arguments Required: ./cub3d and map.cub\n"
+# define ERROR_MAP_NAME \
+"Error\n" \
+"Map should have '.cub' format and at least 1 letter\n"
+# define ERROR_OPEN \
+"Error\n" \
+"Opening File Failed\n"
+# define ERROR_MALLOC \
+"Error\n" \
+"Malloc Initialisation Failed\n"
+# define ERROR_FLOOR_COLOR \
+"Error\n" \
+"Floor Input: Invalid color\n"
+# define ERROR_FLOOR_IDENTIFIER \
+"Error\n" \
+"Floor Identifier must start with 'F'\n"
+# define ERROR_CEILING_COLOR \
+"Error\n" \
+"Ceiling Input: Invalid color\n"
+# define ERROR_TEXTURE_PATH \
+"Error\n" \
+"Texture Path: Invalid Input\n"
+# define ERROR_MAP_CONTENT \
+"Error\n" \
+"Map Content: Invalid Character\n" \
+"Valid Characters are: '1' '0' 'N' 'S' 'E' 'W'\n"
+# define ERROR_MAP_WALL \
+"Error\n" \
+"Map is not surrounded by walls\n"
+# define ERROR_STARTING_POSITION \
+"Error\n" \
+"Invalid Player Starting Position\n"
+
+//singleton_struct
+typedef enum	e_ptr_types
 {
-	double				x;
-	double				y;
-}						t_vector;
+	SINGLE_PTR,
+	DOUBLE_PTR
+}				t_ptr_types;
+
+typedef struct	s_node
+{
+	void				*data;
+	t_ptr_types				type;
+	struct s_node		*next;
+}				t_node;
+
+typedef struct	s_singleton
+{
+	t_node	*head;
+}				t_singleton;
+//
 
 typedef struct s_collision
 {
@@ -87,8 +144,6 @@ typedef struct s_player
 	float				direction_adjust;
 	t_vector			current_tile;
 }						t_player;
-
-
 
 typedef struct s_img
 {
@@ -113,22 +168,6 @@ typedef struct s_texture
 	t_img				east;
 	t_img				west;
 }						t_texture;
-
-typedef struct s_parse
-{
-	char		**map;
-	char		*map_name;
-	char		*text_no;
-	char		*text_so;
-	char		*text_we;
-	char		*text_ea;
-	int			color_floor[3];
-	int			color_ceiling[3];
-	int			map_height;
-	int			map_width;
-	char		dir_player;
-	t_vector	pos_player;
-}						t_parse;
 
 typedef struct s_raycast_data
 {
@@ -158,25 +197,17 @@ typedef struct s_game
 
 
 //						FUNCTIONS						//
-//parsing
-bool			parsing(char *map_name, t_parse **data_map);
-char			**get_map(char *map_name);
-char			*get_next_line(int fd);
-bool			get_color_ceiling(t_parse *map);
-bool			get_color_floor(t_parse *map);
-bool			get_texture_path(t_parse *map);
-bool			check_input_map(t_parse *map);
-int				map_height(char **map);
-int				map_width(char **map);
-bool			is_map_surrounded(char **map);
-void			init_texture(t_parse *data_map);
 //game
+int				init_mlx(t_game **game, t_parse *parse);
 int				handle_keypress(int keycode, t_game *game);
 int				handle_keyrelease(int keycode, t_game *game);
 void			var_init(t_game *game);
 void			init_player(t_game *game);
 void			move(t_game *game, char direction);
 int				game_loop(void *g);
+void			custom_usleep(unsigned int microseconds);
+long 			time_since_start();
+
 //render
 void			render(t_game *game);
 void			render_fps(t_game *game);
@@ -186,12 +217,14 @@ unsigned int	img_pix_read(t_img *img, int x, int y);
 void			load_grid(t_game *game);
 void			clean_map(t_game *game);
 void			clear_img(t_img *img);
+
 //raycast
 void			print_circle_relative_tile_pos(t_game *game, t_vector point);
 char			get_collision_orientation(char last_step, t_vector v_step);
 double			get_texture_x(char last_step, t_vector v_collision_point,
 					t_vector v_map_check);
-t_collision		cast_two_d_ray(t_game *game, t_vector direction);	
+t_collision		cast_two_d_ray(t_game *game, t_vector direction);
+
 //pixel
 int				pixel_out_of_bound(float x, float y, t_img *image);
 t_vector		tile_to_pixel(t_vector tile_coord);
@@ -202,6 +235,7 @@ void			img_pix_put(t_img *img, int x, int y, int color);
 void			draw_vertical_line_2(t_img *img, t_vector pos, int len, int color);
 void			draw_line_dda(t_img *img, t_vector vec1, t_vector vec2, int color);
 void			draw_filled_circle(t_img *img, t_vector mid, int radius, int color);
+
 //vector
 double			vec_angle(t_vector v1, t_vector v2);
 double			vec_distance(t_vector vec1, t_vector vec2);
@@ -214,6 +248,7 @@ t_vector		vec_rotate(t_vector vector, float angle);
 t_vector		vec_scalar_mult(t_vector vec1, double i);
 t_vector		vec_sum(t_vector vec1, t_vector vec2);
 void			vec_to_angle(double angle, t_vector *vector);
+
 //free
 int				close_window(t_game *game);
 void			close_and_free(char **array, int fd);
@@ -226,5 +261,12 @@ void			free_array(char **array);
 void			print_array(char **array);
 int				print_error(char *error);
 void			print_int_array(int *array, int size);
+void			error_msg(const char *error);
+
+//singleton
+t_singleton 	*get_singleton_list();
+bool			add_singleton_data(void *data, t_ptr_types data_type);
+bool			free_singleton_list();
+void			free_singleton_data(t_node *current);
 
 #endif
