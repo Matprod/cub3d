@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:01:04 by Matprod           #+#    #+#             */
-/*   Updated: 2024/11/10 00:16:26 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/11/10 17:12:11 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,24 @@ void	init_raycast_two(t_game *game, t_raycast_data *d)
 
 void	init_raycast(t_game *game, t_vector direction, t_raycast_data *d)
 {
-	// Pré-calcul des positions du joueur et du carreau en coordonnées pixels
-	t_vector player_pos = game->player.pos;
-	t_vector map_check_pixel = tile_to_pixel(pixel_to_tile(player_pos));
-	
-	d->v_map_check = pixel_to_tile(player_pos);
+	d->v_map_check = pixel_to_tile(game->player.pos);
 	d->v_ray_dir = direction;
-
-	// Calcul des étapes en une seule opération, évitant les divisions répétées
-	float inv_dir_x = (d->v_ray_dir.x != 0) ? 1.0f / d->v_ray_dir.x : 0;
-	float inv_dir_y = (d->v_ray_dir.y != 0) ? 1.0f / d->v_ray_dir.y : 0;
-
-	d->v_ray_unit_step.x = sqrt(1 + (d->v_ray_dir.y * inv_dir_x) * (d->v_ray_dir.y * inv_dir_x));
-	d->v_ray_unit_step.y = sqrt(1 + (d->v_ray_dir.x * inv_dir_y) * (d->v_ray_dir.x * inv_dir_y));
-
-	// Calcul direct de `v_step` et `v_ray_length_1d`
-	d->v_step.x = (d->v_ray_dir.x < 0) ? -1 : 1;
-	d->v_ray_length_1d.x = ((d->v_ray_dir.x < 0 ? player_pos.x - map_check_pixel.x
-									: map_check_pixel.x + 64 - player_pos.x)
-							* inv_dir_x) * d->v_ray_unit_step.x;
-
-	d->v_step.y = (d->v_ray_dir.y < 0) ? -1 : 1;
-	d->v_ray_length_1d.y = ((d->v_ray_dir.y < 0 ? player_pos.y - map_check_pixel.y
-									: map_check_pixel.y + 64 - player_pos.y)
-							* inv_dir_y) * d->v_ray_unit_step.y;
-							
+	d->v_ray_unit_step.x = sqrt(1 + (d->v_ray_dir.y / d->v_ray_dir.x)
+			* (d->v_ray_dir.y / d->v_ray_dir.x));
+	d->v_ray_unit_step.y = sqrt(1 + (d->v_ray_dir.x / d->v_ray_dir.y)
+			* (d->v_ray_dir.x / d->v_ray_dir.y));
+	if (d->v_ray_dir.x < 0)
+	{
+		d->v_step.x = -1;
+		d->v_ray_length_1d.x = (game->player.pos.x
+				- tile_to_pixel(d->v_map_check).x) / 64 * d->v_ray_unit_step.x;
+	}
+	else
+	{
+		d->v_step.x = 1;
+		d->v_ray_length_1d.x = (tile_to_pixel(d->v_map_check).x + 64
+				- game->player.pos.x) / 64 * d->v_ray_unit_step.x;
+	}
 	init_raycast_two(game, d);
 }
 
