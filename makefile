@@ -10,7 +10,8 @@ MLX_A 				= libmlx.a
 MLX_DIR 			= lib/mlx/
 # Compiler and CFlags
 CC					= cc
-CFLAGS				= -Wall -Wextra -I
+CFLAGS 				= -Wall -Wextra -O3 -Ofast -g3 -march=native -funroll-loops -flto -fomit-frame-pointer -ffast-math -fno-math-errno -I
+
 #-Werror
 MLX_FLAGS			= -L. -lXext -L. -lX11
 MLX_FLAGS_OBJS 		= lib/mlx/libmlx.a lib/mlx/libmlx_Linux.a -L. -lXext -L. -lX11

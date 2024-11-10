@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/24 14:46:16 by adebert          ###   ########.fr       */
+/*   Updated: 2024/10/26 16:13:17 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,6 @@ bool	split_line_texture(t_parse *map, char *line)
 
 bool	init_texture(t_parse *data_map)
 {
-	data_map->text_no = NULL;
-	data_map->text_so = NULL;
-	data_map->text_ea = NULL;
-	data_map->text_we = NULL;
 	data_map->text_no = ft_strdup(NORTH_WALL);
 	if (!data_map->text_no)
 		return (ERROR);

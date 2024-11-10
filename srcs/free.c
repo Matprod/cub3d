@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:35:57 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/22 20:50:30 by allan            ###   ########.fr       */
+/*   Updated: 2024/11/09 22:03:00 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ void	free_parse(t_parse *parse)
 
 int		close_window(t_game *game)
 {
-	free_all(game);
 	mlx_destroy_window(game->mlx, game->fps_win);
 	mlx_destroy_image(game->mlx, game->fps_img.mlx_img);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
+	free_all(game);
+	free_singleton_list();
 	exit(0);
 }

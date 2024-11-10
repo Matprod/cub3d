@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_fps.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:46:25 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/19 11:54:16 by allan            ###   ########.fr       */
+/*   Updated: 2024/11/10 12:44:37 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	basic_render(t_game *game, t_collision collision, t_vector line_pos,
-		double line_height)
-{
-	if (collision.orientation == 'S' || collision.orientation == 'N')
-		draw_vertical_line_2(&game->fps_img, line_pos, line_height, PALE_BLUE);
-	else
-		draw_vertical_line_2(&game->fps_img, line_pos, line_height,
-			PALE_BLUE_SHADED);
-}
 
 t_img	*get_wall_texture(t_game *game, t_collision collision)
 {
@@ -48,6 +38,10 @@ void	texture_render(t_game *game, t_collision collision, t_vector line_pos,
 	y_text = 0;
 	while (++i < line_pos.y)
 		img_pix_put(&game->fps_img, line_pos.x, i, game->texture.sky_color);
+	i = line_pos.y + line_height;
+	while (i < RES_Y)
+		img_pix_put(&game->fps_img, line_pos.x, i++,
+			game->texture.floor_color);
 	i = 0;
 	while (i < line_height)
 	{
@@ -58,31 +52,34 @@ void	texture_render(t_game *game, t_collision collision, t_vector line_pos,
 		img_pix_put(&game->fps_img, line_pos.x, line_pos.y + i, pixel_color);
 		i++;
 	}
-	i = line_pos.y + line_height;
-	while (i < 720)
-		img_pix_put(&game->fps_img, line_pos.x, i++,
-			game->texture.floor_color);
 }
 
 void	update_collision(t_collision *collision, t_game *game,
 		t_vector line_pos, float half_width)
 {
-	t_vector	v_player_to_camera_plane;
-	t_vector	v_right;
-
-	v_player_to_camera_plane = vec_scalar_mult(game->player.direction,
+	// Calcul des vecteurs pour la direction du joueur et à droite
+	t_vector v_player_to_camera_plane = vec_scalar_mult(game->player.direction,
 			game->player.direction_adjust);
-	v_right = vec_normalize(vec_rotate(game->player.direction, 90));
-	*collision = cast_two_d_ray(game,
-			vec_normalize(vec_sum(v_player_to_camera_plane,
-					vec_scalar_mult(v_right,
-						((2.0f * (float)line_pos.x / (RES_X - 1.0f))
-							- 1.0f) * half_width))));
-	collision->distance = collision->distance / 64
-		* cosf(vec_angle(vec_normalize(vec_sum(v_player_to_camera_plane,
-						vec_scalar_mult(v_right, ((2.0f * (float)line_pos.x
-									/ (RES_X - 1.0f)) - 1.0f) * half_width))),
-				game->player.direction));
+	t_vector v_right = vec_rotate(game->player.direction, 90); // Rotation de 90 degrés sans normalisation
+
+	// Optimiser l'offset une seule fois pour chaque ligne
+	float offset = (2.0f * (float)line_pos.x / (RES_X - 1.0f)) - 1.0f;
+
+	// Calcul direct de la direction du rayon sans appel à vec_sum
+	t_vector ray_dir = vec_sum(v_player_to_camera_plane,
+		vec_scalar_mult(v_right, offset * half_width));
+
+	// Normalisation directe de ray_dir
+	float ray_dir_length = sqrtf(ray_dir.x * ray_dir.x + ray_dir.y * ray_dir.y);
+	ray_dir.x /= ray_dir_length;
+	ray_dir.y /= ray_dir_length;
+
+	// Lancer du rayon et récupération de la collision
+	*collision = cast_two_d_ray(game, ray_dir);
+
+	// Calcul de la distance avec approximation du cosinus sans appel coûteux
+	float ray_cos_angle = (ray_dir.x * game->player.direction.x + ray_dir.y * game->player.direction.y);
+	collision->distance = collision->distance / 64 * ray_cos_angle;
 }
 
 void	render_fps(t_game *game)
@@ -101,7 +98,6 @@ void	render_fps(t_game *game)
 	{
 		update_collision(&collision, game, line_pos, half_width);
 		line_height = (64 / collision.distance) * game->player.direction_adjust;
-		//line_height = (64 / 2) * game->player.direction_adjust;
 		line_pos.y = RES_Y / 2 - line_height / 2;
 		texture_render(game, collision, line_pos, line_height);
 		line_pos.x += 1;

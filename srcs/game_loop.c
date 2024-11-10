@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:35:14 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 13:43:59 by adebert          ###   ########.fr       */
+/*   Updated: 2024/11/10 00:11:39 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ void	edit_player_pos(t_game *game)
 void	edit_player_rotate(t_game *game)
 {
 	if (game->key_states[0])
-	{
 		vec_rotate_edit(&(game->player.direction), -5);
-	}
 	if (game->key_states[1])
 		vec_rotate_edit(&(game->player.direction), 5);
 	if (game->key_states['r'])
@@ -91,7 +89,6 @@ int	game_loop(void *g)
 	game = (t_game *)g;
 	edit_player_pos(game);
 	edit_player_rotate(game);
-	usleep(8000);
 	render(game);
 	return (0);
 }

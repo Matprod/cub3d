@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:27:46 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 11:25:38 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/10/26 16:12:56 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,12 @@ void	load_img(t_game *game)
 	game->texture.north = create_img(game, game->parsing->text_no);
 	if (!game->texture.north.mlx_img)
 		return (printf("Error loading north texture\n"), (void)0);
-	
 	game->texture.south = create_img(game, game->parsing->text_so);
 	if (!game->texture.south.mlx_img)
 		return (printf("Error loading south texture\n"), (void)0);
-	
 	game->texture.west = create_img(game, game->parsing->text_we);
 	if (!game->texture.west.mlx_img)
 		return (printf("Error loading west texture\n"), (void)0);
-	
 	game->texture.east = create_img(game, game->parsing->text_ea);
 	if (!game->texture.east.mlx_img)
 		return (printf("Error loading east texture\n"), (void)0);

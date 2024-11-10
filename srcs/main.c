@@ -3,14 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/25 21:06:06 by allan            ###   ########.fr       */
+/*   Updated: 2024/11/09 23:13:48 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	custom_usleep(unsigned int time)
+{
+	volatile unsigned int counter;
+
+	counter = 0;
+	while (counter < time)
+		counter++;
+	counter = 0;
+	while (counter < time)
+		counter++;
+	counter = 0;
+	while (counter < time)
+		counter++;
+	counter = 0;
+	while (counter < time)
+		counter++;
+}
+
+
+/* struct timeval start_time;
+
+void start_timer() {
+    gettimeofday(&start_time, NULL);
+}
+
+long time_since_start()
+{
+    struct timeval current_time;
+    gettimeofday(&current_time, NULL);
+
+    long elapsed_seconds = current_time.tv_sec - start_time.tv_sec;
+    long elapsed_microseconds = elapsed_seconds * 1000000 + (current_time.tv_usec - start_time.tv_usec);
+	printf("TIME = %ld\n",elapsed_microseconds / 1000);
+    return elapsed_microseconds;
+} */
 
 char	**map_dup(char **map)
 {
@@ -34,6 +70,7 @@ char	**map_dup(char **map)
 	return (new_map);
 }
 
+//NE PAS OUBLIER WERROR
 int	main(int argc, char **argv)
 {
 	t_parse	*parse;
@@ -50,7 +87,6 @@ int	main(int argc, char **argv)
 	if (init_mlx(&game, parse) == ERROR)
 		return (free_singleton_list(), ERROR);
 	var_init(game);
-	usleep(1000); //not allowed
 	mlx_hook(game->fps_win, 2, 1L << 1, handle_keypress, game);
 	mlx_hook(game->fps_win, 3, 1L << 0, handle_keyrelease, game);
 	mlx_loop_hook(game->mlx, game_loop, game);

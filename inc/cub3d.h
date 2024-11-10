@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/25 20:01:31 by allan            ###   ########.fr       */
+/*   Updated: 2024/11/09 23:58:10 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include <fcntl.h>
+# include <time.h>
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -30,8 +31,8 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define FOV_RADIANS 1.5707963268
-# define FOV 60
+# define FOV_RADIANS 1.31
+# define FOV 90
 
 # define RES_X 1280
 # define RES_Y 720
@@ -204,6 +205,8 @@ void			var_init(t_game *game);
 void			init_player(t_game *game);
 void			move(t_game *game, char direction);
 int				game_loop(void *g);
+void			custom_usleep(unsigned int microseconds);
+long 			time_since_start();
 
 //render
 void			render(t_game *game);
