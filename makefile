@@ -2,7 +2,7 @@
 NAME				= cub3d
 
 # Directories
-LIBFT				= lib/libft/libft.a
+LIBFT_DIR				= lib/libft/libft.a
 INC					= inc/
 SRC_DIR				= srcs/
 OBJ_DIR				= obj/
@@ -64,14 +64,13 @@ OBJ 				= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 # Build rules
 all:	$(NAME)
 
-$(LIBFT):
-					make -C ./lib/libft
+$(LIBFT_DIR):
+	make -C ./lib/libft
+	make -C ./lib/mlx
 
-$(MLX):
-					make -C ./lib/mlx
 
-$(NAME): 			$(OBJ) $(LIBFT) $(MLX)
-					$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) $(MLX_FLAGS_OBJS) -lm -o $(NAME)
+$(NAME): 			$(OBJ) $(LIBFT_DIR) $(MLX)
+					$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT_DIR) $(MLX_FLAGS_OBJS) -lm -o $(NAME)
 
 # Compile object files from source files
 $(OBJ_DIR)%.o:		$(SRC_DIR)%.c 
@@ -80,6 +79,7 @@ $(OBJ_DIR)%.o:		$(SRC_DIR)%.c
 
 clean:
 	$(MAKE) clean -C lib/libft
+	$(MAKE) clean -C lib/mlx
 	$(RM) $(OBJ)
 	
 

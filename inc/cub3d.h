@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/11/09 23:58:10 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/11/22 18:30:44 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,24 @@
 # define WHITE_PIXEL 0xFFFFFF
 # define PALE_BLUE 0x25F7C6
 # define PALE_BLUE_SHADED 0x0D5243
+# define COLOR_BLACK 0x000000
+# define COLOR_WHITE 0xFFFFFF
+# define COLOR_RED 0xFF0000
+# define COLOR_GREEN 0x00FF00
+# define COLOR_BLUE  0x0000FF
+# define COLOR_YELLOW 0xFFFF00
+# define COLOR_CYAN 0x00FFFF
+# define COLOR_MAGENTA 0xFF00FF
+# define COLOR_GRAY  0x808080
+# define COLOR_DARK_GRAY 0x505050
+# define COLOR_LIGHT_GRAY 0xD3D3D3
+
+// DEFINE MINIMAP
+# define START_MINIMAP_X 30
+# define START_MINIMAP_Y 30
+# define MINIMAP_SIZE 150
+# define MINIMAP_TILE_SIZE 20
+
 
 # define MAX_DISTANCE 10
 
@@ -127,6 +145,13 @@ typedef struct	s_singleton
 }				t_singleton;
 //
 
+typedef struct s_fps 
+{
+	int		frames;
+	double	last_time;
+	double	fps;
+}				t_fps;
+
 typedef struct s_collision
 {
 	t_vector			point;
@@ -207,6 +232,8 @@ void			move(t_game *game, char direction);
 int				game_loop(void *g);
 void			custom_usleep(unsigned int microseconds);
 long 			time_since_start();
+void			print_vector(t_vector vec);
+
 
 //render
 void			render(t_game *game);

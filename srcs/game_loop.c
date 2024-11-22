@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:35:14 by Matprod           #+#    #+#             */
-/*   Updated: 2024/11/10 00:11:39 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/11/22 17:59:29 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 int	is_walkable(t_game *game, float x, float y)
 {
-	if (game->map[(int)y][(int)x] == '1')
+	int grid_x = (int)x;
+	int grid_y = (int)y;
+
+	if (game->map[grid_y][grid_x] == '1')
 		return (0);
 	return (1);
 }
 
-void	player_wall_collides(t_game *game, t_vector speed)
+void player_wall_collides(t_game *game, t_vector speed)
 {
-	t_vector	v_offset;
-	t_vector	vi_pos;
-	t_vector	vi_pos_add_offset;
+	t_vector v_offset;
+	t_vector vi_pos;
+	t_vector vi_pos_add_offset;
 
 	v_offset.x = 0;
 	v_offset.y = 0;
@@ -38,10 +41,24 @@ void	player_wall_collides(t_game *game, t_vector speed)
 	vi_pos = pixel_to_tile(vec_sum(game->player.pos, game->player.speed));
 	vi_pos_add_offset = pixel_to_tile(vec_sum(game->player.pos, v_offset));
 	if (!is_walkable(game, vi_pos_add_offset.x, vi_pos.y))
+	{
+		printf("HORIZONTALE\n");
 		game->player.speed.x = 0;
+	}
 	if (!is_walkable(game, vi_pos.x, vi_pos_add_offset.y))
+	{
+		printf("VERTICALE\n");
 		game->player.speed.y = 0;
+	}
+	/* if (!is_walkable(game, vi_pos_add_offset.x, vi_pos_add_offset.y))
+	{
+		printf("DIAGONALE\n");
+		game->player.speed.x = 0;
+		game->player.speed.y = 0;
+	} */
 }
+
+
 
 void	edit_player_pos(t_game *game)
 {
@@ -73,13 +90,31 @@ void	edit_player_pos(t_game *game)
 void	edit_player_rotate(t_game *game)
 {
 	if (game->key_states[0])
-		vec_rotate_edit(&(game->player.direction), -5);
+		vec_rotate_edit(&(game->player.direction), -4);
 	if (game->key_states[1])
-		vec_rotate_edit(&(game->player.direction), 5);
+		vec_rotate_edit(&(game->player.direction), 4);
 	if (game->key_states['r'])
 		game->player.direction_adjust += 0.1;
 	if (game->key_states['f'])
 		game->player.direction_adjust -= 0.1;
+}
+
+void fps(void)
+{
+	static int counter = 0;
+    static time_t last_call_time = 0; 
+	time_t		current_time;
+
+	current_time = time(NULL);	
+	if (last_call_time == 0)
+	    last_call_time = current_time;	
+	counter++;
+	if (current_time > last_call_time)
+	{
+		printf("FPS %d\n", counter);
+		counter = 0;
+		last_call_time = current_time;
+	}
 }
 
 int	game_loop(void *g)
@@ -90,5 +125,6 @@ int	game_loop(void *g)
 	edit_player_pos(game);
 	edit_player_rotate(game);
 	render(game);
+	fps();// A ENLEVER A LA FIN
 	return (0);
 }

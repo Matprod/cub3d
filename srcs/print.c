@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:38:58 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/22 20:50:30 by allan            ###   ########.fr       */
+/*   Updated: 2024/11/10 18:56:04 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,9 @@ void	error_msg(const char *error)
 	if (!error)
 		return ;
 	write(2, error, ft_strlen(error));
+}
+
+void	print_vector(t_vector vec)
+{
+	printf("(x = %d, y = %d)\n", (int)vec.x, (int)vec.y);
 }

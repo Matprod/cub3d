@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:46:25 by Matprod           #+#    #+#             */
-/*   Updated: 2024/11/10 12:44:37 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/11/22 18:23:23 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,20 @@ void	texture_render(t_game *game, t_collision collision, t_vector line_pos,
 	int	pixel_color;
 
 	i = -1;
-	x_text = 0;
-	y_text = 0;
 	while (++i < line_pos.y)
-		img_pix_put(&game->fps_img, line_pos.x, i, game->texture.sky_color);
+	{
+		if (!(line_pos.x >= START_MINIMAP_X && line_pos.x < START_MINIMAP_X + MINIMAP_SIZE &&
+			  i >= START_MINIMAP_Y && i < START_MINIMAP_Y + MINIMAP_SIZE))
+			img_pix_put(&game->fps_img, line_pos.x, i, game->texture.sky_color);
+	}
 	i = line_pos.y + line_height;
 	while (i < RES_Y)
-		img_pix_put(&game->fps_img, line_pos.x, i++,
-			game->texture.floor_color);
+	{
+		if (!(line_pos.x >= START_MINIMAP_X && line_pos.x < START_MINIMAP_X + MINIMAP_SIZE &&
+			  i >= START_MINIMAP_Y && i < START_MINIMAP_Y + MINIMAP_SIZE))
+			img_pix_put(&game->fps_img, line_pos.x, i, game->texture.floor_color);
+		i++;
+	}
 	i = 0;
 	while (i < line_height)
 	{
@@ -49,37 +55,33 @@ void	texture_render(t_game *game, t_collision collision, t_vector line_pos,
 		y_text = (int)((i / line_height) * 64);
 		pixel_color = img_pix_read(get_wall_texture(game, collision), x_text,
 				y_text);
-		img_pix_put(&game->fps_img, line_pos.x, line_pos.y + i, pixel_color);
+		if (!(line_pos.x >= START_MINIMAP_X && line_pos.x < START_MINIMAP_X + MINIMAP_SIZE &&
+			  (line_pos.y + i) >= START_MINIMAP_Y && (line_pos.y + i) < START_MINIMAP_Y + MINIMAP_SIZE))
+			img_pix_put(&game->fps_img, line_pos.x, line_pos.y + i, pixel_color);
 		i++;
 	}
 }
 
+
 void	update_collision(t_collision *collision, t_game *game,
 		t_vector line_pos, float half_width)
 {
-	// Calcul des vecteurs pour la direction du joueur et à droite
-	t_vector v_player_to_camera_plane = vec_scalar_mult(game->player.direction,
+	t_vector	v_player_to_camera_plane;
+	t_vector	v_right;
+
+	v_player_to_camera_plane = vec_scalar_mult(game->player.direction,
 			game->player.direction_adjust);
-	t_vector v_right = vec_rotate(game->player.direction, 90); // Rotation de 90 degrés sans normalisation
-
-	// Optimiser l'offset une seule fois pour chaque ligne
-	float offset = (2.0f * (float)line_pos.x / (RES_X - 1.0f)) - 1.0f;
-
-	// Calcul direct de la direction du rayon sans appel à vec_sum
-	t_vector ray_dir = vec_sum(v_player_to_camera_plane,
-		vec_scalar_mult(v_right, offset * half_width));
-
-	// Normalisation directe de ray_dir
-	float ray_dir_length = sqrtf(ray_dir.x * ray_dir.x + ray_dir.y * ray_dir.y);
-	ray_dir.x /= ray_dir_length;
-	ray_dir.y /= ray_dir_length;
-
-	// Lancer du rayon et récupération de la collision
-	*collision = cast_two_d_ray(game, ray_dir);
-
-	// Calcul de la distance avec approximation du cosinus sans appel coûteux
-	float ray_cos_angle = (ray_dir.x * game->player.direction.x + ray_dir.y * game->player.direction.y);
-	collision->distance = collision->distance / 64 * ray_cos_angle;
+	v_right = vec_normalize(vec_rotate(game->player.direction, 90));
+	*collision = cast_two_d_ray(game,
+			vec_normalize(vec_sum(v_player_to_camera_plane,
+					vec_scalar_mult(v_right,
+						((2.0f * (float)line_pos.x / (RES_X - 1.0f))
+							- 1.0f) * half_width))));
+	collision->distance = collision->distance / 64
+		* cosf(vec_angle(vec_normalize(vec_sum(v_player_to_camera_plane,
+						vec_scalar_mult(v_right, ((2.0f * (float)line_pos.x
+									/ (RES_X - 1.0f)) - 1.0f) * half_width))),
+				game->player.direction));
 }
 
 void	render_fps(t_game *game)
