@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:57:04 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/18 11:24:07 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/12/10 17:33:24 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	handle_keypress(int keycode, t_game *game)
 {
-	//printf("keycode  = %d\n", keycode);
 	if (keycode == ESC)
 		close_window(game);
 	if (keycode == 'w' || keycode == 'a' || keycode == 'd' || keycode == 's'

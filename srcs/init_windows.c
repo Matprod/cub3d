@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:27:46 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/26 16:12:56 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/12/29 19:53:51 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 t_img	create_img(t_game *game, char *path)
 {
 	t_img		img;
-	/* if (access(path, F_OK) != 0) 
-		printf("File %s not found or inaccessible\n", path); */
+
 	img.mlx_img = mlx_xpm_file_to_image(game->mlx, path,
 			&img.width, &img.height);
 	 if (!img.mlx_img)
 	{
 		printf("Error: failed to load image from %s\n", path);
-		return (img); // Return a struct with NULL fields
+		return (img);
 	}
 	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp,
 			&img.line_len, &img.endian);
@@ -83,6 +82,8 @@ void	var_init(t_game *game)
 		game->key_states[i] = 0;
 		game->key_release_states[i] = 1;
 	}
+	/* game->mouse_left = FALSE;
+	game->mouse_left = FALSE; */
 	init_player(game);
 	game->map = game->parsing->map;
 	game->texture.sky_color = rgb_to_argb(game->parsing->color_ceiling);

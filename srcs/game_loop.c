@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:35:14 by Matprod           #+#    #+#             */
-/*   Updated: 2024/11/22 17:59:29 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/12/29 19:50:39 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	is_walkable(t_game *game, float x, float y)
 {
-	int grid_x = (int)x;
-	int grid_y = (int)y;
+	int	grid_x;
+	int	grid_y;
 
+	grid_x = (int)x;
+	grid_y = (int)y;
 	if (game->map[grid_y][grid_x] == '1')
 		return (0);
 	return (1);
@@ -41,21 +43,9 @@ void player_wall_collides(t_game *game, t_vector speed)
 	vi_pos = pixel_to_tile(vec_sum(game->player.pos, game->player.speed));
 	vi_pos_add_offset = pixel_to_tile(vec_sum(game->player.pos, v_offset));
 	if (!is_walkable(game, vi_pos_add_offset.x, vi_pos.y))
-	{
-		printf("HORIZONTALE\n");
 		game->player.speed.x = 0;
-	}
 	if (!is_walkable(game, vi_pos.x, vi_pos_add_offset.y))
-	{
-		printf("VERTICALE\n");
 		game->player.speed.y = 0;
-	}
-	/* if (!is_walkable(game, vi_pos_add_offset.x, vi_pos_add_offset.y))
-	{
-		printf("DIAGONALE\n");
-		game->player.speed.x = 0;
-		game->player.speed.y = 0;
-	} */
 }
 
 

@@ -2,7 +2,7 @@
 NAME				= cub3d
 
 # Directories
-LIBFT_DIR				= lib/libft/libft.a
+LIBFT_DIR			= lib/libft/libft.a
 INC					= inc/
 SRC_DIR				= srcs/
 OBJ_DIR				= obj/
@@ -10,7 +10,7 @@ MLX_A 				= libmlx.a
 MLX_DIR 			= lib/mlx/
 # Compiler and CFlags
 CC					= cc
-CFLAGS 				= -Wall -Wextra -O3 -Ofast -g3 -march=native -funroll-loops -flto -fomit-frame-pointer -ffast-math -fno-math-errno -I
+CFLAGS 				= -Wall -Wextra -O3 -Ofast -g3 -I
 
 #-Werror
 MLX_FLAGS			= -L. -lXext -L. -lX11
@@ -52,7 +52,6 @@ SRCS 				=	srcs/main.c\
 						srcs/shapes/line.c\
 						srcs/shapes/pixel.c\
 						srcs/render/color.c\
-						srcs/render/load.c\
 						srcs/render/raycast_utils.c\
 						srcs/render/raycast.c\
 						srcs/render/render_fps.c\

@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/11/22 18:30:44 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/12/29 20:11:16 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,8 @@ typedef struct s_game
 	char				**map;
 	int					key_states[256];
 	int					key_release_states[256];
+	bool				mouse_right;
+	bool				mouse_left;
 	t_img				fps_img;
 	t_player			player;
 	t_texture			texture;
