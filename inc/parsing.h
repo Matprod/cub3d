@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2024/11/22 16:40:28 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:08:16 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef struct s_parse
 	char		*text_so;
 	char		*text_we;
 	char		*text_ea;
-	int		 	color_floor[3];
-	int		 	color_ceiling[3];
-	int		 	map_height;
-	int		 	map_width;
+	int			color_floor[3];
+	int			color_ceiling[3];
+	int			map_height;
+	int			map_width;
 	char		dir_player;
 	t_vector	pos_player;
 }				t_parse;

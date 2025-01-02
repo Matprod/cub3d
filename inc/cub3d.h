@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 16:22:52 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:11:36 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "../lib/libft/libft.h"
 # include "../lib/mlx/mlx.h"
 # include "parsing.h"
-
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -62,7 +61,6 @@
 # define MINIMAP_SIZE 150
 # define MINIMAP_TILE_SIZE 20
 
-
 # define MAX_DISTANCE 10
 
 # define CEILING 2
@@ -81,7 +79,6 @@
 # define WEST_WALL "./images/BRICK_2A.xpm"
 # define EAST_WALL "./images/DOOR_2A.xpm"
 
-
 # define ESC 65307
 # define A 97
 # define W 119
@@ -89,7 +86,6 @@
 # define S 115
 # define RIGHT 65361
 # define LEFT 65363
-
 
 # define ERROR_NBR_ARG \
 "Error\n" \
@@ -127,26 +123,26 @@
 "Invalid Player Starting Position\n"
 
 //singleton_struct
-typedef enum	e_ptr_types
+typedef enum e_ptr_types
 {
 	SINGLE_PTR,
 	DOUBLE_PTR,
 }				t_ptr_types;
 
-typedef struct	s_node
+typedef struct s_node
 {
 	void				*data;
-	t_ptr_types				type;
+	t_ptr_types			type;
 	struct s_node		*next;
 }				t_node;
 
-typedef struct	s_singleton
+typedef struct s_singleton
 {
 	t_node	*head;
 }				t_singleton;
 //
 
-typedef struct s_fps 
+typedef struct s_fps
 {
 	int		frames;
 	double	last_time;
@@ -225,7 +221,6 @@ typedef struct s_game
 	t_parse				*parsing;
 }				t_game;
 
-
 //						FUNCTIONS						//
 //game
 int				init_mlx(t_game **game, t_parse *parse);
@@ -236,9 +231,7 @@ void			init_player(t_game *game);
 void			move(t_game *game, char direction);
 int				game_loop(void *g);
 void			custom_usleep(unsigned int microseconds);
-long 			time_since_start();
 void			print_vector(t_vector vec);
-
 
 //render
 void			render(t_game *game);
@@ -264,9 +257,12 @@ t_vector		pixel_to_tile(t_vector vector);
 
 //shapes
 void			img_pix_put(t_img *img, int x, int y, int color);
-void			draw_vertical_line_2(t_img *img, t_vector pos, int len, int color);
-void			draw_line_dda(t_img *img, t_vector vec1, t_vector vec2, int color);
-void			draw_filled_circle(t_img *img, t_vector mid, int radius, int color);
+void			draw_vertical_line_2(t_img *img,
+					t_vector pos, int len, int color);
+void			draw_line_dda(t_img *img,
+					t_vector vec1, t_vector vec2, int color);
+void			draw_filled_circle(t_img *img,
+					t_vector mid, int radius, int color);
 
 //vector
 double			vec_angle(t_vector v1, t_vector v2);
@@ -297,9 +293,9 @@ void			print_int_array(int *array, int size);
 void			error_msg(const char *error);
 
 //singleton
-t_singleton 	*get_singleton_list();
+t_singleton		*get_singleton_list(void);
 bool			add_singleton_data(void *data, t_ptr_types data_type);
-bool			free_singleton_list();
+bool			free_singleton_list(void);
 void			free_singleton_data(t_node *current);
 
 #endif

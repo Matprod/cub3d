@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 16:40:46 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:01:21 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,38 +53,17 @@ int	init_mlx(t_game **game, t_parse *parse)
 	return (SUCCESS);
 }
 
-int	handle_mouse_click(int button, t_game *game)
-{
-	if (button == 1)
-		game->mouse_left = true;
-	else if (button == 2)
-		game->mouse_right = true;
-	return (0);
-}
-
-int	handle_mouse_release(int button, t_game *game)
-{
-	if (button == 1)
-		game->mouse_left = false;
-	else if (button == 2)
-		game->mouse_right = false;
-	return (0);
-}
-
 void	start_game(t_game *game)
 {
 	var_init(game);
 	mlx_hook(game->fps_win, 2, 1L << 1, handle_keypress, game);
 	mlx_hook(game->fps_win, 3, 1L << 0, handle_keyrelease, game);
-	mlx_mouse_hook(game->fps_win, handle_mouse_click, game);
-	mlx_hook(game->fps_win, 5, 1L << 3, handle_mouse_release, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_hook(game->fps_win, 17, 0, close_window, game);
 	mlx_loop(game->mlx);
 	free_singleton_list();
 }
 
-//NE PAS OUBLIER WERROR
 int	main(int argc, char **argv)
 {
 	t_parse	*parse;
@@ -103,4 +82,3 @@ int	main(int argc, char **argv)
 	start_game(game);
 	return (SUCCESS);
 }
-

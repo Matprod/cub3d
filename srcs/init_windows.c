@@ -6,25 +6,27 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:27:46 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 16:26:25 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:02:51 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_img create_img(t_game *game, char *path)
+t_img	create_img(t_game *game, char *path)
 {
 	t_img	img;
 
 	if (game->img_count >= MAX_IMAGES)
 		printf("Error: maximum number of images (%d) reached\n", MAX_IMAGES);
-	img.mlx_img = mlx_xpm_file_to_image(game->mlx, path, &img.width, &img.height);
+	img.mlx_img = mlx_xpm_file_to_image(game->mlx, path,
+			&img.width, &img.height);
 	if (!img.mlx_img)
 	{
 		printf("Error: failed to load image from %s\n", path);
 		return (img);
 	}
-	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
+	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp,
+			&img.line_len, &img.endian);
 	game->images[game->img_count++] = img;
 	return (img);
 }

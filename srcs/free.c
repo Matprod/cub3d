@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:35:57 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 16:40:29 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:04:24 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,10 @@ void	free_map(t_parse *map)
 	free(map);
 }
 
-void	free_parse(t_parse *parse)
+void	free_images(t_game *game)
 {
-	free_map(parse);
-	free(parse);
-}
+	int	i;
 
-void free_images(t_game *game)
-{
-	int i;
-	
 	i = 0;
 	while (i < game->img_count)
 	{
@@ -74,5 +68,3 @@ int	close_window(t_game *game)
 	free_singleton_list();
 	exit(0);
 }
-
-
