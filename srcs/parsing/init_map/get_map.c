@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/24 14:22:04 by adebert          ###   ########.fr       */
+/*   Updated: 2024/12/29 20:30:25 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	get_nb_line_fd(char *map_name)
 
 bool	add_line(char **map, char *line, int *nb)
 {
-	char **split_eof;
+	char	**split_eof;
 
 	if (skip_data_map(line) == TRUE)
 	{

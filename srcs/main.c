@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/12/29 20:14:46 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 16:40:46 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	init_mlx(t_game **game, t_parse *parse)
 	return (SUCCESS);
 }
 
-int handle_mouse_click(int button, t_game *game)
+int	handle_mouse_click(int button, t_game *game)
 {
 	if (button == 1)
 		game->mouse_left = true;
@@ -62,14 +62,13 @@ int handle_mouse_click(int button, t_game *game)
 	return (0);
 }
 
-int handle_mouse_release(int button, t_game *game)
+int	handle_mouse_release(int button, t_game *game)
 {
 	if (button == 1)
 		game->mouse_left = false;
 	else if (button == 2)
 		game->mouse_right = false;
-
-    return (0);
+	return (0);
 }
 
 void	start_game(t_game *game)
@@ -82,7 +81,6 @@ void	start_game(t_game *game)
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_hook(game->fps_win, 17, 0, close_window, game);
 	mlx_loop(game->mlx);
-	free_all(game);
 	free_singleton_list();
 }
 

@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:01:04 by Matprod           #+#    #+#             */
-/*   Updated: 2024/11/10 17:12:11 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/12/29 20:22:19 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	init_raycast(t_game *game, t_vector direction, t_raycast_data *d)
 	}
 	init_raycast_two(game, d);
 }
-
 
 void	fill_collision(t_raycast_data *d, char last_step)
 {

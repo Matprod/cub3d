@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:35:14 by Matprod           #+#    #+#             */
-/*   Updated: 2024/12/29 19:50:39 by Matprod          ###   ########.fr       */
+/*   Updated: 2024/12/29 20:25:56 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	is_walkable(t_game *game, float x, float y)
 	return (1);
 }
 
-void player_wall_collides(t_game *game, t_vector speed)
+void	player_wall_collides(t_game *game, t_vector speed)
 {
-	t_vector v_offset;
-	t_vector vi_pos;
-	t_vector vi_pos_add_offset;
+	t_vector	v_offset;
+	t_vector	vi_pos;
+	t_vector	vi_pos_add_offset;
 
 	v_offset.x = 0;
 	v_offset.y = 0;
@@ -47,8 +47,6 @@ void player_wall_collides(t_game *game, t_vector speed)
 	if (!is_walkable(game, vi_pos.x, vi_pos_add_offset.y))
 		game->player.speed.y = 0;
 }
-
-
 
 void	edit_player_pos(t_game *game)
 {
@@ -89,7 +87,7 @@ void	edit_player_rotate(t_game *game)
 		game->player.direction_adjust -= 0.1;
 }
 
-void fps(void)
+/* void fps(void)
 {
 	static int counter = 0;
     static time_t last_call_time = 0; 
@@ -105,7 +103,7 @@ void fps(void)
 		counter = 0;
 		last_call_time = current_time;
 	}
-}
+} */
 
 int	game_loop(void *g)
 {
@@ -115,6 +113,5 @@ int	game_loop(void *g)
 	edit_player_pos(game);
 	edit_player_rotate(game);
 	render(game);
-	fps();// A ENLEVER A LA FIN
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/12/29 20:11:16 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 16:22:52 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@
 # define TRUE 1
 # define RES 64
 # define NOT_FOUND 0
+# define MAX_IMAGES 4
 # define NORTH_WALL "./images/BRICK_1A.xpm"
 # define SOUTH_WALL "./images/BRICK_3D.xpm"
 # define WEST_WALL "./images/BRICK_2A.xpm"
@@ -129,7 +130,7 @@
 typedef enum	e_ptr_types
 {
 	SINGLE_PTR,
-	DOUBLE_PTR
+	DOUBLE_PTR,
 }				t_ptr_types;
 
 typedef struct	s_node
@@ -217,6 +218,8 @@ typedef struct s_game
 	bool				mouse_right;
 	bool				mouse_left;
 	t_img				fps_img;
+	t_img				images[MAX_IMAGES];
+	int					img_count;
 	t_player			player;
 	t_texture			texture;
 	t_parse				*parsing;
@@ -285,6 +288,7 @@ void			free_map(t_parse *map);
 void			free_all(t_game *game);
 void			free_parse(t_parse *parse);
 void			free_array(char **array);
+void			free_images(t_game *game);
 
 //print
 void			print_array(char **array);

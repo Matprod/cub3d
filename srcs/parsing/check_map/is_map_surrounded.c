@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_map_surrounded.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 19:58:30 by allan             #+#    #+#             */
-/*   Updated: 2024/10/20 19:59:54 by allan            ###   ########.fr       */
+/*   Updated: 2025/01/02 09:34:41 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	check_first_walls(char **map)
 		{
 			error_msg(ERROR_MAP_WALL);
 			printf("Coordinate: y:%ld, x:%ld value:%c: Should be a wall\n",
-					i, j, map[i][j]);
+				i, j, map[i][j]);
 			return (ERROR);
 		}
 		i++;
@@ -57,7 +57,7 @@ bool	check_last_walls(char **map)
 		{
 			error_msg(ERROR_MAP_WALL);
 			printf("Coordinate: y:%ld, x:%ld value:%c: Should be a wall\n",
-					i, last_char, map[i][last_char]);
+				i, last_char, map[i][last_char]);
 			return (ERROR);
 		}
 		i++;

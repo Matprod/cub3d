@@ -51,7 +51,6 @@ SRCS 				=	srcs/main.c\
 						srcs/shapes/circle.c\
 						srcs/shapes/line.c\
 						srcs/shapes/pixel.c\
-						srcs/render/color.c\
 						srcs/render/raycast_utils.c\
 						srcs/render/raycast.c\
 						srcs/render/render_fps.c\

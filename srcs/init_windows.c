@@ -6,28 +6,28 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:27:46 by Matprod           #+#    #+#             */
-/*   Updated: 2024/12/29 19:53:51 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 16:26:25 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_img	create_img(t_game *game, char *path)
+t_img create_img(t_game *game, char *path)
 {
-	t_img		img;
+	t_img	img;
 
-	img.mlx_img = mlx_xpm_file_to_image(game->mlx, path,
-			&img.width, &img.height);
-	 if (!img.mlx_img)
+	if (game->img_count >= MAX_IMAGES)
+		printf("Error: maximum number of images (%d) reached\n", MAX_IMAGES);
+	img.mlx_img = mlx_xpm_file_to_image(game->mlx, path, &img.width, &img.height);
+	if (!img.mlx_img)
 	{
 		printf("Error: failed to load image from %s\n", path);
 		return (img);
 	}
-	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp,
-			&img.line_len, &img.endian);
+	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
+	game->images[game->img_count++] = img;
 	return (img);
 }
-
 
 void	load_img(t_game *game)
 {
@@ -44,7 +44,6 @@ void	load_img(t_game *game)
 	if (!game->texture.east.mlx_img)
 		return (printf("Error loading east texture\n"), (void)0);
 }
-
 
 void	init_player(t_game *game)
 {
@@ -82,12 +81,11 @@ void	var_init(t_game *game)
 		game->key_states[i] = 0;
 		game->key_release_states[i] = 1;
 	}
-	/* game->mouse_left = FALSE;
-	game->mouse_left = FALSE; */
 	init_player(game);
 	game->map = game->parsing->map;
 	game->texture.sky_color = rgb_to_argb(game->parsing->color_ceiling);
 	game->texture.floor_color = rgb_to_argb(game->parsing->color_floor);
+	game->img_count = 0;
 	load_img(game);
 	mlx_put_image_to_window(game->mlx, game->fps_win,
 		game->fps_img.mlx_img, 0, 0);
