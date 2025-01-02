@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2025/01/02 17:08:16 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:19:25 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char			*ft_strjoin_gnl(char *s1, char const *s2);
 bool			get_color_element(t_parse *map, int element, char name);
 bool			split_line(t_parse *map, char *line, int element, char name);
 bool			check_valid_split(char **first_split, char **second_split,
-				int element);
+					int element);
 void			copy_color(int color_element[3], t_parse *map, int element);
 void			error_color(int element);
 
