@@ -6,51 +6,11 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2024/12/29 20:09:07 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:55:36 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	custom_usleep(unsigned int time)
-{
-	volatile unsigned int counter;
-
-	counter = 0;
-	while (counter < time)
-		counter++;
-	counter = 0;
-	while (counter < time)
-		counter++;
-	counter = 0;
-	while (counter < time)
-		counter++;
-	counter = 0;
-	while (counter < time)
-		counter++;
-}
-
-char	**map_dup(char **map)
-{
-	char	**new_map;
-	int		i;
-
-	i = -1;
-	new_map = malloc(sizeof(char *) * (map_height(map) + 1));
-	if (!new_map)
-		return (NULL);
-	while (map[++i])
-	{
-		new_map[i] = ft_strdup(map[i]);
-		if (!new_map[i])
-		{
-			free_array(new_map);
-			return (NULL);
-		}
-	}
-	new_map[i] = NULL;
-	return (new_map);
-}
 
 /* int handle_mouse_click(int button, t_game *game)
 {
@@ -71,6 +31,17 @@ int handle_mouse_release(int button, t_game *game)
     return (0);
 } */
 
+void	start_game(t_game *game)
+{
+	var_init(game);
+	mlx_hook(game->fps_win, 2, 1L << 1, handle_keypress, game);
+	mlx_hook(game->fps_win, 3, 1L << 0, handle_keyrelease, game);
+	mlx_hook(game->fps_win, 2, 1L << 1, handle_keypress, game);
+	mlx_loop_hook(game->mlx, game_loop, game);
+	mlx_hook(game->fps_win, 17, 0, close_window, game);
+	mlx_loop(game->mlx);
+	free_singleton_list();
+}
 
 //NE PAS OUBLIER WERROR
 int	main(int argc, char **argv)
@@ -88,16 +59,7 @@ int	main(int argc, char **argv)
 		return (free_singleton_list(), ERROR);
 	if (init_mlx(&game, parse) == ERROR)
 		return (free_singleton_list(), ERROR);
-	var_init(game);
-	mlx_hook(game->fps_win, 2, 1L << 1, handle_keypress, game);
-	mlx_hook(game->fps_win, 3, 1L << 0, handle_keyrelease, game);
-	/* mlx_mouse_hook(game->fps_win, handle_mouse_click, game);
-	mlx_hook(game->fps_win, 5, 1L << 3, handle_mouse_release, game); */
-	mlx_loop_hook(game->mlx, game_loop, game);
-	mlx_hook(game->fps_win, 17, 0, close_window, game);
-	mlx_loop(game->mlx);
-	free_all(game);
-	free_singleton_list();
+	start_game(game);
 	return (SUCCESS);
 }
 

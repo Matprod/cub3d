@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:35:57 by Matprod           #+#    #+#             */
-/*   Updated: 2024/11/09 22:03:00 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:39:58 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,27 @@ void	free_map(t_parse *map)
 	free(map);
 }
 
-void	free_all(t_game *game)
+void	free_images(t_game *game)
 {
-	free_map(game->parsing);
-	free(game);
+	int	i;
+
+	i = 0;
+	while (i < game->img_count)
+	{
+		if (game->images[i].mlx_img)
+			mlx_destroy_image(game->mlx, game->images[i].mlx_img);
+		i++;
+	}
+	game->img_count = 0;
 }
 
-void	free_parse(t_parse *parse)
-{
-	free_map(parse);
-	free(parse);
-}
-
-int		close_window(t_game *game)
+int	close_window(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->fps_win);
 	mlx_destroy_image(game->mlx, game->fps_img.mlx_img);
+	free_images(game);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
-	free_all(game);
 	free_singleton_list();
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:46:25 by Matprod           #+#    #+#             */
-/*   Updated: 2024/12/23 16:07:44 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 18:31:29 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,23 @@
 
 t_img	*get_wall_texture(t_game *game, t_collision collision) // STABLE
 {
-	static int	i = 0;
+	static long	start = 0;
+	long		current_time;
 
+	if (start == 0)
+		start = get_time();
+	current_time = get_time();
 	if (collision.orientation == 'N')
 	{
-		i++;
-		if (i < 20000000)
+		if (current_time < start + 600)
 			return (&game->texture.north);
-		else if (i >= 20000000 && i <= 40000000)
+		else if (current_time < start + 1200 && current_time >= start + 600)
 			return (&game->texture.north_two);
-		else if (i >= 40000000 && i <= 60000000)
+		else if (current_time < start + 1800 && current_time >= start + 1200)
 			return (&game->texture.north_three);
-		else if (i > 60000000)
+		else if (current_time >= start + 1800)
 		{
-			i = 0;
+			start = get_time();
 			return (&game->texture.north);
 		}
 	}

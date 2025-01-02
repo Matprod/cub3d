@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2024/12/29 20:09:42 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 21:45:30 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@
 # define SOUTH_WALL "./images/BRICK_3D.xpm"
 # define WEST_WALL "./images/BRICK_2A.xpm"
 # define EAST_WALL "./images/DOOR_2A.xpm"
+# define RICK_PATH "./images/rick/"
+# define RICK_FRAMES 27
+
+# define MAX_IMAGES 6
 
 
 # define ESC 65307
@@ -89,41 +93,17 @@
 # define RIGHT 65361
 # define LEFT 65363
 
-
-# define ERROR_NBR_ARG \
-"Error\n" \
-"Two Arguments Required: ./cub3d and map.cub\n"
-# define ERROR_MAP_NAME \
-"Error\n" \
-"Map should have '.cub' format and at least 1 letter\n"
-# define ERROR_OPEN \
-"Error\n" \
-"Opening File Failed\n"
-# define ERROR_MALLOC \
-"Error\n" \
-"Malloc Initialisation Failed\n"
-# define ERROR_FLOOR_COLOR \
-"Error\n" \
-"Floor Input: Invalid color\n"
-# define ERROR_FLOOR_IDENTIFIER \
-"Error\n" \
-"Floor Identifier must start with 'F'\n"
-# define ERROR_CEILING_COLOR \
-"Error\n" \
-"Ceiling Input: Invalid color\n"
-# define ERROR_TEXTURE_PATH \
-"Error\n" \
-"Texture Path: Invalid Input\n"
-# define ERROR_MAP_CONTENT \
-"Error\n" \
-"Map Content: Invalid Character\n" \
-"Valid Characters are: '1' '0' 'N' 'S' 'E' 'W'\n"
-# define ERROR_MAP_WALL \
-"Error\n" \
-"Map is not surrounded by walls\n"
-# define ERROR_STARTING_POSITION \
-"Error\n" \
-"Invalid Player Starting Position\n"
+# define ERROR_NBR_ARG "Error\nTwo Arguments Required: ./cub3d and map.cub\n"
+# define ERROR_MAP_NAME "Error\nMap should have '.cub' format and 1 letter\n"
+# define ERROR_OPEN "Error\nOpening File Failed\n"
+# define ERROR_MALLOC "Error\nMalloc Initialisation Failed\n"
+# define ERROR_FLOOR_COLOR "Error\nFloor Input: Invalid color\n"
+# define ERROR_FLOOR_IDENTIFIER "Error\nFloor Identifier must start with 'F'\n"
+# define ERROR_CEILING_COLOR "Error\nCeiling Input: Invalid color\n"
+# define ERROR_TEXTURE_PATH "Error\nTexture Path: Invalid Input\n"
+# define ERROR_MAP_CONTENT "Error\nMap Content: Invalid Character\n"
+# define ERROR_MAP_WALL "Error\nMap is not surrounded by walls\n"
+# define ERROR_STARTING_POSITION "Error\nInvalid Player Starting Position\n"
 
 //singleton_struct
 typedef enum	e_ptr_types
@@ -194,6 +174,7 @@ typedef struct s_texture
 	t_img				south;
 	t_img				east;
 	t_img				west;
+	t_img				rick[27];
 }						t_texture;
 
 typedef struct s_raycast_data
@@ -219,6 +200,8 @@ typedef struct s_game
 	bool				mouse_right;
 	bool				mouse_left;
 	t_img				fps_img;
+	t_img				images[MAX_IMAGES];
+	int					img_count;
 	t_player			player;
 	t_texture			texture;
 	t_parse				*parsing;
@@ -234,9 +217,11 @@ void			var_init(t_game *game);
 void			init_player(t_game *game);
 void			move(t_game *game, char direction);
 int				game_loop(void *g);
-void			custom_usleep(unsigned int microseconds);
-long 			time_since_start();
+long 			time_since_start(void);
 void			print_vector(t_vector vec);
+long			get_time(void);
+void			custom_usleep(long usec);
+void			load_rick_img(t_game *game);
 
 
 //render
@@ -248,7 +233,7 @@ unsigned int	img_pix_read(t_img *img, int x, int y);
 void			load_grid(t_game *game);
 void			clean_map(t_game *game);
 void			clear_img(t_img *img);
-
+t_img			create_img(t_game *game, char *path);
 //raycast
 void			print_circle_relative_tile_pos(t_game *game, t_vector point);
 char			get_collision_orientation(char last_step, t_vector v_step);
@@ -279,7 +264,6 @@ t_vector		vec_rotate(t_vector vector, float angle);
 t_vector		vec_scalar_mult(t_vector vec1, double i);
 t_vector		vec_sum(t_vector vec1, t_vector vec2);
 void			vec_to_angle(double angle, t_vector *vector);
-
 //free
 int				close_window(t_game *game);
 void			close_and_free(char **array, int fd);
