@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:27:46 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 17:50:08 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 23:07:39 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_img	create_img(t_game *game, char *path)
 
 void	load_img(t_game *game)
 {
+	load_morty_img(game);
 	game->texture.north = create_img(game, game->parsing->text_no);
 	if (!game->texture.north.mlx_img)
 		return (printf("Error loading north texture\n"), (void)0);

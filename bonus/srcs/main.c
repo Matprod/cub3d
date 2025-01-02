@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 17:55:36 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 22:30:40 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,8 @@ int	init_mlx(t_game **game, t_parse *parse)
 	(*game)->mlx = mlx_init();
 	if (!(*game)->mlx)
 		return (ERROR);
-
 	(*game)->fps_win = mlx_new_window((*game)->mlx,
 			RES_X, RES_Y, "cub3d");
-
 	(*game)->fps_img.mlx_img = mlx_new_image((*game)->mlx, RES_X, RES_Y);
 	(*game)->fps_img.addr = mlx_get_data_addr((*game)->fps_img.mlx_img,
 			&(*game)->fps_img.bpp, &(*game)->fps_img.line_len,

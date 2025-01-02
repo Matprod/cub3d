@@ -26,6 +26,7 @@ SRCS 				=	srcs/main.c\
 						srcs/events.c\
 						srcs/game_loop.c\
 						srcs/init_windows.c\
+						srcs/rick_gif.c\
 						srcs/ft_usleep.c\
 						srcs/parsing/parser.c\
 						srcs/parsing/init_map/init_map.c\

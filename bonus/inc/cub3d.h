@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 21:45:30 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/02 23:19:57 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@
 # define WEST_WALL "./images/BRICK_2A.xpm"
 # define EAST_WALL "./images/DOOR_2A.xpm"
 # define RICK_PATH "./images/rick/"
-# define RICK_FRAMES 27
+# define MORTY_FRAMES 7
 
-# define MAX_IMAGES 6
+# define MAX_IMAGES 14
 
 
 # define ESC 65307
@@ -174,7 +174,7 @@ typedef struct s_texture
 	t_img				south;
 	t_img				east;
 	t_img				west;
-	t_img				rick[27];
+	t_img				morty[7];
 }						t_texture;
 
 typedef struct s_raycast_data
@@ -221,7 +221,7 @@ long 			time_since_start(void);
 void			print_vector(t_vector vec);
 long			get_time(void);
 void			custom_usleep(long usec);
-void			load_rick_img(t_game *game);
+void			load_morty_img(t_game *game);
 
 
 //render
