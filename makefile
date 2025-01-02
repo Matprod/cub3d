@@ -10,7 +10,7 @@ MLX_A 				= libmlx.a
 MLX_DIR 			= lib/mlx/
 # Compiler and CFlags
 CC					= cc
-CFLAGS 				= -Wall -Wextra -O3 -Ofast -g3 -I
+CFLAGS 				= -Wall -Wextra -Werror -O3 -Ofast -g3 -I
 
 #-Werror
 MLX_FLAGS			= -L. -lXext -L. -lX11
