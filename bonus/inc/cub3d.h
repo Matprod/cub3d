@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/05 10:53:21 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/05 12:19:11 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 // DEFINE MINIMAP
 # define START_MINIMAP_X 30
 # define START_MINIMAP_Y 30
-# define MINIMAP_SIZE 150
+# define MINIMAP_SIZE 140
 # define MINIMAP_TILE_SIZE 20
 
 
