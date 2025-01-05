@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:35:57 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 17:39:58 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/05 11:34:59 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	free_array(char **array)
 	int	i;
 
 	i = -1;
-	while (array[++i])
-		free(array[i]);
-	free(array);
+	if(array)
+	{
+		while (array[++i])
+			free(array[i]);
+		free(array);
+	}
 }
 
 void	free_texture(t_parse *map)

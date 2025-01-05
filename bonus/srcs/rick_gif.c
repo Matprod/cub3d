@@ -14,39 +14,36 @@
 
 void load_morty_img(t_game *game)
 {
-    int     i;
-    char    *current;
-    char    *temp;
+	int		i;
+	char	*current;
+	char	*temp;
+	char	*itoa;
+	i = 0;
 
-    char *start = "./images/morty/frame_00";
-    char *final = ".xpm";
-    i = 0;
-
-    while (i < MORTY_FRAMES)
-    {
-        temp = ft_strjoin(start, ft_itoa(i)); // Exemple : "./images/morty/frame1"
-        current = ft_strjoin(temp, final);    // Exemple : "./images/morty/frame1.xpm"
-        free(temp); // Libère la mémoire temporaire utilisée par ft_itoa
-
-        // Charger l'image
-        if (access(current, F_OK) == 0) // Vérifie que le fichier existe
-        {
-            game->texture.morty[i] = create_img(game, current);
-            if (!game->texture.morty[i].mlx_img) // Vérifie si l'image est bien créée
-            {
-                printf("Erreur : Impossible de charger texture.morty[%d] (%s)\n", i, current);
-                free(current);
-                return; // Quitte en cas d'erreur
-            }
-        }
-        else
-        {
-            printf("Erreur : Fichier non trouvé ( %s )\n", current);
-            free(current);
-            return; // Quitte en cas d'erreur
-        }
-
-        free(current); // Libère le chemin actuel
-        i++;
-    }
+	while (i < MORTY_FRAMES)
+	{
+		itoa = ft_itoa(i);
+		temp = ft_strjoin(MORTY_START_PATH, itoa);
+		free(itoa);
+		current = ft_strjoin(temp, FORMAT_XPM);
+		free(temp);
+		if (access(current, F_OK) == 0)
+		{
+			game->texture.morty[i] = create_img(game, current);
+			if (!game->texture.morty[i].mlx_img)
+			{
+				printf("Erreur : Impossible de charger texture.morty[%d] (%s)\n", i, current);
+				free(current);
+				return;
+			}
+		}
+		else
+		{
+			printf("Erreur : Fichier non trouvé ( %s )\n", current);
+			free(current);
+			return;
+		}
+		free(current);
+		i++;
+	}
 }

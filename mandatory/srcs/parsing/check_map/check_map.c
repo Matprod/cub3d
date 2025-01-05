@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:18:29 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 09:08:39 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/05 11:58:06 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ bool	check_map(t_parse *parser)
 		i++;
 	}
 	if (check_empty_case(parser, parser->map) == FALSE)
-		return (ERROR);
+		return (printf("je proc\n"),ERROR);
 	if (is_map_surrounded(parser->map) == FALSE)
 		return (ERROR);
 	if (check_player_exist(parser->map) == FALSE)

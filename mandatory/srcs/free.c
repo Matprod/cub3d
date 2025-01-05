@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:35:57 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 17:04:24 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/05 11:48:51 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@ void	free_array(char **array)
 {
 	int	i;
 
-	i = -1;
-	while (array[++i])
+	i = 0;
+	if (!array)
+		return;
+	while (array[i])
+	{
 		free(array[i]);
+		i++;
+	}
 	free(array);
 }
 

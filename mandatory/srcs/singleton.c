@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:49:16 by allan             #+#    #+#             */
-/*   Updated: 2025/01/02 17:07:24 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/05 11:52:25 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ bool	free_singleton_list(void)
 
 void	free_singleton_data(t_node *current)
 {
+	if (!current || !current->data)
+	 	return;
 	if (current->type == DOUBLE_PTR)
 		free_array((char **)current->data);
 	else

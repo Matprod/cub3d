@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 23:19:57 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/01/05 10:53:21 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@
 # define EAST_WALL "./images/DOOR_2A.xpm"
 # define RICK_PATH "./images/rick/"
 # define MORTY_FRAMES 7
+# define MORTY_START_PATH "./images/morty/frame_00"
+# define FORMAT_XPM ".xpm"
 
 # define MAX_IMAGES 14
 
