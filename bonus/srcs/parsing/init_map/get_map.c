@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/05 12:36:33 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/02 15:50:08 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	get_nb_line_fd(char *map_name)
 
 bool	add_line(char **map, char *line, int *nb)
 {
-	char **split_eof;
+	char	**split_eof;
 
 	if (skip_data_map(line) == TRUE)
 	{

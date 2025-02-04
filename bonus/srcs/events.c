@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:57:04 by Matprod           #+#    #+#             */
-/*   Updated: 2024/12/24 18:24:05 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:35:19 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	handle_keypress(int keycode, t_game *game)
 		game->key_states[0] = 1;
 	if (keycode == LEFT)
 		game->key_states[1] = 1;
-	
 	return (0);
 }
 

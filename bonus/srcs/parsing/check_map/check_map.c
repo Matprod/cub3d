@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:18:29 by Matprod           #+#    #+#             */
-/*   Updated: 2024/11/09 23:50:44 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/02 15:49:34 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ bool	check_map(t_parse *parser)
 	while (parser->map[i])
 	{
 		j = 0;
-		while(parser->map[i][j])
+		while (parser->map[i][j])
 		{
 			if (is_valid_input(parser->map[i][j]) == FALSE)
 				return (ERROR);

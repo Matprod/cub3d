@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_valid_input_pos.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 19:59:25 by allan             #+#    #+#             */
-/*   Updated: 2024/10/20 19:59:44 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/02 15:49:53 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	is_valid_input(char c)
 {
 	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E'
-		|| c == 'W'|| c == ' ')
+		|| c == 'W' || c == ' ')
 		return (TRUE);
 	return (error_msg(ERROR_MAP_CONTENT), FALSE);
 }

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   singleton.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:49:16 by allan             #+#    #+#             */
-/*   Updated: 2024/10/22 20:51:44 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/04 16:37:16 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_singleton *get_singleton_list()
+t_singleton	*get_singleton_list(void)
 {
-	static t_singleton *list = NULL;
+	static t_singleton	*list = NULL;
 
 	if (list == NULL)
 	{
@@ -28,9 +28,10 @@ t_singleton *get_singleton_list()
 
 bool	add_singleton_data(void *data, t_ptr_types data_type)
 {
-	t_node *new_node;
+	t_node		*new_node;
+	t_singleton	*list;
 
-	t_singleton *list = get_singleton_list();
+	list = get_singleton_list();
 	if (!list)
 		return (ERROR);
 	new_node = (t_node *)malloc(sizeof(t_node));
@@ -46,11 +47,13 @@ bool	add_singleton_data(void *data, t_ptr_types data_type)
 	return (SUCCESS);
 }
 
-bool	free_singleton_list()
+bool	free_singleton_list(void)
 {
-	t_node *current;
-	t_node	*next;
-	t_singleton *list = get_singleton_list();
+	t_node		*current;
+	t_node		*next;
+	t_singleton	*list;
+
+	list = get_singleton_list();
 	if (!list)
 		return (ERROR);
 	current = list->head;
@@ -68,6 +71,8 @@ bool	free_singleton_list()
 
 void	free_singleton_data(t_node *current)
 {
+	if (!current || !current->data)
+		return ;
 	if (current->type == DOUBLE_PTR)
 		free_array((char **)current->data);
 	else

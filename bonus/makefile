@@ -26,7 +26,7 @@ SRCS 				=	srcs/main.c\
 						srcs/events.c\
 						srcs/game_loop.c\
 						srcs/init_windows.c\
-						srcs/rick_gif.c\
+						srcs/morty_gif.c\
 						srcs/ft_usleep.c\
 						srcs/parsing/parser.c\
 						srcs/parsing/init_map/init_map.c\
@@ -55,6 +55,8 @@ SRCS 				=	srcs/main.c\
 						srcs/shapes/pixel.c\
 						srcs/render/color.c\
 						srcs/render/load.c\
+						srcs/render/get_wall_texture.c\
+						srcs/render/draw_minimap.c\
 						srcs/render/raycast_utils.c\
 						srcs/render/raycast.c\
 						srcs/render/render_fps.c\

@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:27:46 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 23:07:39 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:52:26 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_img	create_img(t_game *game, char *path)
 	return (img);
 }
 
-
 void	load_img(t_game *game)
 {
 	load_morty_img(game);
@@ -54,7 +53,6 @@ void	load_img(t_game *game)
 	if (!game->texture.east.mlx_img)
 		return (printf("Error loading east texture\n"), (void)0);
 }
-
 
 void	init_player(t_game *game)
 {
@@ -91,10 +89,7 @@ void	var_init(t_game *game)
 	{
 		game->key_states[i] = 0;
 		game->key_release_states[i] = 1;
-		
 	}
-	/* game->mouse_right = false;
-	game->mouse_left = false; */
 	init_player(game);
 	game->map = game->parsing->map;
 	game->texture.sky_color = rgb_to_argb(game->parsing->color_ceiling);

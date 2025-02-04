@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/05 10:56:17 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:52:41 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 	game = NULL;
 	if (get_singleton_list() == NULL)
 		return (ERROR);
-	if (parser(argv[1], &parse) == ERROR)	////LF (exept gnl)
+	if (parser(argv[1], &parse) == ERROR)
 		return (free_singleton_list(), ERROR);
 	if (init_mlx(&game, parse) == ERROR)
 		return (free_singleton_list(), ERROR);

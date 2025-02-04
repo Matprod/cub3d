@@ -6,142 +6,68 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:46:25 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/02 23:06:56 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:09:56 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* t_img	*get_wall_texture(t_game *game, t_collision collision)
+void	render_ceiling_and_floor(t_game *game, t_vector line_pos,
+			double line_height)
 {
-	static int	i = 0;
+	int	i;
 
-	if (collision.orientation == 'N')
+	i = -1;
+	while (++i < line_pos.y)
 	{
+		if (!(line_pos.x >= START_MINIMAP_X && line_pos.x
+				< START_MINIMAP_X + MINIMAP_SIZE
+				&& i >= START_MINIMAP_Y && i < START_MINIMAP_Y + MINIMAP_SIZE))
+			img_pix_put(&game->fps_img, line_pos.x, i, game->texture.sky_color);
+	}
+	i = line_pos.y + line_height;
+	while (i < RES_Y)
+	{
+		if (!(line_pos.x >= START_MINIMAP_X && line_pos.x
+				< START_MINIMAP_X + MINIMAP_SIZE
+				&& i >= START_MINIMAP_Y && i < START_MINIMAP_Y + MINIMAP_SIZE))
+			img_pix_put(&game->fps_img, line_pos.x, i,
+				game->texture.floor_color);
 		i++;
-		if (i < 1000)
-			return (&game->texture.north);
-		else if (i >= 1000 && i <= 2000)
-			return (&game->texture.north_two);
-		else if (i >= 2000 && i <= 3000)
-			return (&game->texture.north_three);
-		else if (i > 3000)
-		{
-			i = 0;
-			return (&game->texture.north);
-		}
 	}
-	else if (collision.orientation == 'S')
-		return (&game->texture.south);
-	else if (collision.orientation == 'E')
-		return (&game->texture.east);
-	else if (collision.orientation == 'W')
-		return (&game->texture.west);
-	return (NULL);
-} */
-
-t_img	*get_wall_texture(t_game *game, t_collision collision) // STABLE
-{
-	static long	start = 0;
-	long		current_time;
-	int			morty_index;
-
-	if (start == 0)
-		start = get_time();
-	current_time = get_time();
-	if (collision.orientation == 'N')
-	{
-		if (current_time < start + 600)
-			return (&game->texture.north);
-		else if (current_time < start + 1200 && current_time >= start + 600)
-			return (&game->texture.north_two);
-		else if (current_time < start + 1800 && current_time >= start + 1200)
-			return (&game->texture.north_three);
-		else if (current_time >= start + 1800)
-		{
-			start = get_time();
-			return (&game->texture.north);
-		}
-	}
-	else if (collision.orientation == 'S')
-		return (&game->texture.south);
-	else if (collision.orientation == 'E')
-	{
-	
-		morty_index = ((current_time - start) / 100) % MORTY_FRAMES;
-		if (morty_index >= 0 && morty_index < MORTY_FRAMES)
-			return (&game->texture.morty[morty_index]);
-	}
-	else if (collision.orientation == 'W')
-		return (&game->texture.west);
-	return (NULL);
 }
 
-/* t_img	*get_wall_texture(t_game *game, t_collision collision)
-{
-	static int	i = 0;
-
-	if (collision.orientation == 'N')
-	{
-		i++;
-		if (i < 20000000)
-			return (&game->texture.north);
-		else if (i >= 20000000 && i <= 40000000)
-			return (&game->texture.north_two);
-		else if (i >= 40000000 && i <= 60000000)
-			return (&game->texture.north_three);
-		else if (i > 60000000)
-		{
-			i = 0;
-			return (&game->texture.north);
-		}
-	}
-	else if (collision.orientation == 'S')
-		return (&game->texture.south);
-	else if (collision.orientation == 'E')
-		return (&game->texture.east);
-	else if (collision.orientation == 'W')
-		return (&game->texture.west);
-	return (NULL);
-} */
-
-void	texture_render(t_game *game, t_collision collision, t_vector line_pos,
-		double line_height)
+void	render_wall_texture(t_game *game, t_collision collision,
+	t_vector line_pos, double line_height)
 {
 	int	i;
 	int	x_text;
 	int	y_text;
 	int	pixel_color;
 
-	i = -1;
-	while (++i < line_pos.y)
-	{
-		if (!(line_pos.x >= START_MINIMAP_X && line_pos.x < START_MINIMAP_X + MINIMAP_SIZE &&
-			  i >= START_MINIMAP_Y && i < START_MINIMAP_Y + MINIMAP_SIZE))
-			img_pix_put(&game->fps_img, line_pos.x, i, game->texture.sky_color);
-	}
-	i = line_pos.y + line_height;
-	while (i < RES_Y)
-	{
-		if (!(line_pos.x >= START_MINIMAP_X && line_pos.x < START_MINIMAP_X + MINIMAP_SIZE &&
-			  i >= START_MINIMAP_Y && i < START_MINIMAP_Y + MINIMAP_SIZE))
-			img_pix_put(&game->fps_img, line_pos.x, i, game->texture.floor_color);
-		i++;
-	}
 	i = 0;
 	while (i < line_height)
 	{
 		x_text = (int)collision.x_pos_tex;
 		y_text = (int)((i / line_height) * 64);
-		pixel_color = img_pix_read(get_wall_texture(game, collision), x_text,
-				y_text);
-		if (!(line_pos.x >= START_MINIMAP_X && line_pos.x < START_MINIMAP_X + MINIMAP_SIZE &&
-			  (line_pos.y + i) >= START_MINIMAP_Y && (line_pos.y + i) < START_MINIMAP_Y + MINIMAP_SIZE))
-			img_pix_put(&game->fps_img, line_pos.x, line_pos.y + i, pixel_color);
+		pixel_color = img_pix_read(get_wall_texture(game, collision),
+				x_text, y_text);
+		if (!(line_pos.x >= START_MINIMAP_X && line_pos.x
+				< START_MINIMAP_X + MINIMAP_SIZE
+				&& (line_pos.y + i) >= START_MINIMAP_Y && (line_pos.y + i)
+				< START_MINIMAP_Y + MINIMAP_SIZE))
+			img_pix_put(&game->fps_img, line_pos.x, line_pos.y + i,
+				pixel_color);
 		i++;
 	}
 }
 
+void	texture_render(t_game *game, t_collision collision,
+		t_vector line_pos, double line_height)
+{
+	render_ceiling_and_floor(game, line_pos, line_height);
+	render_wall_texture(game, collision, line_pos, line_height);
+}
 
 void	update_collision(t_collision *collision, t_game *game,
 		t_vector line_pos, float half_width)

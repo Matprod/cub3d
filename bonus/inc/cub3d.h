@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/05 12:19:11 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:30:57 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,10 @@ void			load_grid(t_game *game);
 void			clean_map(t_game *game);
 void			clear_img(t_img *img);
 t_img			create_img(t_game *game, char *path);
+void			draw_minimap_map(t_game *game, t_parse *map);
+bool			is_green_case(char c);
+int				get_tile_color(t_parse *map, int map_x, int map_y, t_game *game);
+t_img			*get_wall_texture(t_game *game, t_collision collision);
 //raycast
 void			print_circle_relative_tile_pos(t_game *game, t_vector point);
 char			get_collision_orientation(char last_step, t_vector v_step);
