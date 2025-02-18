@@ -55,6 +55,8 @@ SRCS 				=	srcs/main.c\
 						srcs/shapes/pixel.c\
 						srcs/render/color.c\
 						srcs/render/load.c\
+						srcs/render/fov.c\
+						srcs/render/fov_two.c\
 						srcs/render/get_wall_texture.c\
 						srcs/render/draw_minimap.c\
 						srcs/render/raycast_utils.c\

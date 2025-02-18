@@ -6,39 +6,12 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:08:10 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/04 16:50:30 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/18 19:46:57 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* t_img	*get_wall_texture(t_game *game, t_collision collision)
-{
-	static int	i = 0;
-
-	if (collision.orientation == 'N')
-	{
-		i++;
-		if (i < 1000)
-			return (&game->texture.north);
-		else if (i >= 1000 && i <= 2000)
-			return (&game->texture.north_two);
-		else if (i >= 2000 && i <= 3000)
-			return (&game->texture.north_three);
-		else if (i > 3000)
-		{
-			i = 0;
-			return (&game->texture.north);
-		}
-	}
-	else if (collision.orientation == 'S')
-		return (&game->texture.south);
-	else if (collision.orientation == 'E')
-		return (&game->texture.east);
-	else if (collision.orientation == 'W')
-		return (&game->texture.west);
-	return (NULL);
-} */
 
 t_img	*get_north_texture(t_game *game)
 {
@@ -85,31 +58,3 @@ t_img	*get_wall_texture(t_game *game, t_collision collision)
 		return (&game->texture.west);
 	return (NULL);
 }
-
-/* t_img	*get_wall_texture(t_game *game, t_collision collision)
-{
-	static int	i = 0;
-
-	if (collision.orientation == 'N')
-	{
-		i++;
-		if (i < 20000000)
-			return (&game->texture.north);
-		else if (i >= 20000000 && i <= 40000000)
-			return (&game->texture.north_two);
-		else if (i >= 40000000 && i <= 60000000)
-			return (&game->texture.north_three);
-		else if (i > 60000000)
-		{
-			i = 0;
-			return (&game->texture.north);
-		}
-	}
-	else if (collision.orientation == 'S')
-		return (&game->texture.south);
-	else if (collision.orientation == 'E')
-		return (&game->texture.east);
-	else if (collision.orientation == 'W')
-		return (&game->texture.west);
-	return (NULL);
-} */

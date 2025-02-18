@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:28:45 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/04 16:31:55 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/18 20:36:12 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	draw_minimap_row(t_game *game,
 
 	j = 0;
 	map_x = start_x;
-	while (j < 10 && map_x < game->parsing->map_width)
+	while (j < 10 && map_x < game->parsing->map_width + 20)
 	{
 		color = get_tile_color(game->parsing, map_x, map_y, game);
 		x_start = START_MINIMAP_X + j * MINIMAP_TILE_SIZE;
@@ -63,17 +63,10 @@ void	draw_minimap_map(t_game *game, t_parse *map)
 	start_x = (int)(game->player.pos.x / 64) - 5;
 	start_y = (int)(game->player.pos.y / 64) - 5;
 	map_y = start_y;
-	while (i < 10 && map_y < map->map_height)
+	while (i < 10 && map_y < map->map_height + 20)
 	{
 		draw_minimap_row(game, start_x, map_y, i);
 		i++;
 		map_y++;
-	}
-	i = 0;
-	while (i < 5)
-	{
-		img_pix_put(&game->fps_img, (int)(game->player.pos.x / 64 + i),
-			(int)(game->player.pos.y / 64), COLOR_RED);
-		i++;
 	}
 }

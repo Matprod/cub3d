@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/04 16:30:57 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:43:57 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # endif
 
 # define FOV_RADIANS 1.31
-# define FOV 90
+# define FOV 
 
 # define RES_X 1280
 # define RES_Y 720
@@ -192,6 +192,17 @@ typedef struct s_raycast_data
 	char				last_step;
 }						t_raycast_data;
 
+typedef struct s_fov
+{
+	int					x0;
+	int					y0;
+	int					err;
+	int					e2;
+	t_vector			end;
+
+}						t_fov;
+
+
 typedef struct s_game
 {
 	void				*mlx;
@@ -199,8 +210,9 @@ typedef struct s_game
 	char				**map;
 	int					key_states[256];
 	int					key_release_states[256];
-	bool				mouse_right;
-	bool				mouse_left;
+	t_fov				fov;
+	t_vector			fov_left;
+	t_vector			fov_right;
 	t_img				fps_img;
 	t_img				images[MAX_IMAGES];
 	int					img_count;
@@ -240,6 +252,13 @@ void			draw_minimap_map(t_game *game, t_parse *map);
 bool			is_green_case(char c);
 int				get_tile_color(t_parse *map, int map_x, int map_y, t_game *game);
 t_img			*get_wall_texture(t_game *game, t_collision collision);
+int				is_walkable(t_game *game, float x, float y);
+//fov
+int				is_within_minimap(int x, int y);
+void 			set_err_v1(int e2, int err, t_vector end, int x0, int y0);
+void			set_fov(t_game *game, int len, t_vector direction, t_vector start);
+bool			set_fov2(t_game *game);
+void			draw_fov_limits(t_game *game);
 //raycast
 void			print_circle_relative_tile_pos(t_game *game, t_vector point);
 char			get_collision_orientation(char last_step, t_vector v_step);

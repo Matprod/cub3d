@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:35:14 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/04 16:40:01 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:42:01 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ int	game_loop(void *g)
 	game = (t_game *)g;
 	edit_player_pos(game);
 	edit_player_rotate(game);
+	update_fov_vectors(&game->player, &game->fov_left, &game->fov_right);
 	render(game);
+	draw_fov_limits(game);
 	return (0);
 }
