@@ -6,12 +6,11 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:08:10 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/18 19:46:57 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:49:27 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 t_img	*get_north_texture(t_game *game)
 {

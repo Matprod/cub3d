@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/18 21:43:57 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/18 21:52:23 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,7 @@ t_img			*get_wall_texture(t_game *game, t_collision collision);
 int				is_walkable(t_game *game, float x, float y);
 //fov
 int				is_within_minimap(int x, int y);
-void 			set_err_v1(int e2, int err, t_vector end, int x0, int y0);
+void			set_err_v1(t_game *game);
 void			set_fov(t_game *game, int len, t_vector direction, t_vector start);
 bool			set_fov2(t_game *game);
 void			draw_fov_limits(t_game *game);
