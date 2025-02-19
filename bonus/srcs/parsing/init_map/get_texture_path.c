@@ -6,19 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/26 16:13:17 by Matprod          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_color_ceiling.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 17:51:33 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/09 14:21:42 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/19 18:18:40 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +73,40 @@ bool	split_line_texture(t_parse *map, char *line)
 
 bool	init_texture(t_parse *data_map)
 {
-	data_map->text_no = ft_strdup(NORTH_WALL);
-	if (!data_map->text_no)
-		return (ERROR);
-	if (add_singleton_data(data_map->text_no, SINGLE_PTR) == ERROR)
-		return (ERROR);
-	data_map->text_so = ft_strdup(SOUTH_WALL);
+	if (!data_map->text_no) //PROBLEME
+	{
+		data_map->text_no = ft_strdup(NORTH_WALL);
+		if (!data_map->text_no)
+			return (ERROR);
+		if (add_singleton_data(data_map->text_no, SINGLE_PTR) == ERROR)
+			return (ERROR);
+	}
 	if (!data_map->text_so)
-		return (ERROR);
-	if (add_singleton_data(data_map->text_so, SINGLE_PTR) == ERROR)
-		return (ERROR);
-	data_map->text_ea = ft_strdup(EAST_WALL);
+	{
+		data_map->text_so = ft_strdup(SOUTH_WALL);
+		if (!data_map->text_so)
+			return (ERROR);
+		if (add_singleton_data(data_map->text_so, SINGLE_PTR) == ERROR)
+			return (ERROR);
+
+	}
 	if (!data_map->text_ea)
-		return (ERROR);
-	if (add_singleton_data(data_map->text_ea, SINGLE_PTR) == ERROR)
-		return (ERROR);
-	data_map->text_we = ft_strdup(WEST_WALL);
+	{
+		data_map->text_ea = ft_strdup(EAST_WALL);
+		if (!data_map->text_ea)
+			return (ERROR);
+		if (add_singleton_data(data_map->text_ea, SINGLE_PTR) == ERROR)
+			return (ERROR);
+
+	}
 	if (!data_map->text_we)
-		return (ERROR);
-	if (add_singleton_data(data_map->text_we, SINGLE_PTR) == ERROR)
-		return (ERROR);
+	{
+		data_map->text_we = ft_strdup(WEST_WALL);
+		if (!data_map->text_we)
+			return (ERROR);
+		if (add_singleton_data(data_map->text_we, SINGLE_PTR) == ERROR)
+			return (ERROR);
+	}
 	return (SUCCESS);
 }
 

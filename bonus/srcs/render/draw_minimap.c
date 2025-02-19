@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:28:45 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/18 20:36:12 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/19 18:14:21 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static void	draw_minimap_tile(t_game *game, int x_start, int y_start, int color)
 		y = y_start;
 		while (y < y_start + MINIMAP_TILE_SIZE)
 		{
-			img_pix_put(&game->fps_img, x, y, color);
+			if (y == y_start || x == x_start)
+				img_pix_put(&game->fps_img, x, y, COLOR_BLACK);
+			else
+				img_pix_put(&game->fps_img, x, y, color);
 			y++;
 		}
 		x++;
