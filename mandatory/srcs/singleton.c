@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   singleton.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 20:49:16 by allan             #+#    #+#             */
-/*   Updated: 2025/02/04 15:50:45 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/19 19:30:01 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	add_singleton_data(void *data, t_ptr_types data_type)
 {
 	t_node		*new_node;
 	t_singleton	*list;
-
+	
 	list = get_singleton_list();
 	if (!list)
 		return (ERROR);
@@ -52,7 +52,7 @@ bool	free_singleton_list(void)
 	t_node		*current;
 	t_node		*next;
 	t_singleton	*list;
-
+	
 	list = get_singleton_list();
 	if (!list)
 		return (ERROR);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:18:29 by Matprod           #+#    #+#             */
-/*   Updated: 2025/01/05 11:58:06 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/19 19:03:47 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ bool	check_map(t_parse *parser)
 		i++;
 	}
 	if (check_empty_case(parser, parser->map) == FALSE)
-		return (printf("je proc\n"),ERROR);
+		return (ERROR);
 	if (is_map_surrounded(parser->map) == FALSE)
 		return (ERROR);
 	if (check_player_exist(parser->map) == FALSE)

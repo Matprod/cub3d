@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/18 21:52:23 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/20 13:06:39 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,6 @@
 # define S 115
 # define RIGHT 65361
 # define LEFT 65363
-
-# define ERROR_NBR_ARG "Error\nTwo Arguments Required: ./cub3d and map.cub\n"
-# define ERROR_MAP_NAME "Error\nMap should have '.cub' format and 1 letter\n"
-# define ERROR_OPEN "Error\nOpening File Failed\n"
-# define ERROR_MALLOC "Error\nMalloc Initialisation Failed\n"
-# define ERROR_FLOOR_COLOR "Error\nFloor Input: Invalid color\n"
-# define ERROR_FLOOR_IDENTIFIER "Error\nFloor Identifier must start with 'F'\n"
-# define ERROR_CEILING_COLOR "Error\nCeiling Input: Invalid color\n"
-# define ERROR_TEXTURE_PATH "Error\nTexture Path: Invalid Input\n"
-# define ERROR_MAP_CONTENT "Error\nMap Content: Invalid Character\n"
-# define ERROR_MAP_WALL "Error\nMap is not surrounded by walls\n"
-# define ERROR_STARTING_POSITION "Error\nInvalid Player Starting Position\n"
 
 //singleton_struct
 typedef enum	e_ptr_types

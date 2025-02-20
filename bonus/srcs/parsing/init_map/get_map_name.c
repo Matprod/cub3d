@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_name.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebert <adebert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 19:13:56 by allan             #+#    #+#             */
-/*   Updated: 2024/10/24 14:03:01 by adebert          ###   ########.fr       */
+/*   Updated: 2025/02/20 12:58:46 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	get_map_name(char *map_name, t_parse **parser)
 	if (!(*parser)->map_name)
 		return (error_msg(ERROR_MALLOC), ERROR);
 	if (add_singleton_data((*parser)->map_name, SINGLE_PTR) == ERROR)
-		return (ERROR);
+		return (error_msg(ERROR_MALLOC), ERROR);
 	return (SUCCESS);
 }
 

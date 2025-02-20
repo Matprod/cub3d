@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:38:58 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/04 16:51:44 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:23:07 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,12 @@ int	print_error(char *error)
 
 void	error_msg(const char *error)
 {
+	int dumb;
+	
 	if (!error)
 		return ;
-	write(2, error, ft_strlen(error));
+	dumb = write(2, error, ft_strlen(error));
+	dumb++;
 }
 
 void	print_vector(t_vector vec)

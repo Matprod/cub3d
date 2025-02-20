@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:35:14 by Matprod           #+#    #+#             */
-/*   Updated: 2024/12/29 20:25:56 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/19 19:01:50 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	edit_player_pos(t_game *game)
 	if (game->key_states['a'] || game->key_states['d'])
 		game->player.speed = vec_normalize(game->player.speed);
 	if (game->key_states[2] && game->key_states['w'])
-		game->player.speed = vec_scalar_mult(game->player.speed, 12);
-	else
 		game->player.speed = vec_scalar_mult(game->player.speed, 6);
+	else
+		game->player.speed = vec_scalar_mult(game->player.speed, 3);
 	player_wall_collides(game, game->player.speed);
 	game->player.pos = vec_sum(game->player.pos, game->player.speed);
 	game->player.speed.x = 0;
@@ -87,7 +87,7 @@ void	edit_player_rotate(t_game *game)
 		game->player.direction_adjust -= 0.1;
 }
 
-/* void fps(void)
+void fps(void)
 {
 	static int counter = 0;
     static time_t last_call_time = 0; 
@@ -103,7 +103,7 @@ void	edit_player_rotate(t_game *game)
 		counter = 0;
 		last_call_time = current_time;
 	}
-} */
+}
 
 int	game_loop(void *g)
 {
@@ -113,5 +113,6 @@ int	game_loop(void *g)
 	edit_player_pos(game);
 	edit_player_rotate(game);
 	render(game);
+	//fps();
 	return (0);
 }

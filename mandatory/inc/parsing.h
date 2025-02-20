@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2025/01/02 17:30:09 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/20 16:11:29 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 # define PARSING_H
 
 # include "cub3d.h"
+
+# define ERROR_NO_PLAYER "Error\nNo player in the Map: Lack N, S, E or W\n"
+# define ERROR_NBR_ARG "Error\nTwo Arguments Required: ./cub3d and map.cub\n"
+# define ERROR_MAP_NAME "Error\nMap should have '.cub' format and 1 letter\n"
+# define ERROR_OPEN "Error\nOpening File Failed\n"
+# define ERROR_MALLOC "Error\nMalloc Initialisation Failed\n"
+# define ERROR_FLOOR_COLOR "Error\nFloor Input: Invalid color\n"
+# define ERROR_FLOOR_IDENTIFIER "Error\nFloor Identifier must start with 'F'\n"
+# define ERROR_CEILING_COLOR "Error\nCeiling Input: Invalid color\n"
+# define ERROR_TEXTURE_PATH "Error\nTexture Path: Invalid Input\n"
+# define ERROR_MAP_CONTENT "Error\nMap Content: Invalid Character\n"
+# define ERROR_MAP_WALL "Error\nMap is not surrounded by walls\n"
+# define ERROR_STARTING_POSITION "Error\nInvalid Player Starting Position\n"
 
 // Structs related to PARSING
 typedef struct s_vector

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2024/11/22 16:40:28 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:25:59 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 # define PARSING_H
 
 # include "cub3d.h"
+
+# define ERROR_NO_PLAYER "Error\nNo player in the Map: Lack N, S, E or W\n"
+# define ERROR_NBR_ARG "Error\nTwo Arguments Required: ./cub3d and map.cub\n"
+# define ERROR_MAP_NAME "Error\nMap should have '.cub' format and 1 letter\n"
+# define ERROR_OPEN "Error\nOpening File Failed\n"
+# define ERROR_MALLOC "Error\nMalloc Initialisation Failed\n"
+# define ERROR_FLOOR_COLOR "Error\nFloor Input: Invalid color\n"
+# define ERROR_FLOOR_IDENTIFIER "Error\nFloor Identifier must start with 'F'\n"
+# define ERROR_CEILING_COLOR "Error\nCeiling Input: Invalid color\n"
+# define ERROR_TEXTURE_PATH "Error\nTexture Path: Invalid Input\n"
+# define ERROR_MAP_CONTENT "Error\nMap Content: Invalid Character\n"
+# define ERROR_MAP_WALL "Error\nMap is not surrounded by walls\n"
+# define ERROR_STARTING_POSITION "Error\nInvalid Player Starting Position\n"
 
 // Structs related to PARSING
 typedef struct s_vector
@@ -60,6 +73,9 @@ bool			is_valid_starting_position(t_parse *parser, int i, int j);
 bool			is_map_surrounded(char **map);
 bool			check_first_walls(char **map);
 bool			check_last_walls(char **map);
+bool			check_player_exist(char **map);
+bool			check_empty_case(t_parse *parser, char **map);
+bool			is_map(char *line);
 
 //get_next_line
 char			*get_next_line(int fd, bool error);
@@ -77,7 +93,7 @@ void			copy_color(int color_element[3], t_parse *map, int element);
 void			error_color(int element);
 
 //get_texture_path
-bool			init_texture(t_parse *data_map);
+bool			set_default_texture(t_parse *map);
 bool			is_texture(char *line);
 bool			check_split_texture(char **split, char *line);
 bool			split_line_texture(t_parse *map, char *line);

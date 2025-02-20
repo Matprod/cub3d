@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/02 15:50:08 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:56:07 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	get_map(t_parse *map)
 
 	nb = get_nb_line_fd(map->map_name);
 	if (nb == 0)
-		return (ERROR);
+		return (error_msg(ERROR_MAP_CONTENT),ERROR);
 	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
 		return (error_msg(ERROR_OPEN), ERROR);
@@ -28,7 +28,7 @@ bool	get_map(t_parse *map)
 	if (!map->map)
 		return (error_msg(ERROR_MALLOC), close(fd), ERROR);
 	if (add_singleton_data(map->map, DOUBLE_PTR) == ERROR)
-		return (ERROR);
+		return (error_msg(ERROR_MALLOC), ERROR);
 	nb = 0;
 	line = get_next_line(fd, FALSE);
 	while (line != NULL)
@@ -46,7 +46,9 @@ int	get_nb_line_fd(char *map_name)
 	int		fd;
 	char	*line;
 	int		nb;
+	bool	map_started;
 
+	map_started = FALSE;
 	nb = 0;
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
@@ -54,19 +56,66 @@ int	get_nb_line_fd(char *map_name)
 	line = get_next_line(fd, FALSE);
 	while (line != NULL)
 	{
-		if (skip_data_map(line) == TRUE)
+		/* if (is_map(line) == TRUE)
+		{
+			if (map_started == TRUE)
+				return (get_next_line(fd, TRUE),
+					free(line), close(fd), 0);
+			else
+			{
+				nb++;
+				map_started == 1;
+			}
+		} */
+		if (skip_data_map(line) == FALSE)
+		{
 			nb++;
+			map_started = TRUE;
+		}
+		else if (skip_data_map(line) == TRUE && map_started == TRUE)
+			return (get_next_line(fd, TRUE),
+				free(line), close(fd), 0);
 		free(line);
 		line = get_next_line(fd, FALSE);
 	}
 	return (close(fd), nb);
 }
 
+bool	is_map(char *line)
+{
+	int i;
+
+	i = 0;
+	if (!line || !line[i])
+		return (FALSE);
+	while (line[i] && line[i] == ' ')
+		i++;
+	if (line[i] && (line[i] == '0' || line[i] == '1'))
+		return (TRUE);
+	return (FALSE);
+}
+
+bool	skip_data_map(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	if (line[i] && (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'))
+		return (TRUE);
+	if (line[i] && (line[i] == 'E' || line[i] == 'F' || line[i] == 'C'))
+		return (TRUE);
+	if (line[i] && (line[i] == '\n'))
+		return (TRUE);
+	return (FALSE);
+}
+
 bool	add_line(char **map, char *line, int *nb)
 {
 	char	**split_eof;
 
-	if (skip_data_map(line) == TRUE)
+	if (skip_data_map(line) == FALSE)
 	{
 		split_eof = ft_split(line, '\n');
 		map[*nb] = ft_strdup(split_eof[0]);
@@ -81,15 +130,6 @@ bool	add_line(char **map, char *line, int *nb)
 	}
 	free(line);
 	return (SUCCESS);
-}
-
-bool	skip_data_map(char *line)
-{
-	if (line[0] && (line[0] == 'N' || line[0] == 'S' || line[0] == 'W'))
-		return (FALSE);
-	if (line[0] && (line[0] == 'E' || line[0] == 'F' || line[0] == 'C'))
-		return (FALSE);
-	return (TRUE);
 }
 
 void	close_and_free(char **array, int fd)
