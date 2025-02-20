@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/20 12:56:47 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/20 18:34:00 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/* int handle_mouse_click(int button, t_game *game)
-{
-	if (button == 1)
-		game->mouse_left = true;
-	else if (button == 2)
-		game->mouse_right = true;
-	return (0);
-}
-
-int handle_mouse_release(int button, t_game *game)
-{
-	if (button == 1)
-		game->mouse_left = false;
-	else if (button == 2)
-		game->mouse_right = false;
-
-    return (0);
-} */
 
 void	start_game(t_game *game)
 {

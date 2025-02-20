@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/19 20:24:51 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/20 20:03:48 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ bool	get_texture_path(t_parse *map)
 		if (is_texture(line))
 		{
 			if (split_line_texture(map, line) == ERROR)
-				return (ERROR);
+			{
+				get_next_line(fd, TRUE);
+				return (error_msg("ERROR SPLIT TEXTURE\n"),ERROR);
+			}
 		}
 		free(line);
 		line = get_next_line(fd, FALSE);
@@ -85,30 +88,31 @@ bool	split_line_texture(t_parse *map, char *line)
 	split = ft_split(line, ' ');
 	split_eof = ft_split(split[1], '\n');
 	if (check_split_texture(split, line) == ERROR)
-		return (ERROR);
+		return (free_array(split_eof), ERROR);
 	if (line[0] == 'N' && line[1] == 'O')
 	{	
 		map->text_no = ft_strdup(split_eof[0]);
+		printf("map->text_no = %s\n",map->text_no);
 		if (add_singleton_data(map->text_no, SINGLE_PTR) == ERROR)
-			return (ERROR);
+			return (free_array(split), free_array(split_eof), ERROR);
 	}
 	if (line[0] == 'S' && line[1] == 'O')
 	{
 		map->text_so = ft_strdup(split_eof[0]);
 		if (add_singleton_data(map->text_so, SINGLE_PTR) == ERROR)
-			return (ERROR);
+			return (free_array(split), free_array(split_eof), ERROR);
 	}
 	if (line[0] == 'E' && line[1] == 'A')
 	{
 		map->text_ea = ft_strdup(split_eof[0]);
 		if (add_singleton_data(map->text_ea, SINGLE_PTR) == ERROR)
-			return (ERROR);
+			return (free_array(split), free_array(split_eof), ERROR);
 	}
 	if (line[0] == 'W' && line[1] == 'E')
 	{
 		map->text_we = ft_strdup(split_eof[0]);
 		if (add_singleton_data(map->text_we, SINGLE_PTR) == ERROR)
-			return (ERROR);
+			return (free_array(split), free_array(split_eof), ERROR);
 	}
 	free_array(split);
 	free_array(split_eof);
