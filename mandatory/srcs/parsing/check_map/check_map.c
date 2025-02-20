@@ -6,32 +6,39 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:18:29 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/19 19:03:47 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/20 16:20:51 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+# define ERROR_NO_PLAYER "Error\nNo player in the Map: Lack N, S, E or W\n"
 
-bool	check_player_exist(char **map)
+bool	check_map(t_parse *parser)
 {
 	int	i;
 	int	j;
 
-	i = -1;
-	while (map[++i])
+	i = 0;
+	while (parser->map[i])
 	{
-		j = -1;
-		while (map[i][++j])
+		j = 0;
+		while (parser->map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S'
-				|| map[i][j] == 'E' || map[i][j] == 'W')
-			{
-				return (TRUE);
-			}
+			if (is_valid_input(parser->map[i][j]) == FALSE)
+				return (ERROR);
+			if (is_valid_starting_position(parser, i, j) == FALSE)
+				return (ERROR);
+			j++;
 		}
+		i++;
 	}
-	printf("No player in the map, put N,S,E or W somewhere\n");
-	return (FALSE);
+	if (check_empty_case(parser, parser->map) == FALSE)
+		return (error_msg("Error: Empty Space(s) found in the map\n"), ERROR);
+	if (is_map_surrounded(parser->map) == FALSE)
+		return (ERROR);
+	if (check_player_exist(parser->map) == FALSE)
+		return (ERROR);
+	return (SUCCESS);
 }
 
 bool	check_empty_case(t_parse *parser, char **map)
@@ -63,30 +70,24 @@ bool	check_empty_case(t_parse *parser, char **map)
 	return (TRUE);
 }
 
-bool	check_map(t_parse *parser)
+bool	check_player_exist(char **map)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (parser->map[i])
+	i = -1;
+	while (map[++i])
 	{
-		j = 0;
-		while (parser->map[i][j])
+		j = -1;
+		while (map[i][++j])
 		{
-			if (is_valid_input(parser->map[i][j]) == FALSE)
-				return (ERROR);
-			if (is_valid_starting_position(parser, i, j) == FALSE)
-				return (ERROR);
-			j++;
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'E' || map[i][j] == 'W')
+			{
+				return (TRUE);
+			}
 		}
-		i++;
 	}
-	if (check_empty_case(parser, parser->map) == FALSE)
-		return (ERROR);
-	if (is_map_surrounded(parser->map) == FALSE)
-		return (ERROR);
-	if (check_player_exist(parser->map) == FALSE)
-		return (ERROR);
-	return (SUCCESS);
+	return (error_msg("Error\nNo player in the Map: Lack N, S, E or W\n"),
+		FALSE);
 }

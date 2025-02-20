@@ -3,22 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
+/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/26 16:13:17 by Matprod          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_color_ceiling.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 17:51:33 by Matprod           #+#    #+#             */
-/*   Updated: 2024/10/09 14:21:42 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/20 16:19:19 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +20,45 @@ bool	get_texture_path(t_parse *map)
 	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
 		return (error_msg(ERROR_OPEN), ERROR);
+	if (set_default_texture(map) == ERROR)
+		return (ERROR);
 	line = get_next_line(fd, FALSE);
 	while (line != NULL)
 	{
 		if (is_texture(line))
-			split_line_texture(map, line);
+		{
+			if (split_line_texture(map, line) == ERROR)
+				return (ERROR);
+		}
 		free(line);
 		line = get_next_line(fd, FALSE);
 	}
-	if (init_texture(map) == ERROR)
-		return (close(fd), ERROR);
 	close(fd);
+	return (SUCCESS);
+}
+
+bool	set_default_texture(t_parse *map)
+{
+	map->text_no = ft_strdup(NORTH_WALL);
+	if (!map->text_no)
+		return (ERROR);
+	if (add_singleton_data(map->text_no, SINGLE_PTR) == ERROR)
+		return (ERROR);
+	map->text_so = ft_strdup(SOUTH_WALL);
+	if (!map->text_so)
+		return (ERROR);
+	if (add_singleton_data(map->text_so, SINGLE_PTR) == ERROR)
+		return (ERROR);
+	map->text_ea = ft_strdup(EAST_WALL);
+	if (!map->text_ea)
+		return (ERROR);
+	if (add_singleton_data(map->text_ea, SINGLE_PTR) == ERROR)
+		return (ERROR);
+	map->text_we = ft_strdup(WEST_WALL);
+	if (!map->text_we)
+		return (ERROR);
+	if (add_singleton_data(map->text_we, SINGLE_PTR) == ERROR)
+		return (ERROR);
 	return (SUCCESS);
 }
 
@@ -71,40 +87,31 @@ bool	split_line_texture(t_parse *map, char *line)
 	if (check_split_texture(split, line) == ERROR)
 		return (ERROR);
 	if (line[0] == 'N' && line[1] == 'O')
+	{	
 		map->text_no = ft_strdup(split_eof[0]);
+		if (add_singleton_data(map->text_no, SINGLE_PTR) == ERROR)
+			return (ERROR);
+	}
 	if (line[0] == 'S' && line[1] == 'O')
+	{
 		map->text_so = ft_strdup(split_eof[0]);
+		if (add_singleton_data(map->text_so, SINGLE_PTR) == ERROR)
+			return (ERROR);
+	}
 	if (line[0] == 'E' && line[1] == 'A')
+	{
 		map->text_ea = ft_strdup(split_eof[0]);
+		if (add_singleton_data(map->text_ea, SINGLE_PTR) == ERROR)
+			return (ERROR);
+	}
 	if (line[0] == 'W' && line[1] == 'E')
+	{
 		map->text_we = ft_strdup(split_eof[0]);
+		if (add_singleton_data(map->text_we, SINGLE_PTR) == ERROR)
+			return (ERROR);
+	}
 	free_array(split);
 	free_array(split_eof);
-	return (SUCCESS);
-}
-
-bool	init_texture(t_parse *data_map)
-{
-	data_map->text_no = ft_strdup(NORTH_WALL);
-	if (!data_map->text_no)
-		return (ERROR);
-	if (add_singleton_data(data_map->text_no, SINGLE_PTR) == ERROR)
-		return (ERROR);
-	data_map->text_so = ft_strdup(SOUTH_WALL);
-	if (!data_map->text_so)
-		return (ERROR);
-	if (add_singleton_data(data_map->text_so, SINGLE_PTR) == ERROR)
-		return (ERROR);
-	data_map->text_ea = ft_strdup(EAST_WALL);
-	if (!data_map->text_ea)
-		return (ERROR);
-	if (add_singleton_data(data_map->text_ea, SINGLE_PTR) == ERROR)
-		return (ERROR);
-	data_map->text_we = ft_strdup(WEST_WALL);
-	if (!data_map->text_we)
-		return (ERROR);
-	if (add_singleton_data(data_map->text_we, SINGLE_PTR) == ERROR)
-		return (ERROR);
 	return (SUCCESS);
 }
 

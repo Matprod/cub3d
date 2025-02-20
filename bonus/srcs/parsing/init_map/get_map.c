@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/20 15:56:07 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/20 16:17:10 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,6 @@ int	get_nb_line_fd(char *map_name)
 	line = get_next_line(fd, FALSE);
 	while (line != NULL)
 	{
-		/* if (is_map(line) == TRUE)
-		{
-			if (map_started == TRUE)
-				return (get_next_line(fd, TRUE),
-					free(line), close(fd), 0);
-			else
-			{
-				nb++;
-				map_started == 1;
-			}
-		} */
 		if (skip_data_map(line) == FALSE)
 		{
 			nb++;
@@ -79,20 +68,6 @@ int	get_nb_line_fd(char *map_name)
 		line = get_next_line(fd, FALSE);
 	}
 	return (close(fd), nb);
-}
-
-bool	is_map(char *line)
-{
-	int i;
-
-	i = 0;
-	if (!line || !line[i])
-		return (FALSE);
-	while (line[i] && line[i] == ' ')
-		i++;
-	if (line[i] && (line[i] == '0' || line[i] == '1'))
-		return (TRUE);
-	return (FALSE);
 }
 
 bool	skip_data_map(char *line)

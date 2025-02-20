@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2025/02/20 16:11:29 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/20 16:52:57 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ bool			is_valid_starting_position(t_parse *parser, int i, int j);
 bool			is_map_surrounded(char **map);
 bool			check_first_walls(char **map);
 bool			check_last_walls(char **map);
+bool			check_player_exist(char **map);
+bool			check_empty_case(t_parse *parser, char **map);
+bool			set_default_texture(t_parse *map);
 
 //get_next_line
 char			*get_next_line(int fd, bool error);
@@ -87,6 +90,7 @@ bool			check_valid_split(char **first_split, char **second_split,
 					int element);
 void			copy_color(int color_element[3], t_parse *map, int element);
 void			error_color(int element);
+bool			check_color_line(char *line);
 
 //get_texture_path
 bool			init_texture(t_parse *data_map);

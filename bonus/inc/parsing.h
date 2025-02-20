@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2025/02/20 15:25:59 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/20 16:17:20 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ bool			check_first_walls(char **map);
 bool			check_last_walls(char **map);
 bool			check_player_exist(char **map);
 bool			check_empty_case(t_parse *parser, char **map);
-bool			is_map(char *line);
 
 //get_next_line
 char			*get_next_line(int fd, bool error);

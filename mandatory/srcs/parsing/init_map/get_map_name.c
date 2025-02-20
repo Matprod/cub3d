@@ -6,7 +6,7 @@
 /*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 19:13:56 by allan             #+#    #+#             */
-/*   Updated: 2025/02/19 19:26:43 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/20 16:16:22 by allan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	get_map_name(char *map_name, t_parse **parser)
 	if (!(*parser)->map_name)
 		return (error_msg(ERROR_MALLOC), ERROR);
 	if (add_singleton_data((*parser)->map_name, SINGLE_PTR) == ERROR)
-		return (ERROR);
+		return (error_msg(ERROR_MALLOC), ERROR);
 	return (SUCCESS);
 }
 
