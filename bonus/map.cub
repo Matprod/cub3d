@@ -1,9 +1,9 @@
-C 0,0,200
-F 0,90,0
-NO ./images/BRICK_1A.xpm
-SO ./images/BRICK_1A.xpm
-WE ./images/BRICK_1A.xpm
-EA ./images/BRICK_1A.xpm
+     C 0,0,200
+     F 0,90,0
+         NO ./images/BRICK_1A.xpm
+     SO ./images/BRICK_2A.xpm
+     WE ./images/BRICK_3D.xpm
+      EA ./images/BRICK_3A.xpm
       
 1111111111111111111111111111111111
 1000000000000000000000000000000001

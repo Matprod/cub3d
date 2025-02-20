@@ -24,6 +24,7 @@ SRCS 				=	srcs/main.c\
 						srcs/singleton.c\
 						srcs/print.c\
 						srcs/events.c\
+						srcs/utils.c\
 						srcs/game_loop.c\
 						srcs/init_windows.c\
 						srcs/morty_gif.c\

@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/20 20:03:48 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/21 00:58:36 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	get_texture_path(t_parse *map)
 	line = get_next_line(fd, FALSE);
 	while (line != NULL)
 	{
+		trim_leading_spaces(line);
 		if (is_texture(line))
 		{
 			if (split_line_texture(map, line) == ERROR)
@@ -92,7 +93,6 @@ bool	split_line_texture(t_parse *map, char *line)
 	if (line[0] == 'N' && line[1] == 'O')
 	{	
 		map->text_no = ft_strdup(split_eof[0]);
-		printf("map->text_no = %s\n",map->text_no);
 		if (add_singleton_data(map->text_no, SINGLE_PTR) == ERROR)
 			return (free_array(split), free_array(split_eof), ERROR);
 	}

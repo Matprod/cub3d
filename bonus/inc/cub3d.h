@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/20 16:22:52 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/21 00:55:22 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,5 +296,7 @@ t_singleton 	*get_singleton_list();
 bool			add_singleton_data(void *data, t_ptr_types data_type);
 bool			free_singleton_list();
 void			free_singleton_data(t_node *current);
-
+//utils
+int				ft_isspace(char c);
+void			trim_leading_spaces(char *str);
 #endif
