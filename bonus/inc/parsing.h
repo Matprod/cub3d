@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2025/02/21 11:16:46 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/21 12:40:39 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct s_parse
 	char		*text_so;
 	char		*text_we;
 	char		*text_ea;
-	int		 	color_floor[3];
-	int		 	color_ceiling[3];
-	int		 	map_height;
-	int		 	map_width;
+	int			color_floor[3];
+	int			color_ceiling[3];
+	int			map_height;
+	int			map_width;
 	char		dir_player;
 	t_vector	pos_player;
 }				t_parse;
@@ -88,7 +88,7 @@ char			*ft_strjoin_gnl(char *s1, char const *s2);
 bool			get_color_element(t_parse *map, int element, char name);
 bool			split_line(t_parse *map, char *line, int element, char name);
 bool			check_valid_split(char **first_split, char **second_split,
-				int element);
+					int element);
 void			copy_color(int color_element[3], t_parse *map, int element);
 void			error_color(int element);
 

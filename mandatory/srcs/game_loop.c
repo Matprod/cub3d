@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:35:14 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/19 19:01:50 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/21 13:03:07 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,6 @@ void	edit_player_rotate(t_game *game)
 		game->player.direction_adjust -= 0.1;
 }
 
-void fps(void)
-{
-	static int counter = 0;
-    static time_t last_call_time = 0; 
-	time_t		current_time;
-
-	current_time = time(NULL);	
-	if (last_call_time == 0)
-	    last_call_time = current_time;	
-	counter++;
-	if (current_time > last_call_time)
-	{
-		printf("FPS %d\n", counter);
-		counter = 0;
-		last_call_time = current_time;
-	}
-}
-
 int	game_loop(void *g)
 {
 	t_game	*game;
@@ -113,6 +95,5 @@ int	game_loop(void *g)
 	edit_player_pos(game);
 	edit_player_rotate(game);
 	render(game);
-	//fps();
 	return (0);
 }

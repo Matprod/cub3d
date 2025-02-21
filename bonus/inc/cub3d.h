@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/21 12:28:08 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/21 12:45:05 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "../lib/libft/libft.h"
 # include "../lib/mlx/mlx.h"
 # include "parsing.h"
-
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -61,8 +60,6 @@
 # define START_MINIMAP_Y 30
 # define MINIMAP_SIZE 140
 # define MINIMAP_TILE_SIZE 20
-
-
 # define MAX_DISTANCE 10
 
 # define CEILING 2
@@ -86,7 +83,6 @@
 
 # define MAX_IMAGES 14
 
-
 # define ESC 65307
 # define A 97
 # define W 119
@@ -96,26 +92,25 @@
 # define LEFT 65363
 
 //singleton_struct
-typedef enum	e_ptr_types
+typedef enum e_ptr_types
 {
 	SINGLE_PTR,
 	DOUBLE_PTR
 }				t_ptr_types;
 
-typedef struct	s_node
+typedef struct s_node
 {
 	void				*data;
-	t_ptr_types				type;
+	t_ptr_types			type;
 	struct s_node		*next;
 }				t_node;
 
-typedef struct	s_singleton
+typedef struct s_singleton
 {
 	t_node	*head;
 }				t_singleton;
-//
 
-typedef struct s_fps 
+typedef struct s_fps
 {
 	int		frames;
 	double	last_time;
@@ -190,7 +185,6 @@ typedef struct s_fov
 
 }						t_fov;
 
-
 typedef struct s_game
 {
 	void				*mlx;
@@ -209,7 +203,6 @@ typedef struct s_game
 	t_parse				*parsing;
 }				t_game;
 
-
 //						FUNCTIONS						//
 //game
 int				init_mlx(t_game **game, t_parse *parse);
@@ -219,12 +212,11 @@ void			var_init(t_game *game);
 void			init_player(t_game *game);
 void			move(t_game *game, char direction);
 int				game_loop(void *g);
-long 			time_since_start(void);
+long			time_since_start(void);
 void			print_vector(t_vector vec);
 long			get_time(void);
 void			custom_usleep(long usec);
 void			load_morty_img(t_game *game);
-
 
 //render
 void			render(t_game *game);
@@ -238,13 +230,15 @@ void			clear_img(t_img *img);
 t_img			create_img(t_game *game, char *path);
 void			draw_minimap_map(t_game *game, t_parse *map);
 bool			is_green_case(char c);
-int				get_tile_color(t_parse *map, int map_x, int map_y, t_game *game);
+int				get_tile_color(t_parse *map, int map_x, int map_y,
+					t_game *game);
 t_img			*get_wall_texture(t_game *game, t_collision collision);
 int				is_walkable(t_game *game, float x, float y);
 //fov
 int				is_within_minimap(int x, int y);
 void			set_err_v1(t_game *game);
-void			set_fov(t_game *game, int len, t_vector direction, t_vector start);
+void			set_fov(t_game *game, int len, t_vector direction,
+					t_vector start);
 bool			set_fov2(t_game *game);
 void			draw_fov_limits(t_game *game);
 //raycast
@@ -261,9 +255,12 @@ t_vector		pixel_to_tile(t_vector vector);
 
 //shapes
 void			img_pix_put(t_img *img, int x, int y, int color);
-void			draw_vertical_line_2(t_img *img, t_vector pos, int len, int color);
-void			draw_line_dda(t_img *img, t_vector vec1, t_vector vec2, int color);
-void			draw_filled_circle(t_img *img, t_vector mid, int radius, int color);
+void			draw_vertical_line_2(t_img *img, t_vector pos,
+					int len, int color);
+void			draw_line_dda(t_img *img, t_vector vec1,
+					t_vector vec2, int color);
+void			draw_filled_circle(t_img *img, t_vector mid,
+					int radius, int color);
 
 //vector
 double			vec_angle(t_vector v1, t_vector v2);
@@ -292,9 +289,9 @@ void			print_int_array(int *array, int size);
 void			error_msg(const char *error);
 
 //singleton
-t_singleton 	*get_singleton_list();
+t_singleton		*get_singleton_list(void);
 bool			add_singleton_data(void *data, t_ptr_types data_type);
-bool			free_singleton_list();
+bool			free_singleton_list(void);
 void			free_singleton_data(t_node *current);
 //utils
 int				ft_isspace(char c);

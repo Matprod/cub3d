@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:47:01 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/18 20:35:23 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/21 13:26:28 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_tile_color(t_parse *map, int map_x, int map_y, t_game *game)
 void	render(t_game *game)
 {
 	render_fps(game);
-	custom_usleep(15);
+	custom_usleep(2);
 	mlx_put_image_to_window(game->mlx, game->fps_win, game->fps_img.mlx_img, 0,
 		0);
 	draw_minimap_map(game, game->parsing);

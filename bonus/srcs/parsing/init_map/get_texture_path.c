@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/21 12:16:45 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/21 13:29:26 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	get_texture_path(t_parse *map)
 			if (split_line_texture(map, line) == ERROR)
 			{
 				get_next_line(fd, TRUE);
-				return (error_msg("ERROR SPLIT TEXTURE\n"), ERROR);
+				return (ERROR);
 			}
 		}
 		free(line);

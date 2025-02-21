@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:40 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/20 16:15:04 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/21 13:04:23 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	custom_usleep(unsigned int time)
-{
-	volatile unsigned int	counter;
-
-	counter = 0;
-	while (counter < time)
-		counter++;
-	counter = 0;
-	while (counter < time)
-		counter++;
-	counter = 0;
-	while (counter < time)
-		counter++;
-	counter = 0;
-	while (counter < time)
-		counter++;
-}
 
 int	init_mlx(t_game **game, t_parse *parse)
 {

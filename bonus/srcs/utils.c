@@ -6,19 +6,19 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 00:49:29 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/21 12:28:49 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/21 12:37:51 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int ft_isspace(char c)
+int	ft_isspace(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' ||
-			c == '\v' || c == '\f' || c == '\r');
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
 }
 
-void trim_leading_spaces(char *str)
+void	trim_leading_spaces(char *str)
 {
 	int	i;
 	int	j;
@@ -31,6 +31,7 @@ void trim_leading_spaces(char *str)
 		str[j++] = str[i++];
 	str[j] = '\0';
 }
+
 bool	is_texture(char *line)
 {
 	if (ft_strlen(line) < 2)
