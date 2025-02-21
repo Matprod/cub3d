@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/20 19:14:50 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/21 00:50:16 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,5 +262,7 @@ t_singleton		*get_singleton_list(void);
 bool			add_singleton_data(void *data, t_ptr_types data_type);
 bool			free_singleton_list(void);
 void			free_singleton_data(t_node *current);
-
+//utils
+int				ft_isspace(char c);
+void			trim_leading_spaces(char *str);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_color_element.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:49:49 by allan             #+#    #+#             */
-/*   Updated: 2025/02/20 17:30:40 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/21 00:49:02 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ bool	get_color_element(t_parse *map, int element, char name)
 	line = get_next_line(fd, FALSE);
 	while (line != NULL)
 	{
+		trim_leading_spaces(line);
 		if (split_line(map, line, element, name) == ERROR)
 		{
 			get_next_line(fd, TRUE);
@@ -72,6 +73,7 @@ bool	split_line(t_parse *map, char *line, int element, char name)
 	i = -1;
 	if (line[0] == name)
 	{
+		ft_putstr_fd(line, 1);
 		if (check_color_line(line) == ERROR)
 			return (ERROR);
 		first_split = ft_split(line, ' ');

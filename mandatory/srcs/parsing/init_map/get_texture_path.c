@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/20 20:05:19 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/21 00:52:03 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	get_texture_path(t_parse *map)
 	line = get_next_line(fd, FALSE);
 	while (line != NULL)
 	{
+		trim_leading_spaces(line);
 		if (is_texture(line))
 		{
 			if (split_line_texture(map, line) == ERROR)

@@ -21,6 +21,7 @@ RM					= rm -f
 # Concatenate all source files
 SRCS 				=	srcs/main.c\
 						srcs/free.c\
+						srcs/utils.c\
 						srcs/singleton.c\
 						srcs/print.c\
 						srcs/events.c\
