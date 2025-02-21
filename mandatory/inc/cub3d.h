@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:39:52 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/21 00:50:16 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/21 12:27:54 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,4 +265,7 @@ void			free_singleton_data(t_node *current);
 //utils
 int				ft_isspace(char c);
 void			trim_leading_spaces(char *str);
+bool			is_texture(char *line);
+void			free_two_array(char **first_split, char **second_split);
+void			copy_color(int color_element[3], t_parse *map, int element);
 #endif

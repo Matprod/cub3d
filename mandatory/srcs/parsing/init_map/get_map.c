@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:40:37 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/20 16:17:41 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/21 12:24:50 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	get_map(t_parse *map)
 
 	nb = get_nb_line_fd(map->map_name);
 	if (nb == 0)
-		return (error_msg(ERROR_MAP_CONTENT),ERROR);
+		return (error_msg(ERROR_MAP_CONTENT), ERROR);
 	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
 		return (error_msg(ERROR_OPEN), ERROR);
@@ -72,7 +72,7 @@ int	get_nb_line_fd(char *map_name)
 
 bool	skip_data_map(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] == ' ')

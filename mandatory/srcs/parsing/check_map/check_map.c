@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 22:18:29 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/20 16:20:51 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/21 11:23:09 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-# define ERROR_NO_PLAYER "Error\nNo player in the Map: Lack N, S, E or W\n"
 
 bool	check_map(t_parse *parser)
 {

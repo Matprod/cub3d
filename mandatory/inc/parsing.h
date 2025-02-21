@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: allan <allan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 18:05:45 by allan             #+#    #+#             */
-/*   Updated: 2025/02/20 16:52:57 by allan            ###   ########.fr       */
+/*   Updated: 2025/02/21 11:17:10 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define ERROR_MAP_CONTENT "Error\nMap Content: Invalid Character\n"
 # define ERROR_MAP_WALL "Error\nMap is not surrounded by walls\n"
 # define ERROR_STARTING_POSITION "Error\nInvalid Player Starting Position\n"
+# define ERROR_NO_PLAYER "Error\nNo player in the Map: Lack N, S, E or W\n"
 
 // Structs related to PARSING
 typedef struct s_vector

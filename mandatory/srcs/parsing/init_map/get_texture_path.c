@@ -6,7 +6,7 @@
 /*   By: Matprod <matprod42@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:22:01 by Matprod           #+#    #+#             */
-/*   Updated: 2025/02/21 00:52:03 by Matprod          ###   ########.fr       */
+/*   Updated: 2025/02/21 12:24:22 by Matprod          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	get_texture_path(t_parse *map)
 			if (split_line_texture(map, line) == ERROR)
 			{
 				get_next_line(fd, TRUE);
-				return (error_msg("ERROR SPLIT TEXTURE\n"),ERROR);
+				return (error_msg("ERROR SPLIT TEXTURE\n"), ERROR);
 			}
 		}
 		free(line);
@@ -66,32 +66,10 @@ bool	set_default_texture(t_parse *map)
 	return (SUCCESS);
 }
 
-bool	is_texture(char *line)
+bool	set_texture(t_parse *map, char *line, char **split, char **split_eof)
 {
-	if (ft_strlen(line) < 2)
-		return (FALSE);
 	if (line[0] == 'N' && line[1] == 'O')
-		return (TRUE);
-	if (line[0] == 'S' && line[1] == 'O')
-		return (TRUE);
-	if (line[0] == 'W' && line[1] == 'E')
-		return (TRUE);
-	if (line[0] == 'E' && line[1] == 'A')
-		return (TRUE);
-	return (FALSE);
-}
-
-bool	split_line_texture(t_parse *map, char *line)
-{
-	char	**split;
-	char	**split_eof;
-
-	split = ft_split(line, ' ');
-	split_eof = ft_split(split[1], '\n');
-	if (check_split_texture(split, line) == ERROR)
-		return (free_array(split_eof), ERROR);
-	if (line[0] == 'N' && line[1] == 'O')
-	{	
+	{
 		map->text_no = ft_strdup(split_eof[0]);
 		if (add_singleton_data(map->text_no, SINGLE_PTR) == ERROR)
 			return (free_array(split), free_array(split_eof), ERROR);
@@ -114,6 +92,20 @@ bool	split_line_texture(t_parse *map, char *line)
 		if (add_singleton_data(map->text_we, SINGLE_PTR) == ERROR)
 			return (free_array(split), free_array(split_eof), ERROR);
 	}
+	return (SUCCESS);
+}
+
+bool	split_line_texture(t_parse *map, char *line)
+{
+	char	**split;
+	char	**split_eof;
+
+	split = ft_split(line, ' ');
+	split_eof = ft_split(split[1], '\n');
+	if (check_split_texture(split, line) == ERROR)
+		return (free_array(split_eof), ERROR);
+	if (set_texture(map, line, split, split_eof) == ERROR)
+		return (error_msg("ERROR SET TEXTURE\n"), ERROR);
 	free_array(split);
 	free_array(split_eof);
 	return (SUCCESS);
