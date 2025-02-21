@@ -48,12 +48,12 @@ t_img	*get_east_texture(t_game *game)
 t_img	*get_wall_texture(t_game *game, t_collision collision)
 {
 	if (collision.orientation == 'N')
-		return (get_north_texture(game));
-	else if (collision.orientation == 'S')
 		return (&game->texture.south);
+	else if (collision.orientation == 'S')
+		return (get_north_texture(game));
 	else if (collision.orientation == 'E')
-		return (get_east_texture(game));
-	else if (collision.orientation == 'W')
 		return (&game->texture.west);
+	else if (collision.orientation == 'W')
+		return (get_east_texture(game));
 	return (NULL);
 }

@@ -20,7 +20,7 @@ bool	get_map(t_parse *map)
 
 	nb = get_nb_line_fd(map->map_name);
 	if (nb == 0)
-		return (error_msg(ERROR_MAP_CONTENT),ERROR);
+		return (error_msg(ERROR_MAP_CONTENT), ERROR);
 	fd = open(map->map_name, O_RDONLY);
 	if (fd == -1)
 		return (error_msg(ERROR_OPEN), ERROR);
@@ -72,7 +72,7 @@ int	get_nb_line_fd(char *map_name)
 
 bool	skip_data_map(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] == ' ')

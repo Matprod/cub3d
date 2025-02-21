@@ -44,8 +44,8 @@ int	print_error(char *error)
 
 void	error_msg(const char *error)
 {
-	int dumb;
-	
+	int	dumb;
+
 	if (!error)
 		return ;
 	dumb = write(2, error, ft_strlen(error));

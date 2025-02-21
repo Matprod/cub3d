@@ -12,7 +12,6 @@
 
 #include "cub3d.h"
 
-
 bool	check_map(t_parse *parser)
 {
 	int	i;

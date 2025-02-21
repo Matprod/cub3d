@@ -44,7 +44,6 @@ int	get_tile_color(t_parse *map, int map_x, int map_y, t_game *game)
 void	render(t_game *game)
 {
 	render_fps(game);
-	custom_usleep(2);
 	mlx_put_image_to_window(game->mlx, game->fps_win, game->fps_img.mlx_img, 0,
 		0);
 	draw_minimap_map(game, game->parsing);

@@ -42,10 +42,10 @@ void	draw_vector(t_game *game, t_vector start,
 	{
 		img_pix_put(&game->fps_img, game->fov.x0, game->fov.y0, 0x0000FF);
 		boolean = set_fov2(game);
-		if (game->fov.e2 < abs((game->fov.end.x / 64.0 * MINIMAP_TILE_SIZE)
+		if (game->fov.e2 < fabs((game->fov.end.x / 64.0 * MINIMAP_TILE_SIZE)
 				- game->fov.x0))
 		{
-			game->fov.err += abs((game->fov.end.x / 64.0 * MINIMAP_TILE_SIZE)
+			game->fov.err += fabs((game->fov.end.x / 64.0 * MINIMAP_TILE_SIZE)
 					- game->fov.x0);
 			if (game->fov.y0 < game->fov.end.y / 64.0 * MINIMAP_TILE_SIZE)
 				game->fov.y0 += 1;

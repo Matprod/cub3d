@@ -22,6 +22,7 @@
 # include <string.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+# include <sys/time.h>
 # include "../lib/libft/libft.h"
 # include "../lib/mlx/mlx.h"
 # include "parsing.h"
@@ -241,6 +242,8 @@ void			set_fov(t_game *game, int len, t_vector direction,
 					t_vector start);
 bool			set_fov2(t_game *game);
 void			draw_fov_limits(t_game *game);
+void			update_fov_vectors(t_player *player, t_vector *fov_left,
+					t_vector *fov_right);
 //raycast
 void			print_circle_relative_tile_pos(t_game *game, t_vector point);
 char			get_collision_orientation(char last_step, t_vector v_step);
@@ -294,6 +297,7 @@ bool			add_singleton_data(void *data, t_ptr_types data_type);
 bool			free_singleton_list(void);
 void			free_singleton_data(t_node *current);
 //utils
+
 int				ft_isspace(char c);
 void			trim_leading_spaces(char *str);
 bool			is_texture(char *line);

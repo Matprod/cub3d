@@ -12,24 +12,6 @@
 
 #include "cub3d.h"
 
-/* void	load_grid(t_game *game)
-{
-	int			i;
-	int			j;
-	t_vector	pos;
-
-	i = -1;
-	while (++i < map_height(game->map))
-	{
-		j = -1;
-		while (++j < map_width(game->map))
-		{
-			pos.x = j * 64;
-			pos.y = i * 64;
-		}
-	}
-} */
-
 void	clean_map(t_game *game)
 {
 	int			i;

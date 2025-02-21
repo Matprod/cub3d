@@ -34,7 +34,7 @@ t_img	create_img(t_game *game, char *path)
 void	load_img(t_game *game)
 {
 	load_morty_img(game);
-	game->texture.north = create_img(game, game->parsing->text_no);
+	game->texture.north = create_img(game, "./images/DOORTRIM_1A.xpm");
 	if (!game->texture.north.mlx_img)
 		return (printf("Error loading north texture\n"), (void)0);
 	game->texture.north_two = create_img(game, "./images/DOORTRIM_1B.xpm");

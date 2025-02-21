@@ -12,6 +12,9 @@
 
 #include "cub3d.h"
 
+void	update_fov_vectors(t_player *player, t_vector *fov_left,
+			t_vector *fov_right);
+
 int	is_walkable(t_game *game, float x, float y)
 {
 	int	grid_x;
@@ -89,6 +92,19 @@ void	edit_player_rotate(t_game *game)
 		game->player.direction_adjust -= 0.1;
 }
 
+int	game_loop(void *g)
+{
+	t_game	*game;
+
+	game = (t_game *)g;
+	edit_player_pos(game);
+	edit_player_rotate(game);
+	update_fov_vectors(&game->player, &game->fov_left, &game->fov_right);
+	render(game);
+	draw_fov_limits(game);
+	return (0);
+}
+
 /* void fps(void)
 {
 	static int counter = 0;
@@ -106,16 +122,3 @@ void	edit_player_rotate(t_game *game)
 		last_call_time = current_time;
 	}
 } */
-
-int	game_loop(void *g)
-{
-	t_game	*game;
-
-	game = (t_game *)g;
-	edit_player_pos(game);
-	edit_player_rotate(game);
-	update_fov_vectors(&game->player, &game->fov_left, &game->fov_right);
-	render(game);
-	draw_fov_limits(game);
-	return (0);
-}
